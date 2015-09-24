@@ -34,7 +34,7 @@ var Instagram = (function(){
 		setTimeout(function(){
 			preLoad(data);
 		},3000);
-		
+
 		$("a[rel=example_group]").fancybox();
 	}
 
@@ -99,9 +99,9 @@ var Instagram = (function(){
 			}
 		});
 	}
-	
 
-	var changeSize = function(){	
+
+	var changeSize = function(){
 		if($(document).width() <= 600){
 			$(".img-box").css({"width":"auto", "height":"auto"});
 		}else{
