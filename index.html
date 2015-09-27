@@ -65,7 +65,7 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>Menu</li>
-						<!-- <li>Tag Cloud</li> -->
+						<li>TagCloud</li>
 						
 						
 						<li>About me</li>
@@ -85,10 +85,6 @@
 						
 							<li><a href="/archives">過去記事一覧</a></li>
 						
-							<li><a href="/categories">カテゴリー</a></li>
-						
-							<li><a href="/tags">タグ</a></li>
-						
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -98,14 +94,8 @@
 							
 						</div>
 					</nav>
-					
-						<div class="widget tagcloud" id="js-tagcloud">
-							<a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
-						</div>
-					
 				</section>
 
-<!--
  				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
@@ -113,13 +103,12 @@
 					</div>
 				</section>
 				
- -->
 
 				
 
 				
 					
-					<section class="switch-part switch-part2">
+					<section class="switch-part switch-part3">
 					
 						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
 週末はRailsを頑張っています。<br>
@@ -154,10 +143,6 @@ _:(´ཀ`」 ∠):_</div>
 					<li><a href="/">ホーム</a></li>
 		        
 					<li><a href="/archives">過去記事一覧</a></li>
-		        
-					<li><a href="/categories">カテゴリー</a></li>
-		        
-					<li><a href="/tags">タグ</a></li>
 		        
 		        <div class="clearfix"></div>
 				</ul>
@@ -201,7 +186,7 @@ _:(´ཀ`」 ∠):_</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>初記事という事で、手慣らしのためHexo + Github Pagesの導入方法を書き綴ります。</p>
-<p>ちょうど一年前位、学習のアウトプットにHexoでブログを書き始めようと考え、公式HPを読みながら触っていましたが、なぜか画像が表示されなかったりなど理由で放置状態でした。</p>
+<p>ちょうど一年前位、学習のアウトプットにHexoでブログを書き始めようと考え、公式HPを読みながら触っていましたが、なぜか画像が表示されなかったりなどの理由で放置状態。</p>
 <p>屁糞hanakus…<em>:(´ཀ`」 ∠):</em>ｱﾊﾞﾊﾞﾊﾞ</p>
 <p>JekyllやOctpressなどのツールも試したりしましたが、どうしてもHexoのyillaというテーマが使いたかったため、試行錯誤、ようやく導入に漕ぎ着けました。</p>
 <p>導入（インストール〜デプロイ）までの手順は以下です。<br>既に完了している場合は、適宜飛ばして下さい。</p>
@@ -210,7 +195,7 @@ _:(´ཀ`」 ∠):_</div>
 <p>頑張って作りましょう。（雑ですみません）</p>
 <h2 id="2-_Node-jsのインストール">2. Node.jsのインストール</h2><p>まずは、Hexoを動作させるNode.jsを本家サイトからダウンロード→インストールしましょう。<br>GUIでインストールできるので楽チンですね。<br><a href="http://nodejs.jp/nodejs.org_ja/" target="_blank" rel="external">http://nodejs.jp/nodejs.org_ja/</a></p>
 <h2 id="3-_Hexoインストール&amp;アップデート">3. Hexoインストール&amp;アップデート</h2><p>次に、Hexoのインストールです。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span></span><br></pre></td></tr></table></figure></p>
-<p>前にインストールしたけど、動かなくなっちゃった人・導入に挫折した人は最新verにアップデートしておきましょう。<br>※既存のHexoブログは動かなくなるので注意</p>
+<p>前にインストールしたけど、動かなくなっちゃった人・導入に挫折した人は最新verにアップデートしておきましょう。<br>※既存のHexoブログは動かなくなるので注意<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo npm <span class="keyword">update</span> hexo -<span class="keyword">g</span></span><br><span class="line"><span class="keyword">cd</span> 既存のプロジェクト/</span><br><span class="line">sudo npm <span class="keyword">update</span></span><br></pre></td></tr></table></figure></p>
 <p>なお、ターミナルからコマンドが叩けない場合は、「Command Line Tools for Xcode」がインストールされていない可能性があります。（本記事では割愛）</p>
 <h2 id="4-_プロジェクト(ブログ)作成">4. プロジェクト(ブログ)作成</h2><p>以下のコマンドで、任意の場所にプロジェクトを作成しましょう。<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">hexo</span> init プロジェクト名(以下<span class="keyword">blog)</span><br><span class="line"></span><span class="label">cd</span> <span class="keyword">blog/</span><br><span class="line"></span><span class="label">sudo</span> npm install</span><br></pre></td></tr></table></figure></p>
 <p>すると、以下のような構成のディレクトリ・ファイル群が生成されます。<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── scripts</span><br><span class="line">├── source</span><br><span class="line"><span class="string">|   ├── _drafts</span></span><br><span class="line"><span class="string">|   └── _posts</span></span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure></p>
@@ -236,119 +221,6 @@ _:(´ཀ`」 ∠):_</div>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 	</div>
 
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/ブログ/">ブログ</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/25/cieyfaw980000cfvpxr8lihhn/" class="article-date">
-  	<time datetime="2015-09-24T16:17:37.000Z" itemprop="datePublished">2015-09-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/25/cieyfaw980000cfvpxr8lihhn/">My New Post</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/24/ciey9pmjl0000o5vpcliblykx/" class="article-date">
-  	<time datetime="2015-09-24T13:17:48.000Z" itemprop="datePublished">2015-09-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/24/ciey9pmjl0000o5vpcliblykx/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
       
 
       
