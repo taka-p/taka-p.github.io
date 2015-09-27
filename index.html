@@ -159,10 +159,61 @@ _:(´ཀ`」 ∠):_</div>
 </nav>
       <div class="body-wrap">
   
+    <article id="post-埋め込みテスト" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/28/cif2n3ad20003u3vpr9137mmc/" class="article-date">
+  	<time datetime="2015-09-27T15:05:36.000Z" itemprop="datePublished">2015-09-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/28/cif2n3ad20003u3vpr9137mmc/">埋め込みテスト</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>｛% gist taka-p/index.html [script.js] %｝</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Hexoはじめました" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/25/cif2m4pig0000qjvpbttxlagm/" class="article-date">
+      <a href="/2015/09/25/cif2n3acl0000u3vpb06aao52/" class="article-date">
   	<time datetime="2015-09-24T16:17:55.000Z" itemprop="datePublished">2015-09-25</time>
 </a>
     </div>
@@ -176,7 +227,7 @@ _:(´ཀ`」 ∠):_</div>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/25/cif2m4pig0000qjvpbttxlagm/">Hexoはじめました</a>
+      <a class="article-title" href="/2015/09/25/cif2n3acl0000u3vpb06aao52/">Hexoはじめました</a>
     </h1>
   
 
@@ -187,30 +238,7 @@ _:(´ཀ`」 ∠):_</div>
       
         <p>初記事という事で、手慣らしのためHexo + Github Pagesの導入方法を書いていきます。</p>
 <p>ちょうど一年前位、学習のアウトプットにHexoでブログを書き始めようと考えドキュメントを漁っていましたが、なぜか画像が表示されなかったりなどの理由で放置状態。</p>
-<p>屁糞hanakus…<em>:(´ཀ`」 ∠):</em>ｱﾊﾞﾊﾞﾊﾞ</p>
-<p>JekyllやOctpressなどのツールも試したりしましたが、どうしてもHexoのyillaというテーマが使いたかったため、試行錯誤、ようやく導入に漕ぎ着けました。</p>
-<p>導入（インストール〜デプロイ）までの手順は以下です。<br>既に完了している場合は、適宜飛ばして下さい。</p>
-<h2 id="1-_Githubでリポジトリを作成しておく">1. Githubでリポジトリを作成しておく</h2><p>以下の名称でリポジトリを作成してください。<br>「アカウント名.github.io.git」</p>
-<p>例として、当ブログのリポジトリを掲載します↓<br><a href="https://github.com/taka-p/taka-p.github.io" target="_blank" rel="external">https://github.com/taka-p/taka-p.github.io</a></p>
-<p>頑張って作りましょう。（雑ですみません）</p>
-<h2 id="2-_Node-jsのインストール">2. Node.jsのインストール</h2><p>まずは、Hexoを動作させるNode.jsを本家サイトからダウンロード→インストールしましょう。<br>GUIでインストールできるので楽チンですね。<br><a href="http://nodejs.jp/nodejs.org_ja/" target="_blank" rel="external">http://nodejs.jp/nodejs.org_ja/</a></p>
-<h2 id="3-_Hexoインストール&amp;アップデート">3. Hexoインストール&amp;アップデート</h2><p>次に、Hexoのインストールです。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span></span><br></pre></td></tr></table></figure></p>
-<p>前にインストールしたけど、動かなくなっちゃった人・導入に挫折した人は最新verにアップデートしておきましょう。<br>※既存のHexoブログは動かなくなるので注意<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo npm <span class="keyword">update</span> hexo -<span class="keyword">g</span></span><br><span class="line"><span class="keyword">cd</span> 既存のプロジェクト/</span><br><span class="line">sudo npm <span class="keyword">update</span></span><br></pre></td></tr></table></figure></p>
-<p>なお、ターミナルからコマンドが叩けない場合は、「Command Line Tools for Xcode」がインストールされていない可能性があります。（本記事では割愛）</p>
-<h2 id="4-_プロジェクト(ブログ)作成">4. プロジェクト(ブログ)作成</h2><p>以下のコマンドで、任意の場所にプロジェクトを作成しましょう。<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">hexo</span> init プロジェクト名(以下<span class="keyword">blog)</span><br><span class="line"></span><span class="label">cd</span> <span class="keyword">blog/</span><br><span class="line"></span><span class="label">sudo</span> npm install</span><br></pre></td></tr></table></figure></p>
-<p>すると、以下のような構成のディレクトリ・ファイル群が生成されます。<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── scripts</span><br><span class="line">├── source</span><br><span class="line"><span class="string">|   ├── _drafts</span></span><br><span class="line"><span class="string">|   └── _posts</span></span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure></p>
-<p>この段階で、以下のコマンドを叩くと<a href="http://localhost:4000でサーバーが立ち上がります。" target="_blank" rel="external">http://localhost:4000でサーバーが立ち上がります。</a><br>(blog/直下で実行)<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="5-_デプロイ設定">5. デプロイ設定</h2><p>今回はGithub Pagesを利用するため、blog/_config.ymlの最下部の記述を以下のように変更します。<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Deployment</span></span><br><span class="line"><span class="preprocessor">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="title">deploy</span>:</span><br><span class="line">  <span class="typedef"><span class="keyword">type</span>: git</span></span><br><span class="line">  repo: git@github.com:アカウント名/アカウント名.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: <span class="type">Hexo</span> blog deploy</span><br></pre></td></tr></table></figure></p>
-<p>保存したら、以下のコマンドでデプロイされます。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">d</span> -<span class="keyword">g</span></span><br></pre></td></tr></table></figure></p>
-<p>サイトに反映されるまで、しばし待ち以下のURLにアクセスすれば、ローカル環境と同じ画面が表示されると思います。<br>「<a href="http://アカウント名.github.io/」" target="_blank" rel="external">http://アカウント名.github.io/」</a></p>
-<p>ちなみに、「d」はdeploy、「-g」はgenerateのショートカットです。<br>引っかかるところですが、Hexoは静的サイトジェネレータのため、ローカルでhtmlをgenerateしてからじゃないとデプロイしても見れなかったりします。</p>
-<h2 id="6-_テーマの変更">6. テーマの変更</h2><p>おまけで、簡単なテーマの変更方法もご紹介<br>以下のURLから、公開中テーマの一覧が見れますので、お好きなテーマを選択してください。</p>
-<p>該当テーマのリポジトリを開き、「SSH clone URL」をコピーして（HTTPSでもOK）、以下のコマンドでthmes/にクローンしてきましょう。<br>ex.ではapolloというテーマのURLを入れています。<br>(blog/直下で実行)<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone 該当テーマのリモートリポジトリURL themes/apollo</span><br><span class="line"></span><br><span class="line">ex.</span><br><span class="line">git clone git@github<span class="class">.com</span>:joyceim/hexo-theme-apollo<span class="class">.git</span> themes/apollo</span><br></pre></td></tr></table></figure></p>
-<p>次に、blog/直下の_config.ymlファイルの最下部、デプロイ設定の上にあるテーマ設定の部分を変更<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Extensions</span></span><br><span class="line"><span class="preprocessor">## Plugins: http://hexo.io/plugins/</span></span><br><span class="line"><span class="preprocessor">## Themes: http://hexo.io/themes/</span></span><br><span class="line">theme: apollo</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># Deployment</span></span><br><span class="line"><span class="preprocessor">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>上記を保存して、サーバーを立ち上げ直せば、テーマが変更されているはずです。<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctrl + c でサーバーを停止</span><br><span class="line">hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<p>Hexoインストール〜デプロイ、テーマ変更についての説明は以上です。</p>
-<p>次回は、記事の追加方法などについて書こうと考えています。<br>では(๑´ㅂ`๑)</p>
-
+<p>屁糞hanakus…<em>:(´ཀ`」 ∠):</em>ｱﾊﾞﾊﾞﾊﾞ<br>
       
     </div>
     
@@ -223,6 +251,10 @@ _:(´ཀ`」 ∠):_</div>
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/25/cif2n3acl0000u3vpb06aao52/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
