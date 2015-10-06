@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RubyonRails4アプリケーションプログラミング 1-2章 | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ruby on Rails 4 アプリケーションプログラミングの1-2章を読み進めたので、所々メモ。
+なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。
+雛形作成のコマンドたちコマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RubyonRails4アプリケーションプログラミング 1-2章">
+<meta property="og:url" content="http://taka-p.github.io/2015/10/06/cifffxjpn000771vp3blyqi4u/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="Ruby on Rails 4 アプリケーションプログラミングの1-2章を読み進めたので、所々メモ。
+なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。
+雛形作成のコマンドたちコマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。">
+<meta property="og:updated_time" content="2015-10-06T14:51:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RubyonRails4アプリケーションプログラミング 1-2章">
+<meta name="twitter:description" content="Ruby on Rails 4 アプリケーションプログラミングの1-2章を読み進めたので、所々メモ。
+なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。
+雛形作成のコマンドたちコマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">taka-p</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">taka-p</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RubyonRails4アプリケーションプログラミング-1-2章" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/06/cifffxjpn000771vp3blyqi4u/" class="article-date">
+  	<time datetime="2015-10-05T22:54:05.000Z" itemprop="datePublished">2015-10-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RubyonRails4アプリケーションプログラミング 1-2章
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.amazon.co.jp/Ruby-Rails-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774164100" target="_blank" rel="external">Ruby on Rails 4 アプリケーションプログラミング</a>の1-2章を読み進めたので、所々メモ。</p>
+<p>なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。</p>
+<h1 id="雛形作成のコマンドたち">雛形作成のコマンドたち</h1><p>コマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。</p>
+<a id="more"></a>
+<ul>
+<li>新規アプリケーションの作成<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails <span class="keyword">new</span> appName [<span class="keyword">option</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>→オプションとして、bundle installをスキップする「–skip-bundle」は今後良く使いそう。（PCが重くなっていくため、bundleインストールはスキップした方が良いとの噂です）<br>また、作成するアプリケーションのrailsのバージョンを指定する「rails _3.2.0_ new apName」というコマンドも使いそう。</p>
+<ul>
+<li>コントローラークラスの作成<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails generate controller name <span class="string">[options]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>→generateは「g」に省略可能。<br>オプションはjsやcss等のアセット生成をスキップする「–assets:false」はよく使いそう。</p>
+<ul>
+<li><p>モデルの作成</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails generate model name field:type <span class="string">[...]</span> <span class="string">[options]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成したファイル一覧を削除</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rails</span> destroy controller hello</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>→多分modelとかでも出来る</p>
+<ul>
+<li>サーバーの起動<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails server <span class="string">[name]</span> <span class="string">[-option]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>→severは「s」で省略可能。<br>オプションは、環境を選択する「-e production」など。</p>
+<ul>
+<li>ビューの自動生成（おまけ）<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rails</span> generate controller hello show</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>→viewの生成はcontroller生成時に行われるが、コントローラー名の後に欲しいviewの名前を入力すると、「hello/show.html.erb」のように配置される。（複数指定が可能）</p>
+<h1 id="記法・ルールなど">記法・ルールなど</h1><ul>
+<li>ルーティング<br>Railsでは、クライアントの要求を受け取ると、ルーティングを利用して呼び出すべきコントローラー/アクションを決定する。<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">match <span class="string">':controller(/:action(/:id))'</span>, <span class="symbol">via:</span> [ <span class="symbol">:get</span>, <span class="symbol">:post</span>, <span class="symbol">:patch</span> ]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上記はmatchメソッドの例。「/:id」はactionに渡される任意のパラメータを表し、()は省略可能である事を意味する。</p>
+<ul>
+<li><p>コメント<br>以下のような記法が存在する。</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="comment">&lt;%# コメント</span><br><span class="line">改行可能 %&gt;</span><span class="xml"></span><br><span class="line"></span><br><span class="line"></span>&lt;%<span class="ruby"> msg = <span class="string">'this is message'</span></span><br><span class="line"> <span class="comment"># デリミタ内に記述可能 </span></span>%&gt;<span class="xml"></span><br><span class="line"></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">if</span> <span class="keyword">false</span> </span>%&gt;<span class="xml"></span><br><span class="line"></span>&lt;%=<span class="ruby"> 無視される  </span>%&gt;<span class="xml"></span>&lt;%<span class="ruby"> これも無視 </span>%&gt;<span class="xml"></span><br><span class="line">可読性ががが</span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line"></span><br><span class="line"></span>&lt;%<span class="ruby"></span><br><span class="line"><span class="comment">=begin </span></span>%&gt;<span class="xml"></span><br><span class="line">行頭に=を記述する必要がある</span><br><span class="line">上のやつよりかまし</span><br><span class="line"></span>&lt;%<span class="ruby"><span class="comment"></span><br><span class="line">=end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>YAMLのインデントはスペース</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">production</span>:</span><br><span class="line">  <span class="attribute">adapter</span>: sqlite3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>です。</p>
+<ul>
+<li>コントローラーの命名規則
+<style>
+th { background: #ddd; }
+</style>
+<table>
+  <tr><th>種類</th><th>概要</th><th>名前（例）</th></tr>
+  <tr><td>コントローラクラス</td><td>先頭大文字のキャメルケースで、接尾辞に「Controller」</td><td>HelloController</td></tr>
+  <tr><td>コントローラのファイル名</td><td>コントローラクラスを小文字にしたもので、スネークケース</td><td>hello_controller.rb</td></tr>
+  <tr><td>ヘルパーファイル名</td><td>コントローラ名に接尾辞「_helper.rb」</td><td>hello_helper.rb</td></tr>
+  <tr><td>テストスクリプト名</td><td>コントローラ名に接尾辞「_test.rb」</td><td>hello_test.rb</td></tr>
+</table>
+</li>
+<li>モデルの命名規則
+<style>
+th { background: #ddd; }
+</style>
+<table>
+  <tr><th>種類</th><th>概要</th><th>名前（例）</th></tr>
+  <tr><td>モデルクラス</td><td>先頭大文字の単数系</td><td>Book</td></tr>
+  <tr><td>モデルのファイル名</td><td>先頭は小文字で単数系</td><td>book.rb</td></tr>
+  <tr><td>テーブル</td><td>先頭は小文字で複数形</td><td>books</td></tr>
+  <tr><td>テストスクリプト</td><td>モデル名に接尾辞「_test.rb」(先頭小文字の単数系)</td><td>book_test.rb</td></tr>
+</table>
+
+</li>
+</ul>
+<h1 id="機能の説明など">機能の説明など</h1><ul>
+<li>O/Rマッパー<br>「Object/Relational」を意味する。<br>アプリケーションで利用されるオブジェクトモデルとデータベースで利用されるリレーショナルモデルのデータ構造の違いを埋めるため、O/Rマーッパーの一種であるActive Recordのようなツールが利用される。<br>ちなみに構造的なギャップの事を「インピーダンスマッチ」と呼ぶ。<br>Active Recordでは、以下のような関係性でアプリケーション〜データベース間の紐付けが行われる。
+<style>
+th { background: #ddd; }
+</style>
+<table>
+  <tr><th>アプリケーション側</th><th>データベース側</th></tr>
+  <tr><td>モデルクラス</td><td>テーブル</td></tr>
+  <tr><td>モデルクラスのインスタンス</td><td>レコード1件のオブジェクト</td></tr>
+  <tr><td>オブジェクトのプロパティ</td><td>テーブルのフィールド</td></tr>
+</table>
+</li>
+<li>TODO、FIXME、OPTIMIZEアノテーション<br>以下のようなコメントをアプリケーション内から検索してきて、該当ファイルを列挙できる。<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># TODO: らんらんる〜٩( ‘ω’ )و</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>（´-`）.｡oO (grepでいいか)</p>
+<p>では、ざっくりでしたが今回は終わりです。<br>次回は3章を読む→書くます！</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/02/cifffxjpp000c71vpk1sbrn6h/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ruby on railsの学習</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
