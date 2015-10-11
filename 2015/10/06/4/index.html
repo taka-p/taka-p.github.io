@@ -6,20 +6,20 @@
   <title>RubyonRails4アプリケーションプログラミング 1-2章 | VagueLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Ruby on Rails 4 アプリケーションプログラミングの1-2章を読み進めたので、所々メモ。
-なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。
+なお、1章は「Railsとは、WAFとは」的な内容だったため割愛します。
 雛形作成のコマンドたちコマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RubyonRails4アプリケーションプログラミング 1-2章">
 <meta property="og:url" content="http://taka-p.github.io/2015/10/06/4/index.html">
 <meta property="og:site_name" content="VagueLog">
 <meta property="og:description" content="Ruby on Rails 4 アプリケーションプログラミングの1-2章を読み進めたので、所々メモ。
-なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。
+なお、1章は「Railsとは、WAFとは」的な内容だったため割愛します。
 雛形作成のコマンドたちコマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。">
-<meta property="og:updated_time" content="2015-10-06T15:20:10.000Z">
+<meta property="og:updated_time" content="2015-10-11T02:42:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RubyonRails4アプリケーションプログラミング 1-2章">
 <meta name="twitter:description" content="Ruby on Rails 4 アプリケーションプログラミングの1-2章を読み進めたので、所々メモ。
-なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。
+なお、1章は「Railsとは、WAFとは」的な内容だったため割愛します。
 雛形作成のコマンドたちコマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。">
   
     <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
@@ -106,7 +106,7 @@
  				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
 					</div>
 				</section>
 				
@@ -202,7 +202,7 @@ _:(´ཀ`」 ∠):_</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p><a href="http://www.amazon.co.jp/Ruby-Rails-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774164100" target="_blank" rel="external">Ruby on Rails 4 アプリケーションプログラミング</a>の1-2章を読み進めたので、所々メモ。</p>
-<p>なお、1章は「Railsと、WAFとは」的な内容だったため割愛します。</p>
+<p>なお、1章は「Railsとは、WAFとは」的な内容だったため割愛します。</p>
 <h1 id="雛形作成のコマンドたち">雛形作成のコマンドたち</h1><p>コマンドライン（ターミナル）からコマンドを入力する事で、アプリケーションに必要な各種雛形ファイルを作成できるコマンドは以下です。</p>
 <a id="more"></a>
 <ul>
@@ -234,7 +234,36 @@ _:(´ཀ`」 ∠):_</div>
 </li>
 </ul>
 <p>→viewの生成はcontroller生成時に行われるが、コントローラー名の後に欲しいviewの名前を入力すると、「hello/show.html.erb」のように配置される。（複数指定が可能）</p>
-<h1 id="記法・ルールなど">記法・ルールなど</h1><ul>
+<h1 id="DB操作系">DB操作系</h1><ul>
+<li><p>マイグレーション<br><code>db/migrate</code>配下のマイグレーションファイルを実行</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">rake</span> <span class="rule"><span class="attribute">db</span>:<span class="value">migrate</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>データベースのデータを空にする(テーブル構造はそのまま残る)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">rake</span> <span class="rule"><span class="attribute">db</span>:<span class="value">reset</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>データベースを空にする(テーブル構造も含めて削除 - マイグレーション前の初期状態に戻す)</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="keyword">db</span>:<span class="keyword">drop</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>フィクスチャによるテストデータの読み込み<br>あらかじめ用意したYAML形式のデータをデータベースに流し込む事が出来る</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="string">db:</span><span class="string">fixtures:</span>load FIXTURES=books</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>ちなみに、FIXTURES=*を指定しなければ<code>test/fixtures</code>配下の*.ymlファイルが全て読み込まれる。</p>
+<ul>
+<li><p>データベースクライアントの起動</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rails</span> db</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>テーブル一覧を参照(sqlite)</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">.tables</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特定テーブルの構造を参照(sqlite)</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.schema</span> books</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特定テーブルの内容を参照</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> books;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="構文・ルールなど">構文・ルールなど</h1><ul>
 <li>ルーティング<br>Railsでは、クライアントの要求を受け取ると、ルーティングを利用して呼び出すべきコントローラー/アクションを決定する。<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">match <span class="string">':controller(/:action(/:id))'</span>, <span class="symbol">via:</span> [ <span class="symbol">:get</span>, <span class="symbol">:post</span>, <span class="symbol">:patch</span> ]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -291,7 +320,7 @@ th { background: #ddd; }
 </li>
 </ul>
 <p>（´-`）.｡oO (grepでいいか)</p>
-<p>では、ざっくりでしたが今回は終わりです。<br>次回は3章を読む→書くます！</p>
+<p>では、ざっくりでしたが今回は終わりです。<br>次回は3章を読む→書くます</p>
 
       
     </div>
@@ -300,6 +329,15 @@ th { background: #ddd; }
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/10/11/1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RubyonRails4アプリケーションプログラミング 3章
+        
+      </div>
+    </a>
   
   
     <a href="/2015/10/02/3/" id="article-nav-older" class="article-nav-link-wrap">
