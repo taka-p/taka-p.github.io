@@ -5,16 +5,31 @@
   
   <title>RubyonRails4アプリケーションプログラミング 3章 | VagueLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。">
+  <meta name="description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。
+なお、scaffolding機能は以下のような局面で役立つ模様。
+
+
+まずは動作するアプリケーションを作成したい
+マスターメンテナンスなど凝った">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RubyonRails4アプリケーションプログラミング 3章">
 <meta property="og:url" content="http://taka-p.github.io/2015/10/11/1/index.html">
 <meta property="og:site_name" content="VagueLog">
-<meta property="og:description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。">
-<meta property="og:updated_time" content="2015-10-11T06:21:04.000Z">
+<meta property="og:description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。
+なお、scaffolding機能は以下のような局面で役立つ模様。
+
+
+まずは動作するアプリケーションを作成したい
+マスターメンテナンスなど凝った">
+<meta property="og:updated_time" content="2015-10-11T06:32:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RubyonRails4アプリケーションプログラミング 3章">
-<meta name="twitter:description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。">
+<meta name="twitter:description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。
+なお、scaffolding機能は以下のような局面で役立つ模様。
+
+
+まずは動作するアプリケーションを作成したい
+マスターメンテナンスなど凝った">
   
     <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
   
@@ -196,7 +211,6 @@ _:(´ཀ`」 ∠):_</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>3章を読み終えたので、要点をまとめていきます。<br>3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。</p>
-<a id="more"></a>
 <p>なお、scaffolding機能は以下のような局面で役立つ模様。</p>
 <blockquote>
 <ul>
@@ -205,14 +219,21 @@ _:(´ཀ`」 ∠):_</div>
 <li>Railsによる基本的なCRUD実装を理解したい</li>
 </ul>
 </blockquote>
+<a id="more"></a>
 <p>プロトタイプの作成、社内業務システム系や管理画面、railsの練習などに向いた機能という事でしょう。</p>
-<h1 id="雛形作成のコマンド_-_scaffold">雛形作成のコマンド - scaffold</h1><p>以下、scaffolding機能を実行するコマンド。<br>Model,View,Controllerを一括で生成してくれる<br><figure class="highlight"><figcaption><span>ターミナル</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g scaffold name field:type [...] [options]</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h2 id="雛形作成のコマンド_-_scaffold">雛形作成のコマンド - scaffold</h2><p>以下、scaffolding機能を実行するコマンド。<br>Model,View,Controllerを一括で生成してくれる<br><figure class="highlight"><figcaption><span>ターミナル</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g scaffold name field:type [...] [options]</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>name: モデル名、field: フィールド名、type: データ型、option: 動作オプション</p>
 </blockquote>
 <p><code>model</code>が<code>scaffold</code>に変わっただけで、ほとんどモデルと同じ構文。</p>
-<h1 id="ルーティングの確認">ルーティングの確認</h1><ul>
-<li>resourcesメソッド<br>scaffolding機能によってアプリケーションを生成すると、<code>config/routes.rb</code>に以下の記述が追加される。<figure class="highlight"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources :books</span><br></pre></td></tr></table></figure>
+
+<br><br>
+
+<h2 id="ルーティングの確認">ルーティングの確認</h2><ul>
+<li><strong>resourcesメソッド</strong><br>scaffolding機能によってアプリケーションを生成すると、<code>config/routes.rb</code>に以下の記述が追加される。<figure class="highlight"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources :books</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>上記の<code>resources</code>メソッドによって、booksリソースに対する標準的なCRUD操作がまとめて提供される。</p>
@@ -273,15 +294,21 @@ _:(´ཀ`」 ∠):_</div>
 <blockquote>
 <p>備考として、<code>()</code>は省略可能、<code>.:format</code>はデータを描画するテンプレートを指定する構文で、省略した場合は<code>.html.erb</code>が選択される<br>その他、jsonをパースする<code>.json.jbuilder</code>などが指定できる<br><code>ex. http://localhost:3000/books.json</code><br>上記は、<strong>erbを利用してhtml形式の出力を生成するためのテンプレート</strong>、<strong>jbuilderを利用してjson形式の出力を生成するためのテンプレート</strong>という意味を持つ</p>
 </blockquote>
+
+<br>
+
 <ul>
-<li>ルーティングの状態を確認する方法<br>以下2つがある。</li>
+<li><strong>ルーティングの状態を確認する方法</strong><br>以下2つがある。</li>
 </ul>
 <ol>
 <li>ターミナルから<code>rake routes</code>を叩く</li>
 <li>ブラウザから<code>http://localhost:3000/rails/info/routes</code>にアクセスする</li>
 </ol>
-<h1 id="View関連のメソッド（ビューヘルパー）">View関連のメソッド（ビューヘルパー）</h1><ul>
-<li>link toメソッド<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">link_to</span><span class="params">(body, url [,html_options])</span></span></span><br></pre></td></tr></table></figure>
+
+<br><br>
+
+<h2 id="View関連のメソッド（ビューヘルパー）">View関連のメソッド（ビューヘルパー）</h2><ul>
+<li><strong>link toメソッド</strong><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">link_to</span><span class="params">(body, url [,html_options])</span></span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -289,13 +316,19 @@ _:(´ཀ`」 ∠):_</div>
 </blockquote>
 <p>ルート定義に記載される<code>*_path</code>というヘルパーをurlに指定するのが一般的。<br>urlにモデルオブジェクトが渡された場合は、book.idを取得して<code>books/1</code>のようなパスが生成される。<br>また、以下のように<code>data-confrm</code>オプションを指定する事で「リンククリック時に確認ダイアログを表示する」という振る舞いを行う。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= link_to <span class="string">'不可逆的な操作'</span>, url, <span class="string">data:</span> &#123; <span class="string">confirm:</span> <span class="string">'Are you sure?'</span> &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
 <p>なお、HTTP GET以外のメソッドにハイパーリンク経由でアクセスする場合は、明示的に<code>method: delete</code>のような記述を行う必要がある。<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= link_to <span class="string">'Destroy'</span>, url, <span class="function"><span class="keyword">method</span>:</span> delete, data: <span class="comment">&#123; confirm: 'Are you sure?' &#125;</span> %&gt;</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
 <ul>
-<li>renderメソッド（Controllerでも使う）<br>テンプレート内に下記の記述を行う事で、<strong>部分テンプレート</strong>である<code>_form.html.erb</code>が呼び出される。<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="variable">%=</span> <span class="keyword">render</span> <span class="string">'form'</span> <span class="variable">%&gt;</span></span><br></pre></td></tr></table></figure>
+<li><strong>renderメソッド（Controllerでも使う）</strong><br>テンプレート内に下記の記述を行う事で、<strong>部分テンプレート</strong>である<code>_form.html.erb</code>が呼び出される。<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="variable">%=</span> <span class="keyword">render</span> <span class="string">'form'</span> <span class="variable">%&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>なお、部分テンプレートはファイル名の接頭辞に<code>_</code>を付けること。</p>
+
+<br>
+
 <ul>
-<li>form_forメソッド<br>モデルオブジェクトに関連づけたフォームを生成するメソッド。<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">form_f<span class="subst">or</span>(model) <span class="keyword">do</span> |f|</span><br><span class="line">  <span class="attribute">...</span>フォームの本体<span class="attribute">...</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<li><strong>form_forメソッド</strong><br>モデルオブジェクトに関連づけたフォームを生成するメソッド。<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">form_f<span class="subst">or</span>(model) <span class="keyword">do</span> |f|</span><br><span class="line">  <span class="attribute">...</span>フォームの本体<span class="attribute">...</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -303,8 +336,11 @@ _:(´ཀ`」 ∠):_</div>
 </blockquote>
 <p>モデルオブジェクトとの関連付けを行う事によって、<strong>入力値をモデルのプロパティに割り当てる</strong>、<strong>編集・エラー時にモデルの現在値をフォームに書き戻す</strong>というメリットを享受できる。<br>また、この際に渡されるモデルオブジェクトが空であるか否かによって（正確にはレコードが新規か既存かによって）、action属性の内容を変化させ、新規レコードの場合はcreateアクション、既存レコードの場合はupdateアクションへのURLを生成する。</p>
 <p>なお、モデルに関連づけたくない場合は<code>form_tag</code>メソッドを利用する。</p>
-<h1 id="Controller関連のメソッド">Controller関連のメソッド</h1><ul>
-<li>before_actionメソッド<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">before_action <span class="function"><span class="keyword">method</span>, <span class="title">only</span>:</span> action</span><br></pre></td></tr></table></figure>
+
+<br><br>
+
+<h2 id="Controller関連のメソッド">Controller関連のメソッド</h2><ul>
+<li><strong>before_actionメソッド</strong><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">before_action <span class="function"><span class="keyword">method</span>, <span class="title">only</span>:</span> action</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -312,45 +348,71 @@ _:(´ཀ`」 ∠):_</div>
 </blockquote>
 <p>コントローラファイルに定義される、アクションメソッド群の前に実行したいメソッドを指定する構文。（このようなメソッドを<code>フィルタ</code>と呼ぶ）<br>以下は、<code>set_book</code>というフィルタをshowアクションに適用した例。<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">before_action <span class="symbol">:set_book</span>, <span class="symbol">only:</span> [<span class="symbol">:show</span>]</span><br><span class="line">略...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span></span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">略...</span><br><span class="line"><span class="keyword">private</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">set_book</span></span></span><br><span class="line">    <span class="variable">@book</span> = <span class="constant">Book</span>.find(params[<span class="symbol">:id</span>])</span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
 <p>なお、意図しないアクションとして呼び出されないために、private宣言を行っている。</p>
+
+<br>
+
 <ul>
-<li>StrongParameters<br>CreateアクションやUpdateアクションにおいて、Viewからポストデータを取得する際、取得できるパラメータを制限する処理。（セキュリティ強化のため）<figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...略</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span></span></span><br><span class="line">  <span class="variable">@book</span> <span class="constant">Book</span>.new(book_params)</span><br><span class="line">...略</span><br><span class="line"></span><br><span class="line">private</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">book_params</span></span></span><br><span class="line">    params.<span class="keyword">require</span>(<span class="symbol">:book</span>).permit(<span class="symbol">:isbn</span>, <span class="symbol">:title</span>, <span class="symbol">:price</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<li><strong>StrongParameters</strong><br>CreateアクションやUpdateアクションにおいて、Viewからポストデータを取得する際、取得できるパラメータを制限する処理。（セキュリティ強化のため）<figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...略</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span></span></span><br><span class="line">  <span class="variable">@book</span> <span class="constant">Book</span>.new(book_params)</span><br><span class="line">...略</span><br><span class="line"></span><br><span class="line">private</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">book_params</span></span></span><br><span class="line">    params.<span class="keyword">require</span>(<span class="symbol">:book</span>).permit(<span class="symbol">:isbn</span>, <span class="symbol">:title</span>, <span class="symbol">:price</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>なお、rails4から導入された機能のため、rails3以前のscaffoldで生成されたアプリケーションではエラーが発生する。</p>
+
+<br>
+
 <ul>
-<li>respond_toメソッド<br>クライアントからリクエストされたURLの<code>.:format</code>によって、行う処理を分岐できるメソッド。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">respond_to <span class="keyword">do</span> |format|</span><br><span class="line">  format.html &#123; テンプレートの渡す処理 &#125;</span><br><span class="line">  format.json  &#123; テンプレートの渡す処理 &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<li><strong>respond_toメソッド</strong><br>クライアントからリクエストされたURLの<code>.:format</code>によって、行う処理を分岐できるメソッド。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">respond_to <span class="keyword">do</span> |format|</span><br><span class="line">  format.html &#123; テンプレートの渡す処理 &#125;</span><br><span class="line">  format.json  &#123; テンプレートの渡す処理 &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>なお、rails4からは指定しない場合は、デフォルトのテンプレートを呼び出す振る舞いを行う。</p>
+
+<br>
+
 <ul>
-<li>redirect_toメソッド</li>
+<li><strong>redirect_toメソッド</strong></li>
 </ul>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redirect_to url <span class="string">[,option]</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>url: リダイレクト先のパス、option: オプション</p>
 </blockquote>
 <p>良く利用するオプションとして、リダイレクト先にメッセージを伝える<code>notice</code>がある。<br>他、応答時に使用するHTTPステータスを指定する<code>status</code>など。</p>
+
+<br>
+
 <ul>
-<li><p>saveメソッド<br>データベース操作の結果を<code>true/false</code>で返す</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable">@book</span>.save</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<li><strong>saveメソッド</strong><br>データベース操作の結果を<code>true/false</code>で返す<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable">@book</span>.save</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>updateメソッド<br>更新の正否を<code>true/false</code>で返す</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">update</span><span class="params">(attrs)</span></span></span><br></pre></td></tr></table></figure>
+</ul>
+
+<br>
+
+<ul>
+<li><strong>updateメソッド</strong><br>更新の正否を<code>true/false</code>で返す<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">update</span><span class="params">(attrs)</span></span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
 <p>attrs: 更新データ[プロパティ名: 値]のハッシュ形式<br><code>ex. if @book.update(book_params)</code></p>
 </blockquote>
+
+<br>
+
 <ul>
-<li>headメソッド<br>HTTPステータス（処理結果）のみを通知し、コンテンツ本体は出力しないメソッド<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
+<li><strong>headメソッド</strong><br>HTTPステータス（処理結果）のみを通知し、コンテンツ本体は出力しないメソッド<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
 <p>status: 応答ステータス<br><code>ex. format.json { head :no_content }</code></p>
 </blockquote>
-<h1 id="その他補足">その他補足</h1><ul>
-<li>RESTfulインターフェースの擬似的な実現<br><code>link_to</code>メソッドや<code>form_for</code>メソッドにより描画されるhtmlに、methodの情報が付与される理由は、「ブラウザはすべてのHTTPメソッドに対応しているべきで、目的に応じて、それぞれを使い分けるべき」というRESTfulな思想を緊急避難的に体現するため。<br>（一般的なブラウザはHTTP DELETE,PUT,PATCHメソッドに対応していない）<br>link_toメソッドでは<code>data-meshod</code>属性に、form_forメソッドではinputの<code>name</code>属性にメソッドの情報が付与される。</li>
-<li>PATCH / PUTの違い<br>rails3では更新処理にPUTが採用されていたが、rails4ではPATCHに振り返られた。<br>PUTは本来「リソースの完全な置換」という性質を持つが、更新処理を行うリソースは大抵の場合、部分的な更新を行う事が多く、「リソースの部分的な更新」という性質を持つPATCHが採用された。<br>rails4において、PATCH / PUTの両方が存在するのは、後方互換性に配慮されているためである。</li>
+
+<br><br>
+
+<h2 id="その他補足">その他補足</h2><ul>
+<li><strong>RESTfulインターフェースの擬似的な実現</strong><br><code>link_to</code>メソッドや<code>form_for</code>メソッドにより描画されるhtmlに、methodの情報が付与される理由は、「ブラウザはすべてのHTTPメソッドに対応しているべきで、目的に応じて、それぞれを使い分けるべき」というRESTfulな思想を緊急避難的に体現するため。<br>（一般的なブラウザはHTTP DELETE,PUT,PATCHメソッドに対応していない）<br>link_toメソッドでは<code>data-meshod</code>属性に、form_forメソッドではinputの<code>name</code>属性にメソッドの情報が付与される。</li>
+</ul>
+
+<br>
+
+<ul>
+<li><strong>PATCH / PUTの違い</strong><br>rails3では更新処理にPUTが採用されていたが、rails4ではPATCHに振り返られた。<br>PUTは本来「リソースの完全な置換」という性質を持つが、更新処理を行うリソースは大抵の場合、部分的な更新を行う事が多く、「リソースの部分的な更新」という性質を持つPATCHが採用された。<br>rails4において、PATCH / PUTの両方が存在するのは、後方互換性に配慮されているためである。</li>
 </ul>
 
 <br><br>
