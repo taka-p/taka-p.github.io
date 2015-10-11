@@ -21,7 +21,8 @@
 
 まずは動作するアプリケーションを作成したい
 マスターメンテナンスなど凝った">
-<meta property="og:updated_time" content="2015-10-11T06:32:58.000Z">
+<meta property="og:image" content="http://taka-p.github.io/2015/10/11/1/IMG_0144.JPG">
+<meta property="og:updated_time" content="2015-10-11T07:15:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RubyonRails4アプリケーションプログラミング 3章">
 <meta name="twitter:description" content="3章を読み終えたので、要点をまとめていきます。3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。
@@ -406,18 +407,23 @@ _:(´ཀ`」 ∠):_</div>
 <br><br>
 
 <h2 id="その他補足">その他補足</h2><ul>
-<li><strong>RESTfulインターフェースの擬似的な実現</strong><br><code>link_to</code>メソッドや<code>form_for</code>メソッドにより描画されるhtmlに、methodの情報が付与される理由は、「ブラウザはすべてのHTTPメソッドに対応しているべきで、目的に応じて、それぞれを使い分けるべき」というRESTfulな思想を緊急避難的に体現するため。<br>（一般的なブラウザはHTTP DELETE,PUT,PATCHメソッドに対応していない）<br>link_toメソッドでは<code>data-meshod</code>属性に、form_forメソッドではinputの<code>name</code>属性にメソッドの情報が付与される。</li>
+<li><strong>RESTfulインターフェースの擬似的な実現</strong><br><code>link_to</code>メソッドや<code>form_for</code>メソッドにより描画されるhtmlに、HTTPメソッドの情報が付与される理由は、「ブラウザはすべてのHTTPメソッドに対応しているべきで、目的に応じて、それぞれを使い分けるべき」というRESTfulな思想を緊急避難的に体現するため。<br>（一般的なブラウザはHTTP DELETE,PUT,PATCHメソッドに対応していない）<br>link_toメソッドでは<code>data-method</code>属性に、form_forメソッドではinputの<code>name</code>属性にHTTPメソッドの情報が付与される。</li>
 </ul>
 
 <br>
 
 <ul>
-<li><strong>PATCH / PUTの違い</strong><br>rails3では更新処理にPUTが採用されていたが、rails4ではPATCHに振り返られた。<br>PUTは本来「リソースの完全な置換」という性質を持つが、更新処理を行うリソースは大抵の場合、部分的な更新を行う事が多く、「リソースの部分的な更新」という性質を持つPATCHが採用された。<br>rails4において、PATCH / PUTの両方が存在するのは、後方互換性に配慮されているためである。</li>
+<li><strong>PATCH / PUTの違い</strong><br>rails3では更新処理にPUTが採用されていたが、rails4ではPATCHに振り替られた。<br>PUTは本来「リソースの完全な置換」という性質を持つが、更新処理を行うリソースは大抵の場合、部分的な更新を行う事が多く、「リソースの部分的な更新」という性質を持つPATCHが採用された。<br>rails4において、PATCH / PUTの両方が存在するのは、後方互換性に配慮されているためである。</li>
 </ul>
 
 <br><br>
 
 <p>以上で3章は終わりです。<br>次回は、細かい内容まで言及している4章を書いていきます。</p>
+
+<br>
+
+<p>PS. 他のやつ届いた<br>思いのほか汚い_:(´ཀ`」 ∠):_<br>あと、真ん中のやつがrails4対応かと思ったら、赤い電車のとこに「Rails3」て書いてた凡ミス..w</p>
+<p><img src="/2015/10/11/1/IMG_0144.JPG" alt="amazonで買ったrails本たち" title="amazonで買ったrails本たち"></p>
 
       
     </div>
