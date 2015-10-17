@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP4 ビュー開発 - フォーム関連のビューヘルパー | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="4章を読み終えたので、要点をまとめていきます。4章では、1~3章で学んだ全体像の内、Viewに焦点を当てた内容で、ここからはひたすらメソッド・ヘルパーの説明を行っていて、リファレンス的に使う方が向いているかも。
+この記事書いてる最中も、もしかして僕はRailsメソッドリファレンスを作っているんじゃなかろか。。という不安に駆られた。チョベリバ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP4 ビュー開発 - フォーム関連のビューヘルパー">
+<meta property="og:url" content="http://taka-p.github.io/2015/10/17/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="4章を読み終えたので、要点をまとめていきます。4章では、1~3章で学んだ全体像の内、Viewに焦点を当てた内容で、ここからはひたすらメソッド・ヘルパーの説明を行っていて、リファレンス的に使う方が向いているかも。
+この記事書いてる最中も、もしかして僕はRailsメソッドリファレンスを作っているんじゃなかろか。。という不安に駆られた。チョベリバ">
+<meta property="og:updated_time" content="2015-10-17T18:02:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP4 ビュー開発 - フォーム関連のビューヘルパー">
+<meta name="twitter:description" content="4章を読み終えたので、要点をまとめていきます。4章では、1~3章で学んだ全体像の内、Viewに焦点を当てた内容で、ここからはひたすらメソッド・ヘルパーの説明を行っていて、リファレンス的に使う方が向いているかも。
+この記事書いてる最中も、もしかして僕はRailsメソッドリファレンスを作っているんじゃなかろか。。という不安に駆られた。チョベリバ">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">taka-p</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">taka-p</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RubyonRails4アプリケーションプログラミング4章-ビュー開発" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/17/1/" class="article-date">
+  	<time datetime="2015-10-17T13:30:11.000Z" itemprop="datePublished">2015-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP4 ビュー開発 - フォーム関連のビューヘルパー
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>4章を読み終えたので、要点をまとめていきます。<br>4章では、1~3章で学んだ全体像の内、Viewに焦点を当てた内容で、ここからはひたすらメソッド・ヘルパーの説明を行っていて、リファレンス的に使う方が向いているかも。</p>
+<p>この記事書いてる最中も、もしかして僕はRailsメソッドリファレンスを作っているんじゃなかろか。。<br>という不安に駆られた。<del>チョベリバ</del></p>
+<a id="more"></a>
+
+<br>
+
+<p>この記事では、よく使いそうなヘルパーだけ書いていこうと思います。<br>なお、ビューにおいて利用されるヘルパーを「ビューヘルパー」と呼ぶ模様。</p>
+
+<br>
+
+<h2 id="フォーム関連のビューヘルパー">フォーム関連のビューヘルパー</h2><ul>
+<li><strong>フォーム生成の基礎について</strong><br>フォームの生成のビューヘルパーは、大きく分けて以下2つに分類出来る。</li>
+</ul>
+<ol>
+<li>form_tag …汎用的なフォームを生成</li>
+<li>form_for …特定のモデルに関連づいたフォームを生成</li>
+</ol>
+<p>また、フォーム配下の要素を生成するビューヘルパー郡に関しても、汎用的に利用する（モデルに関連づかない）ものは基本的に、メソッド名の末尾に<code>_tag</code>と付く。<br>汎用的に利用するフォーム内の要素は「FormTagヘルパー」、モデルに関連づいたものは「Formヘルパー」と呼ぶ。</p>
+
+<br>
+
+<ul>
+<li><strong>form_tagメソッド</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">form_tag(url_opts [,opts]) <span class="operator"><span class="keyword">do</span></span><br><span class="line">  ...<span class="keyword">body</span>...</span><br><span class="line"><span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>url_opts: リンク先のURL、opts: <code>&lt;form&gt;</code>タグの属性、body: フォームの本体<br>optsには、<code>method</code>や<code>id</code>、<code>class</code>などが指定できる。</em></p>
+</blockquote>
+<p>form_tagメソッド配下においては、基本的にはFormTagヘルパーを利用するが、Formヘルパーも利用できる。<br>しかし、Formヘルパーが頻出するようならば、そもそもform_forメソッドを利用する方がスマート。<br>逆に、form_forメソッド配下において、FormTagヘルパーの利用も可能。</p>
+<p>なお、form_forメソッドは3章で紹介したため省略する。</p>
+
+<br>
+
+<ul>
+<li><strong>Formヘルパーメソッド<code>_field</code> が付くもの</strong><br>Formヘルパーの内、メソッド末尾に<code>_field</code>が付くもの(主要なやつ)<br>引数はいずれも<code>(obj, prop [,opts])</code>なので省略<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">text_field</span><br><span class="line">password_field</span><br><span class="line">file_field</span><br><span class="line">hidden_field</span><br><span class="line"></span><br><span class="line">--以下、<span class="constant">HTML5</span>対応ブラウザ用</span><br><span class="line">datetime_field</span><br><span class="line">date_field</span><br><span class="line">time_field</span><br><span class="line">email_field</span><br><span class="line">number_field</span><br><span class="line">range_field</span><br><span class="line">telephone_field</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名(form_for配下では<code>f.xxx_field</code>の形式)<br>prop: プロパティ名、opts: inputタグの属性</em></p>
+</blockquote>
+
+<br>
+
+<ul>
+<li><strong>Formヘルパーメソッド<code>_field</code>が付かないもの</strong><br>Formヘルパーの内、メソッド末尾に<code>_field</code>が付かないもの(主要なやつ)<br>なお、特筆すべきメソッドは後述していく<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">text_area</span><span class="params">(obj, prop [,opts])</span></span></span><br><span class="line"><span class="function"><span class="title">radio_button</span><span class="params">(obj, prop, value [,opts])</span></span></span><br><span class="line"><span class="function"><span class="title">check_box</span><span class="params">(obj, prop [,opts [,checked=<span class="string">"1"</span> [,unchecked=<span class="string">"0"</span>]]])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名(form_for配下では<code>f.xxx_field</code>の形式)<br>prop: プロパティ名、opts: inputタグの属性、value: value属性<br>checked/unchecked: チェック/非チェック時のvalue属性</em></p>
+</blockquote>
+
+<br>
+
+<ul>
+<li><strong>FormTagヘルパーメソッド</strong><br>上記Fromヘルパーの末尾に<code>_tag</code>が付く。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">xxx_field_tag</span><span class="params">(name, [,value [,opts]])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>name: 入力要素の名前、value: value属性の値、opts: inputタグの属性</em></p>
+</blockquote>
+<p>Formヘルパーでは<code>obj, prop</code>を引数に指定していたが、FormTagヘルパーでは<code>name, value</code>に置き換わっている。ほぼHTML。</p>
+
+<br>
+
+<ul>
+<li><strong>selectメソッド</strong><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">select</span><span class="params">(obj, prop, choices, [,opts [,html_opts]])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名、prop: プロパティ名<br>choices: <code>&lt;option&gt;</code>タグの情報（配列かハッシュで渡す）<br>opts: 動作オプション、html_opts: <code>&lt;select&gt;</code>タグの属性</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>動作オプション</th>
+<th style="text-align:left">概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include_balnk</td>
+<td style="text-align:left">先頭に空の選択肢を追加（選択して下さいなど）</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td style="text-align:left">無効にする選択肢</td>
+</tr>
+<tr>
+<td>selected</td>
+<td style="text-align:left">オブジェクトと異なる選択肢を選択中にする</td>
+</tr>
+</tbody>
+</table>
+<p>FormTagヘルパー版にあたる「select_tagメソッド」も存在する。</p>
+
+<br>
+
+<ul>
+<li><strong>collection_selectメソッド</strong><br>selectメソッドの発展系。<br><code>option</code>タグをデータベースから参照したデータを元に生成する。<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">collection_select</span>(obj, prop, collection, value, <span class="value">text</span> <span class="attr_selector">[,opts [,html_opts]</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名、prop: プロパティ名<br>collection: <code>&lt;option&gt;</code>タグの元になるオブジェクト配列<br>value: collectionでvalue属性に割り当てられる<br>text: collectionでテキストに割り当てられる<br>opts: 動作オプション、html_opts: <code>&lt;select&gt;</code>タグのオプション</em></p>
+</blockquote>
+<p>FormTagヘルパー版にあたる「option_from_collection_for_selectメソッド」も存在する。</p>
+<p>本当にどうでもいいけど、途中までoptsを<a href="http://dictionary.goo.ne.jp/leaf/ej3/59202/m0u/" target="_blank" rel="external">oops</a>だと思ってた謎。</p>
+
+<br>
+
+<ul>
+<li><strong>group_collection_selectメソッド</strong><br>collection_selectメソッドの発展系。<br><code>optgroup</code>タグで<code>option</code>タグ群をグルーピングする。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">group_collection_select</span><span class="params">(obj, prop, collection, group, group_label, option_key, option_value [,opts [,html_opts]])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名、prop: プロパティ名<br>collection: <code>&lt;optgroup&gt;</code>タグの元になるオブジェクト配列<br>group: <code>&lt;option&gt;</code>タグを取得するメソッド<br>group_label: <code>&lt;optgroup&gt;</code>タグのlabel属性<br>group_key: <code>&lt;optgroup&gt;</code>タグのvalue属性<br>option_value: <code>&lt;option&gt;</code>タグのテキスト<br>opts: 動作オプション、html_opts: <code>&lt;select&gt;</code>タグのオプション</em></p>
+</blockquote>
+<p>引数が多いため、<a href="http://railsdoc.com/references/grouped_collection_select#contents" target="_blank" rel="external">Railsのリファレンス</a>を見ながら使った方が賢明そう</p>
+<p>FormTagヘルパー版にあたる「option_group_from_collection_for_selectメソッド」も存在する。<br>メソッド名が長過ぎて泣けてくる。</p>
+
+<br>
+
+<ul>
+<li><strong>xxx_selectメソッド</strong><br>日付時刻の入力に特化した選択ボックスを生成する。<br>引数はいずれも<code>(obj, prop [,opts [,html_opts]])</code>なので省略<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">datetime_select</span></span><br><span class="line">date_select</span><br><span class="line">time_select</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名、prop: プロパティ名<br>opts: 動作オプション、html_opts: <code>&lt;select&gt;</code>タグの属性</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>主な動作オプション</th>
+<th style="text-align:left">概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>use_month_number</td>
+<td style="text-align:left">月を数字で表示(デフォルトはJanualyなど英語表記)</td>
+</tr>
+<tr>
+<td>discard_year</td>
+<td style="text-align:left">年を非表示（month,dayもある）</td>
+</tr>
+</tbody>
+</table>
+<p>FormTagヘルパー版にあたる「select_xxxメソッド」も存在する。</p>
+
+<br>
+
+<ul>
+<li><strong>labelメソッド</strong><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">label</span>(obj, prop, <span class="attr_selector">[,content]</span> <span class="attr_selector">[,opts]</span> ,&amp;<span class="value">block</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>obj: オブジェクト名、prop: プロパティ名<br>content/&amp;block: <code>&lt;label&gt;</code>タグ配下のコンテンツ<br>opts: <code>label</code>の属性</em></p>
+</blockquote>
+<p>なお、<code>content/&amp;block</code>という記述は<code>do</code>を指定した場合は<code>do</code>から<code>end</code>までのコードを引数に渡す。という意味になる。<br>(<code>do</code>記述が無ければ、<code>content</code>に指定した値が引数に渡る)</p>
+
+<br>
+
+<ul>
+<li><strong>submitメソッド</strong><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">submit</span><span class="params">([value [,opts]])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>value: ボタンキャプション（ボタン上に表示される文字）<br>opts: 動作オプション</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>動作オプション</th>
+<th style="text-align:left">概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disabled</td>
+<td style="text-align:left">ボタンを非アクティブ状態にするか</td>
+</tr>
+<tr>
+<td>data</td>
+<td style="text-align:left">confirm,disable_withなどlink_toと同様のもの（独自定義も含む）</td>
+</tr>
+<tr>
+<td>その他</td>
+<td style="text-align:left">id,classなど<code>&lt;input&gt;</code>タグの属性</td>
+</tr>
+</tbody>
+</table>
+<p>data-confirm：サブミット時に確認ダイアログを表示<br>data-disable_with：サブミット時、ボタンが無効化している間に表示するテキストを指定（処理中…など）<br>なお、該当アクション（Controllerクラス）に<code>sleepメソッド</code>を定義する事で、処理を休止する時間を指定できる（認識できない一瞬に、処理中と表示されてもユーザーが不安になるため）<br><figure class="highlight ruby"><figcaption><span>hoge_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fuga</span></span></span><br><span class="line">  sleep <span class="number">3</span> <span class="comment"># 3秒休止する</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<ul>
+<li><strong>fields_forメソッド</strong><br>form_forブロック配下において、別のモデルを関連づけたサブフォームを生成するFormヘルパー。<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fields_f<span class="subst">or</span>(<span class="built_in">var</span>) <span class="keyword">do</span> |f|</span><br><span class="line">  <span class="attribute">...</span>body<span class="attribute">...</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>var: 対象のモデルオブジェクト</em></p>
+</blockquote>
+
+<br>
+<br>
+
+<p>フォーム関連のビューヘルパーは、ここで終了。<br>次回は「文字列/数値関連のビューヘルパー」をやっていきます。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/11/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RubyonRails4アプリケーションプログラミング 3章 Scaffolding機能によるRails開発の基礎</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
