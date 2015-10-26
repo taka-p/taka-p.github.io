@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。
+文字列/数値加工系メソッドのため、前回の「フォーム関連のビューヘルパー」に比べ、他のフレームワークにも共通する要素が多く、楽しく読み進められた気がします。
+今の仕事ではSmartyを使っていますが、文字列/数値加工系のヘルパーを良く利用するため、Railsでのアプリ開発においても利用機会は頻出するものだと思っています。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー">
+<meta property="og:url" content="http://taka-p.github.io/2015/10/18/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。
+文字列/数値加工系メソッドのため、前回の「フォーム関連のビューヘルパー」に比べ、他のフレームワークにも共通する要素が多く、楽しく読み進められた気がします。
+今の仕事ではSmartyを使っていますが、文字列/数値加工系のヘルパーを良く利用するため、Railsでのアプリ開発においても利用機会は頻出するものだと思っています。">
+<meta property="og:updated_time" content="2015-10-26T13:23:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー">
+<meta name="twitter:description" content="4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。
+文字列/数値加工系メソッドのため、前回の「フォーム関連のビューヘルパー」に比べ、他のフレームワークにも共通する要素が多く、楽しく読み進められた気がします。
+今の仕事ではSmartyを使っていますが、文字列/数値加工系のヘルパーを良く利用するため、Railsでのアプリ開発においても利用機会は頻出するものだと思っています。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">taka-p</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">taka-p</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP4-4章-ビュー開発①-文字列-数値関連のビューヘルパー" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/18/1/" class="article-date">
+  	<time datetime="2015-10-18T06:26:34.000Z" itemprop="datePublished">2015-10-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。</p>
+<p>文字列/数値加工系メソッドのため、前回の「フォーム関連のビューヘルパー」に比べ、他のフレームワークにも共通する要素が多く、楽しく読み進められた気がします。</p>
+<p>今の仕事ではSmartyを使っていますが、文字列/数値加工系のヘルパーを良く利用するため、Railsでのアプリ開発においても利用機会は頻出するものだと思っています。</p>
+<a id="more"></a>
+
+<br>
+<br>
+
+<h2 id="文字列加工系のビューヘルパー">文字列加工系のビューヘルパー</h2><p>文字列の加工、HTMLの付与、エンコード・エスケープ処理などを行ってくれるヘルパーを先に紹介。<br>数値関連は後ほど紹介。</p>
+<ul>
+<li><strong>simple_formatメソッド</strong><br>文字列全体を<code>p</code>タグで括る。<br>単一の改行文字には<code>&lt;br /&gt;</code>タグを付与。<br>連続した改行文字には<code>&lt;/p&gt;&lt;p&gt;</code>タグを付与<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">simple_format</span>(<span class="value">text</span>, <span class="attr_selector">[,html_options]</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>text: 整形対象のテキスト、html_options: <code>&lt;p&gt;</code>タグの属性</em></p>
+</blockquote>
+
+<br>
+
+<ul>
+<li><strong>EOS,EOL</strong><br>「<a href="http://qiita.com/mogulla3/items/3e114e9c4697f0dea84c" target="_blank" rel="external">ヒアドキュメント</a>」と呼ばれ、Rubyにおいては行指定のための文字列リテラル。<figure class="highlight ruby"><figcaption><span>例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print &lt;&lt;<span class="constant">EOS</span>      <span class="comment"># 識別子 EOS までがリテラルになる</span></span><br><span class="line">  the string</span><br><span class="line">  <span class="keyword">next</span> line</span><br><span class="line"><span class="constant">EOS</span></span><br><span class="line">↓</span><br><span class="line">print <span class="string">"  the string\n  next line\n"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+<br>
+
+<ul>
+<li><strong>truncateメソッド</strong><br>文字列を指定桁で丸める（切り捨てる）メソッド。<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">truncate</span>(<span class="value">text</span> <span class="attr_selector">[,options]</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>text: 切り捨て対象の文字列、options: 動作オプション</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>動作オプション</th>
+<th>概要</th>
+<th style="text-align:center">デフォルト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>length</td>
+<td>切り捨てを行う桁数</td>
+<td style="text-align:center">30</td>
+</tr>
+<tr>
+<td>sparator</td>
+<td>切り捨て箇所を表す文字</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>omission</td>
+<td>切り捨て時、末尾に付与する文字列</td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<p>separatorオプションを利用する事によって「lengthによる指定桁数に到達する直前にあるseparater指定文字」で切り捨てを行う事が出来、文脈がおかしくなりにくい。</p>
+
+<br>
+
+<ul>
+<li><strong>excerptメソッド</strong><br>文字列から、特定の文字を中心に前後の文字列を抜粋するメソッド。<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">excerpt</span>(<span class="value">text</span>, phrase <span class="attr_selector">[.options]</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>text: 抜粋対象の文字列、phrase: 検索文字列、options: 動作オプション</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>動作オプション</th>
+<th>概要</th>
+<th style="text-align:center">デフォルト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>radius</td>
+<td>抜粋する前後の文字列</td>
+<td style="text-align:center">30</td>
+</tr>
+<tr>
+<td>omission</td>
+<td>抽出時、前後に付与する文字列</td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<ul>
+<li><strong>cycleメソッド</strong><br>主にeachブロック配下で利用される。<br>あらかじめ指定された値リストを順番に出力する。<br>（表の背景色など）<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cycle</span>(<span class="keyword">value</span> [,...] [,<span class="keyword">name</span>: cname])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>value: 値リスト、cname: サイクル名</em></p>
+</blockquote>
+<p>また、現在のサイクル値を取得する<code>current_cycle</code>メソッドも存在する。<br>each配下において、複数箇所cycle値を利用したい場合に使える。<br>（値リストを一元化できる）</p>
+
+<br>
+
+<ul>
+<li><strong>highlightメソッド</strong><br>文字列に含まれる特定の文字列をハイライト表示する。<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">hightlight</span>(<span class="value">text</span>, phrases <span class="attr_selector">[,highlighter: replaced]</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>text: ハイライト処理するテキスト、phrases: ハイライトするキーワード<br>replaced: ハイライトする際に置き換える文字列（htmlなど）</em></p>
+</blockquote>
+
+<br>
+
+<ul>
+<li><strong>concatメソッド</strong><br>制御構文用のデリミタ<code>&lt;% ...body... %&gt;</code>内において、一部出力を行うメソッド。<figure class="highlight ruby"><figcaption><span>例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> book.price &gt;= <span class="number">3000</span></span><br><span class="line">  concat image_tag <span class="string">'hoge.png'</span></span><br><span class="line"><span class="keyword">end</span> %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意点として、concatメソッドが連続するような記述は逆に冗長なため、控える。<br>ヘルパー作成時に良く利用される。</p>
+
+<br>
+
+<ul>
+<li><strong>h/rawメソッド</strong><br>エスケープ処理を制御する。<br>h - エスケープする<br>raw - エスケープしない<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h(<span class="variable">$msg</span>)</span><br><span class="line">raw(<span class="variable">$msg</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>エスケープ - HTMLの予約語である<code>&lt;&gt;&amp;</code>等の文字列を<code>&amp;lt;</code>等の無害な文字列に置き換える処理。ブラウザがレンダリングを行う際に、HTMLでは無く「文字列(特殊文字)」として認識するため、ユーザーコメントなどにおいて予期しないレイアウト崩れや悪意のあるスクリプトの埋め込みを防ぐ。<br>
+例：<a href="javascript:alert('クッキーの情報とかを送信!（例なのでご安心下さい）');" rel="external" target="_blank">あられもない画像...♡</a>
+
+</em></p>
+</blockquote>
+<p>なお、Rails4においては、<code>&lt;%= ...body... %&gt;</code>左記、出力用のデリミタで記述する事によって、自動的にエスケープが行われる。<br>（<code>&lt;%== ...body... %&gt;</code>でエスケープしない。）<br>ヘルパー作成時やWebAPI作成時など利用される。</p>
+
+<br>
+
+<ul>
+<li><strong>sanitizeメソッド</strong><br>与えられたHTML文字列から特定のタグや属性を削除する。<br>エスケープではHTMLの有効・無効を制御していたが、こちらのメソッドでは部分選択的に制御を行える。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sanitize</span><span class="params">(html, [.opts])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>html: HTML文字列、opts: 許可するタグ・属性</em></p>
+</blockquote>
+<p>なお、opts指定の湯有無にかかわらず、javascript疑似プロトコルなどは自動で除去される。</p>
+<ul>
+<li><strong>sprintfメソッド</strong></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/17/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 4章 ビュー開発① - フォーム関連のビューヘルパー</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
