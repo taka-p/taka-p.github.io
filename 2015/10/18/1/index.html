@@ -15,7 +15,8 @@
 <meta property="og:description" content="4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。
 文字列/数値加工系メソッドのため、前回の「フォーム関連のビューヘルパー」に比べ、他のフレームワークにも共通する要素が多く、楽しく読み進められた気がします。
 今の仕事ではSmartyを使っていますが、文字列/数値加工系のヘルパーを良く利用するため、Railsでのアプリ開発においても利用機会は頻出するものだと思っています。">
-<meta property="og:updated_time" content="2015-10-26T13:23:19.000Z">
+<meta property="og:image" content="http://taka-p.github.io/2015/10/18/1/IMG_0145.JPG">
+<meta property="og:updated_time" content="2015-10-27T14:53:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー">
 <meta name="twitter:description" content="4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。
@@ -347,8 +348,128 @@ _:(´ཀ`」 ∠):_</div>
 </blockquote>
 <p>なお、opts指定の湯有無にかかわらず、javascript疑似プロトコルなどは自動で除去される。</p>
 <ul>
-<li><strong>sprintfメソッド</strong></li>
+<li><strong>sprintfメソッド</strong><br>指定した書式文字列に、指定した文字列の形式でプレイスホルダを埋め込むメソッド。<br>頻繁に利用するらしい。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sprintf</span><span class="params">(format, obj [,...])</span></span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<blockquote>
+<p><em>format: 書式文字列、obj,…: 書式文字列に埋め込む文字列</em></p>
+</blockquote>
+<p>以下が構文となる</p>
+<figure class="highlight"><figcaption><span>変換指定子の構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%[ &#12501;&#12521;&#12464; ][ &#24133; ][ .&#31934;&#24230; ] &#22411;</span><br></pre></td></tr></table></figure>
+<p>変換指定子のオプションは以下。<br>
+<table>
+  <thead>
+    <tr>
+      <th>分類</th>
+      <th>指定子</th>
+      <th>概要</th>
+    </tr>
+  </thead>
+  <tr>
+    <td rowspan="2">フラグ</td>
+    <td>+</td>
+    <td>文字列を符号付きで出力</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>右詰めで出力。左側を0で埋める</td>
+  </tr>
+  <tr>
+    <td>幅</td>
+    <td>1以上の整数</td>
+    <td>生成される文字列の長さ（小数点や符号も含む）</td>
+  </tr>
+  <tr>
+    <td>精度</td>
+    <td>0以上の整数</td>
+    <td>整数の場合は桁数、浮動小数点の場合は小数点以下の桁数、文字列の場合は文字列長</td>
+  </tr>
+  <tr>
+    <td rowspan="6">型</td>
+    <td>s</td>
+    <td>文字列として表現（to_sメソッドを適用）</td>
+  </tr>
+  <tr>
+    <td>p</td>
+    <td>inspectメソッドを適用（可読形式に変換）</td>
+  </tr>
+  <tr>
+    <td>d</td>
+    <td>整数として表現</td>
+  </tr>
+  <tr>
+    <td>f</td>
+    <td>浮動小数点として表現</td>
+  </tr>
+  <tr>
+    <td>e</td>
+    <td>指数として表現</td>
+  </tr>
+  <tr>
+    <td>%</td>
+    <td>パーセント文字</td>
+  </tr>
+</table>
+<br><a href="http://docs.ruby-lang.org/ja/2.1.0/doc/print_format.html" target="_blank" rel="external">その他のsprintfオプション</a></p>
+
+<br>
+
+<figure class="highlight ruby"><figcaption><span>例文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line"><span class="variable">@name</span> = <span class="string">'大動脈切れ造百貨店'</span></span><br><span class="line"><span class="variable">@shop</span>  = <span class="number">50</span></span><br><span class="line"><span class="variable">@sum</span>   = <span class="number">1000.115</span></span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%= sprintf(<span class="string">'%.3s : 全店舗数 %d 件の月次総売上 %.2f 円、店舗平均は %5.3f 円です。'</span>, <span class="variable">@name</span>, <span class="variable">@_shop</span>, <span class="variable">@sum</span>, <span class="variable">@sum</span> / <span class="variable">@shop</span>) %&gt;</span><br><span class="line"></span><br><span class="line">↓結果↓</span><br><span class="line"></span><br><span class="line">大動脈 <span class="symbol">:</span> 全店舗数 <span class="number">50</span> 件の月次総売上 <span class="number">1000.12</span> 円、店舗平均は <span class="number">20.002</span> 円です。</span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+
+<h2 id="数値整形系のビューヘルパー">数値整形系のビューヘルパー</h2><p>数値の整形を行ってくれるヘルパーたちです。<br>(sprintfメソッドも数値を整形してくれます)</p>
+
+<br>
+
+<ul>
+<li><strong>number_xxxメソッド</strong><br>数値を加工するメソッド。<br>以下抜粋。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>number_to_human(num [,opt])</td>
+<td>引数numを10,100…の単位に変換</td>
+</tr>
+<tr>
+<td>number_to_human_size</td>
+<td>バイト単位の引数numをKB,MB…に変換</td>
+</tr>
+<tr>
+<td>number_with_delimiter</td>
+<td>引数numに対して桁区切り文字を付与</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<ul>
+<li><strong>strftimeメソッド</strong><br>日付データを整形するメソッド。<br>超使いそう。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">strftime</span><span class="params">(format)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>format: 書式文字列</em></p>
+</blockquote>
+<p><a href="http://qiita.com/annyamonnya/items/97c5cb0cfa414b3592d7" target="_blank" rel="external">strftimeの変換指定子</a></p>
+
+<br>
+<br>
+
+<p>文字列/数値関連はここまで、次回は「その他」のヘルパーを書いていきます。</p>
+
+<br>
+
+<p>追伸<br>端から端まで読んじゃうタイプです。</p>
+<p><img src="/2015/10/18/1/IMG_0145.JPG" alt="付箋ががが" title="付箋ががが"></p>
+<p>（´-`）.｡oO（<a href="http://dictionary.goo.ne.jp/leaf/jn2/192952/m0u/" target="_blank" rel="external">付箋って何だっけ</a>）</p>
 
       
     </div>
@@ -357,6 +478,15 @@ _:(´ཀ`」 ∠):_</div>
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/10/27/1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー
+        
+      </div>
+    </a>
   
   
     <a href="/2015/10/17/1/" id="article-nav-older" class="article-nav-link-wrap">

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="4章ビュー開発のラスト、残りのビューヘルパーとrailsにおけるレイアウト管理について書いていきます。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー">
+<meta property="og:url" content="http://taka-p.github.io/2015/10/27/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="4章ビュー開発のラスト、残りのビューヘルパーとrailsにおけるレイアウト管理について書いていきます。">
+<meta property="og:updated_time" content="2015-10-29T17:13:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー">
+<meta name="twitter:description" content="4章ビュー開発のラスト、残りのビューヘルパーとrailsにおけるレイアウト管理について書いていきます。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">taka-p</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">taka-p</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP-4章-ビュー開発②-その他のビューヘルパー" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/27/1/" class="article-date">
+  	<time datetime="2015-10-27T14:36:33.000Z" itemprop="datePublished">2015-10-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>4章ビュー開発のラスト、残りのビューヘルパーとrailsにおけるレイアウト管理について書いていきます。</p>
+<a id="more"></a>
+
+<br>
+<br>
+
+<h2 id="リンク関連のビューヘルパー">リンク関連のビューヘルパー</h2><p>アンカータグ、URL文字列の生成を行うヘルパーなどがある。</p>
+<ul>
+<li><strong>link_toメソッド</strong><br>アンカータグを生成する。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">link_to</span><span class="params">(body, url [, html_opt])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>body: リンクテキスト、url: リンク先のURL、html_opt: 動作オプション</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>method</td>
+<td>HTTPメソッドの種類を便宜的に付与する※</td>
+</tr>
+<tr>
+<td>remote</td>
+<td>Ajaxでリンクを処理する</td>
+</tr>
+<tr>
+<td>data</td>
+<td>確認ダイアログを表示するconfirm、クリック後に日アクティブな状態であることを表示するdisable_withなど、javascript機能を付与する</td>
+</tr>
+<tr>
+<td>属性名</td>
+<td>id,clas,styleなどの一般的なHTML属性</td>
+</tr>
+</tbody>
+</table>
+<p>※本来、ブラウザはGET,POSTのみを受け付けるが、DELETE,PUT,PATCHのようなメソッドをRESTful思想に基づき、便宜的に付加している</p>
+
+<br>
+
+<ul>
+<li><strong>url_forメソッド</strong><br>引数に与えられたオプションに基づいて、URLを生成する。<br><code>link_toメソッド</code>のアンカータグを生成しないバージョン。<br>（<code>link_toメソッド</code>の引数指定は、<code>url_forメソッド</code>のそれに基づく）</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">url_for</span><span class="params">(opts)</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>opts: URLの生成オプション</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>controller</td>
+<td>コントローラー名</td>
+</tr>
+<tr>
+<td>action</td>
+<td>アクション名</td>
+</tr>
+<tr>
+<td>host</td>
+<td>ホスト名</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>プロトコル名</td>
+</tr>
+<tr>
+<td>anchor</td>
+<td>アンカー名</td>
+</tr>
+<tr>
+<td>only_path</td>
+<td>相対URLを返す</td>
+</tr>
+<tr>
+<td>trailing_slash</td>
+<td>末尾にスラッシュを付与</td>
+</tr>
+<tr>
+<td>user</td>
+<td>HTTP認証に使用するユーザー名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>HTTP認証に使用するパスワード</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= url_for(<span class="symbol">action:</span> <span class="symbol">:new</span>) %&gt;</span><br><span class="line"><span class="comment"># =&gt; /view/new</span></span><br><span class="line"></span><br><span class="line">&lt;%= url_for(<span class="symbol">controller:</span> <span class="symbol">:books</span>, <span class="symbol">action:</span> <span class="symbol">:show</span>, <span class="symbol">id:</span> <span class="number">5</span>, <span class="symbol">anchor:</span> <span class="string">'rails'</span>, <span class="symbol">charset:</span> <span class="string">'utf8'</span>) %&gt;</span><br><span class="line"><span class="comment"># =&gt; /books/5?charset=utf8#rails</span></span><br><span class="line"></span><br><span class="line">&lt;%= url_for(<span class="symbol">controller:</span> <span class="symbol">:members</span>, <span class="symbol">action:</span> <span class="symbol">:login</span>, <span class="symbol">only_path:</span> <span class="keyword">false</span>, <span class="symbol">protcol:</span> <span class="string">'https'</span>) %&gt;</span><br><span class="line"><span class="comment"># =&gt; https://localhost:3000/members/login</span></span><br><span class="line"></span><br><span class="line">&lt;% <span class="variable">@book</span> = <span class="constant">Book</span>.find(<span class="number">2</span>) %&gt;</span><br><span class="line">&lt;%= url_for(url_for(<span class="variable">@book</span>)) %&gt;</span><br><span class="line"><span class="comment"># =&gt; /books/2</span></span><br><span class="line"></span><br><span class="line">&lt;%= url_for(url_for(<span class="symbol">:back</span>)) %&gt;</span><br><span class="line"><span class="comment"># =&gt; javascript:history.back()</span></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+
+<h2 id="外部リソース指定のビューヘルパー">外部リソース指定のビューヘルパー</h2><p>各種静的リソースを呼び出すためのヘルパー。</p>
+<ul>
+<li><strong>image_tagメソッド</strong><br><code>&lt;img&gt;</code>タグの生成<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">image_tag</span><span class="params">(src [,opts])</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>src: 画像フォルダのパス、opts: 動作オプション<br>なお<code>src</code>には、絶対パスもしくわ<code>app/assets/images</code>フォルダからの相対パスを指定する</em></p>
+</blockquote>
+
+<br>
+
+<ul>
+<li><strong>path_to_xxxメソッド</strong><br>引数に指定したオプションに基づき、URLを生成する。<br>タグを生成しないバージョン。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path_to_javascript(src)</td>
+<td>jsのパスを取得</td>
+</tr>
+<tr>
+<td>path_to_stylesheet(src)</td>
+<td>スタイルシートのパスを取得</td>
+</tr>
+<tr>
+<td>path_to_image(src)</td>
+<td>画像のパスを取得</td>
+</tr>
+<tr>
+<td>path_to_audio(src)</td>
+<td>音声のパスを取得</td>
+</tr>
+<tr>
+<td>path_to_video(src)</td>
+<td>動画のパスを取得</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+<br>
+
+<h2 id="その他のビューヘルパー">その他のビューヘルパー</h2><p>その他の便利系メソッドを抜粋。</p>
+<ul>
+<li><strong>debugメソッド</strong><br>引数に指定したオブジェクトをYAML形式で表示する。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">debug</span><span class="params">(object)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>object: 出力対象のオブジェクト</em></p>
+</blockquote>
+
+<br>
+
+<ul>
+<li><strong>captureメソッド</strong><br>テンプレートの一部を変数に格納する。<br>部分テンプレート化する粒度では無い場合に用いる。<figure class="highlight cal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">var</span> = capture <span class="keyword">do</span></span><br><span class="line">  template</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>@var: 変数、template: 変数に格納する任意のテンプレート</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="variable">@current</span> = capture <span class="keyword">do</span> %&gt;</span><br><span class="line">  ただいまの時刻は&lt;%= <span class="constant">Time</span>.now %&gt;です。</span><br><span class="line">&lt;% <span class="keyword">end</span> %&gt;</span><br><span class="line"></span><br><span class="line">&lt;%= <span class="variable">@current</span> %&gt;</span><br><span class="line"><span class="comment"># =&gt; 多々今の時刻は2015-10-29 00:00:00 +0900です。</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+
+<mark><b>ちょっと脱線</b></mark>
+
+<p>普段の仕事では、smartyを利用していますが「複数ページに渡り使用しないが、単一のページ内において複数使用する」といったケースでは、以下のように再利用・共通部品化しています。<br><figure class="highlight php"><figcaption><span>smarty.tpl</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="function"><span class="keyword">function</span> <span class="title">hoge_module</span>&#125;</span><br><span class="line"><span class="title">hoge</span></span><br><span class="line"></span>&#123;/<span class="function"><span class="keyword">function</span>&#125;</span><br><span class="line"></span><br><span class="line"></span>&#123;hoge_module&#125;</span><br></pre></td></tr></table></figure></p>
+
+<br>
+<br>
+
+<h2 id="共通レイアウトを定義・利用する">共通レイアウトを定義・利用する</h2><p>ここは、少しつまづきました。<br>以下、概念的な部分に重きを置くため、文章中心になります。</p>
+<p>Railsにおいて「共通レイアウト」を定義・利用する方法は大きく以下の二つに分類される。</p>
+<ol>
+<li>ヘッダーやフッターなど「コンテンツの外枠」の共通パーツを定義する<mark>レイアウト/レイアウトテンプレート</mark></li>
+<li>「コンテンツ内」の部分的な共通パーツを定義する<mark>部分テンプレート</mark></li>
+</ol>
+<p><strong>レイアウト</strong>は広域に利用される部品を定義、<strong>部分テンプレート</strong>は局所的な部品を定義する。<br>とも言い換えられるかと思います。</p>
+<p>多くのフレームワークでは、2の部分テンプレートによって、1のレイアウトもカバーするケースが多いと思いますが（知らないだけかも）、Railsにおいては1のレイアウトという機能も利用されるようです。</p>
+<p>まだ、基礎学習のレベルなので確かではありませんが、レイアウトはControllerによるレイアウト管理に用いられ、部分テンプレートはViewの中で部品を管理するために用いられている。<br>と、一旦解釈しています。</p>
+<h3 id="レイアウト">レイアウト</h3><p>Railsでは、<code>/app/views/layouts/application.html.erb</code>をデフォルトのレイアウトとして適用する。</p>
+<figure class="highlight html"><figcaption><span>application.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">yield</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;%= yield %&gt; --&gt;</span>にコンテンツが設置される</span><br></pre></td></tr></table></figure>
+<ul>
+<li>コントローラー単位にレイアウトを設定する方法<br><code>/app/views/layouts/Controller名.html.erb</code>が存在する場合は自動的に適用。<br>変更する場合は以下のように指定する。<figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooksController</span> <span class="inheritance">&lt; <span class="parent">ApplicationController</span></span></span></span><br><span class="line">  layout <span class="string">'hoge'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment"># /app/views/layouts/hoge.html.erbが適用される</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+<br>
+
+<ul>
+<li>アクション単位にレイアウトを設定する方法<figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span></span></span><br><span class="line">  render <span class="symbol">layout:</span> <span class="string">'bar'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+<br>
+
+<ul>
+<li>複数のコンテンツ領域を設置する方法<br><code>content_forメソッド</code>を利用して、レイアウトテンプレートをネストする。<br>アクションからレイアウトの呼び出し↓<figure class="highlight ruby"><figcaption><span>view_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nest</span></span></span><br><span class="line">  <span class="variable">@msg</span> = <span class="string">'うぇーい'</span></span><br><span class="line">  render <span class="symbol">layout:</span> <span class="string">'child'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>まずは、nest.html.erbが参照される↓<br><figure class="highlight html"><figcaption><span>nest.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">%=</span> @<span class="attribute">msg</span> %&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>layoutに指定したchildに上記コンテンツが埋め込まれる↓<br><figure class="highlight html"><figcaption><span>child.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">%</span> <span class="attribute">content_for</span> <span class="attribute">:hoge</span> <span class="attribute">do</span> %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"hoge.jpg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">yield</span> %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">nav</span>&gt;</span>hoge<span class="tag">&lt;/<span class="title">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">%</span> <span class="attribute">end</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">render</span> <span class="attribute">template:</span> '<span class="attribute">layouts</span>/<span class="attribute">applicatioin</span>' %&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>さらに遡り、application.html.erbに埋め込まれる↓<br><figure class="highlight html"><figcaption><span>application.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">content_for</span>?(<span class="attribute">:hoge</span>) ? <span class="attribute">yield</span>(<span class="attribute">:hoge</span>) <span class="attribute">:</span> <span class="attribute">yield</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最終的な描画結果↓<br><figure class="highlight html"><figcaption><span>描画結果</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"hoge.jpg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>うぇーい<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">nav</span>&gt;</span>hoge<span class="tag">&lt;/<span class="title">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>ふぇー(๑´ㅂ`๑)</p>
+<p>慣れるまでに時間が掛かりそう。。</p>
+<p>普段smartyで行っている以下のように複雑な部品管理よりはよいかもカモシカ<br><figure class="highlight php"><figcaption><span>smarty.tpl</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="keyword">if</span> <span class="variable">$is_hoge</span>&#125;</span><br><span class="line">  &#123;<span class="keyword">include</span> file=<span class="string">"hoge.tpl"</span>&#125;</span><br><span class="line">&#123;<span class="keyword">else</span>&#125;</span><br><span class="line">  &#123;<span class="keyword">if</span> <span class="variable">$is_fuga</span>&#125;</span><br><span class="line">    &#123;<span class="keyword">include</span> file=<span class="string">"fuga.tpl"</span>&#125;</span><br><span class="line">  &#123;<span class="keyword">else</span>&#125;</span><br><span class="line">    &#123;<span class="keyword">if</span> <span class="variable">$is_foo</span>&#125;</span><br><span class="line">      &#123;<span class="keyword">include</span> file=<span class="string">"foo.tpl"</span>&#125;</span><br><span class="line">    &#123;<span class="keyword">else</span>&#125;</span><br><span class="line">      &#123;<span class="keyword">include</span> file=<span class="string">"bar.tpl"</span>&#125;</span><br><span class="line">    &#123;/<span class="keyword">if</span>&#125;</span><br><span class="line">  &#123;/<span class="keyword">if</span>&#125;</span><br><span class="line">&#123;/<span class="keyword">if</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;* 更に各種テンプレート内において、ページの判定などが存在 *&#125;</span><br></pre></td></tr></table></figure></p>
+<p>（´-`）.｡oO（いや、結局<code>if地獄</code>が<code>content_for地獄</code>に変わるだけのような気が候）</p>
+
+<br>
+
+<h3 id="部分テンプレート">部分テンプレート</h3><p>待望の部分テンプレート。<br>ルールはシンプルで、「ファイル名の接頭辞として<code>_</code>を付与」すれば、部分テンプレートとして認識される。</p>
+<p>以下は慣例的な保存先（ルールではない）</p>
+<table>
+<thead>
+<tr>
+<th>保存先フォルダ</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/views/application</td>
+<td>アプリ共通で利用される部品</td>
+</tr>
+<tr>
+<td>/views/コントローラー名</td>
+<td>特定のコントローラーのみで利用される部品</td>
+</tr>
+<tr>
+<td>/views/リソース名</td>
+<td>リソースに強く関連づいた部品※</td>
+</tr>
+</tbody>
+</table>
+<p>※この場所に保存すると、呼び出す際にオブジェクトモデルを指定するだけで呼び出し＆ローカル変数定義を行える。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通常</span></span><br><span class="line">&lt;%= render <span class="string">'books/book'</span>, <span class="symbol">book:</span> <span class="variable">@book</span> %&gt;</span><br><span class="line"><span class="comment"># リソースに関連づいている、かつ指定の保存場所</span></span><br><span class="line">&lt;%= render <span class="variable">@book</span> %&gt;</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<p>また、上記には<code>eachメソッド</code>で配列を渡すような記述が不要になる。</p>
+<p>通常は<code>collectionオプション</code>を利用する事で、実現する。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># each使う</span></span><br><span class="line">&lt;% <span class="variable">@books</span>.each <span class="keyword">do</span> |book| %&gt;</span><br><span class="line">  &lt;%= render <span class="string">'books/book'</span>, <span class="symbol">book:</span> book %&gt;</span><br><span class="line">&lt;% <span class="keyword">end</span> %&gt;</span><br><span class="line"><span class="comment"># collection使う</span></span><br><span class="line">&lt;%= render <span class="symbol">partial:</span> <span class="string">'books/book'</span>, <span class="symbol">collection:</span> <span class="variable">@books</span> %&gt;</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<p>その他、コントローラーで省略されたパラメータに対して、初期値をセットする方法。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># typeが省略されたらdetailsをセット</span></span><br><span class="line">&lt;%= render <span class="string">'books/book'</span>, <span class="symbol">book:</span> <span class="variable">@book</span>, <span class="symbol">type:</span> <span class="symbol">:details</span> %&gt;</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<p>部分テンプレートを繰り返す場合に、区切り線を入れる方法。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= render <span class="symbol">partial:</span> <span class="string">'books/book'</span>, <span class="symbol">collection:</span> <span class="variable">@books</span>, <span class="symbol">spacer_template:</span> <span class="string">'separator'</span> %&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><figcaption><span>view/_separator.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">hr</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+
+<p>以上で、4章ビュー開発編は終わりです。<br>次回から5章モデル開発編を書いていきます。</p>
+
+<br>
+
+<p>最近、書くのをさぼり過ぎて、5章読み終わったら4章書き終わる。<br>という辛い状況( ◜◡＾)っ✂╰⋃╯</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/18/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
