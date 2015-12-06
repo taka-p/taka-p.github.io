@@ -235,7 +235,7 @@ a {
 #container .left-col {
   background: #fff;
   width: 300px;
-  position: fixed;
+  position: absolute;
   opacity: 1;
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
@@ -256,7 +256,6 @@ a {
   background-position: -135px 0;
 }
 #container .left-col .intrude-less {
-  width: 76%;
   text-align: center;
   margin: 112px auto 0;
 }
@@ -343,16 +342,13 @@ a {
     padding-top: 10px;
   }
   #container .article .article-title {
-    font-size: 18px;
-    max-width: 185px;
     display: block;
     margin: 0;
+    line-height: 25px;
+    font-size: 18px;
   }
   #container .article .article-meta {
-    width: auto;
-    height: 30px;
-    margin-top: -5px;
-    position: ralative;
+    margin-top: 5px;
   }
   #container .article .article-meta .article-date {
     font-size: 12px;
@@ -366,11 +362,6 @@ a {
     width: 100%;
     text-align: left;
     margin-left: 10px;
-  }
-  #container .article .article-meta .article-date time {
-    width: auto;
-    float: right;
-    margin-right: 10px;
   }
   #container .article .article-meta .article-tag-list {
     margin-top: 7px;
@@ -452,11 +443,6 @@ a {
   }
   #container .archives-wrap .archive-year-wrap a {
     padding: 0 0 0 0;
-  }
-  #container .archives-wrap .article-meta .archive-article-date {
-    font-size: 12px;
-    margin-right: 10px;
-    margin-top: -5px;
   }
   #container .archives-wrap .article-meta .article-tag-list-link {
     font-size: 12px;
@@ -564,7 +550,7 @@ a {
   position: relative;
   width: 100%;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 230px;
   font-size: 14px;
 }
 #header .switch-area .switch-wrap {
@@ -721,6 +707,143 @@ a {
   text-align: left;
   line-height: 30px;
 }
+.toc-left-area {
+  border: 1px solid #e0e0e0;
+  padding: 10px 5px;
+  background-color: #f8f8f8;
+  -webkit-transition: background 250ms 0s linear;
+  -moz-transition: background 250ms 0s linear;
+  -ms-transition: background 250ms 0s linear;
+  transition: background 250ms 0s linear;
+}
+.toc-left-area.is-fixed {
+  position: fixed;
+  top: 10px;
+  left: 0;
+  width: 300px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.toc-left-area .toc {
+  text-align: left;
+  font-size: 13px;
+  list-style: none;
+}
+.toc-left-area .toc .toc-item {
+  position: relative;
+  padding-left: 5px;
+}
+.toc-left-area .toc .toc-child {
+  list-style: none;
+  margin-top: 10px;
+}
+.toc-left-area .toc .toc-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.toc-left-area .toc .toc-item:nth-child(1)::after {
+  content: "1.";
+}
+.toc-left-area .toc .toc-item:nth-child(2)::after {
+  content: "2.";
+}
+.toc-left-area .toc .toc-item:nth-child(3)::after {
+  content: "3.";
+}
+.toc-left-area .toc .toc-item:nth-child(4)::after {
+  content: "4.";
+}
+.toc-left-area .toc .toc-item:nth-child(5)::after {
+  content: "5.";
+}
+.toc-left-area .toc .toc-item:nth-child(6)::after {
+  content: "6.";
+}
+.toc-left-area .toc .toc-item:nth-child(7)::after {
+  content: "7.";
+}
+.toc-left-area .toc .toc-item:nth-child(8)::after {
+  content: "8.";
+}
+.toc-left-area .toc .toc-item:nth-child(9)::after {
+  content: "9.";
+}
+.toc-left-area .toc .toc-item:nth-child(10)::after {
+  content: "10.";
+}
+.toc-left-area .toc .toc-item::after {
+  position: absolute;
+  left: -9px;
+  top: 0;
+  color: #258fb8;
+}
+.toc-left-area .toc-link:hover {
+  color: #2fb5e8;
+}
+.toc-left-area .toc-link.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  margin-top: -5px;
+  border: 7px solid transparent;
+  border-left: 7px solid #258fb8;
+}
+.back-to-top {
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  height: 0;
+  background-color: #e0e0e0;
+  -webkit-transition: all 200ms 0s;
+  -moz-transition: all 200ms 0s;
+  -ms-transition: all 200ms 0s;
+  transition: all 200ms 0s;
+}
+.back-to-top.is-show {
+  opacity: 1;
+  height: 35px;
+}
+.back-to-top::before {
+/*白い丸 */
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -15px;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #fff;
+}
+.back-to-top::after {
+/*「after要素」で三角 */
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-top: -19px;
+  margin-left: -12px;
+  border: 12px solid transparent;
+  border-bottom: 12px solid #e0e0e0;
+}
+.back-to-top:hover {
+  background: #f8f8f8;
+}
+.back-to-top:hover::after {
+  border-bottom-color: #f8f8f8;
+}
 .duoshuo {
   padding: 0 40px;
 }
@@ -803,13 +926,7 @@ a {
   position: relative;
 }
 .archive-article-inner .article-meta {
-  position: relative;
-  float: right;
-  margin-top: -10px;
   color: #555;
-  background: none;
-  text-align: right;
-  width: auto;
 }
 .archive-article-inner .article-meta .article-date time {
   color: #aaa;
@@ -1120,14 +1237,7 @@ a {
   background: none;
 }
 .article-meta {
-  width: 150px;
-  font-size: 14;
-  text-align: right;
-  position: absolute;
-  right: 0;
-  top: 23px;
-  text-align: center;
-  z-index: 1;
+  margin-top: 10px;
 }
 .article-meta time {
   color: #aaa;
@@ -1416,13 +1526,7 @@ a {
   position: relative;
 }
 .archive-article-inner .article-meta {
-  position: relative;
-  float: right;
-  margin-top: -10px;
   color: #555;
-  background: none;
-  text-align: right;
-  width: auto;
 }
 .archive-article-inner .article-meta .article-date time {
   color: #aaa;
@@ -1803,8 +1907,7 @@ pre .css ~ * .id {
   }
 }
 .switch-btn {
-  margin-left: 74px;
-  margin-top: 23px;
+  margin: 23px auto 0;
   position: relative;
   width: 70px;
   text-align: center;

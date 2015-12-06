@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 5章 モデル開発 その① データ取得関連のメソッド | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="5章の前半では、主にActiveRecodeの解説を行っていて、データへのアクセスやバリデーションなどについて触れています。後半では、マイグレーションやデータの投入方法の詳細について触れています。
+この記事では、データを取得する際のメソッド群について書いていきます。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 5章 モデル開発 その① データ取得関連のメソッド">
+<meta property="og:url" content="http://taka-p.github.io/2015/10/31/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="5章の前半では、主にActiveRecodeの解説を行っていて、データへのアクセスやバリデーションなどについて触れています。後半では、マイグレーションやデータの投入方法の詳細について触れています。
+この記事では、データを取得する際のメソッド群について書いていきます。">
+<meta property="og:updated_time" content="2015-12-06T15:04:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 5章 モデル開発 その① データ取得関連のメソッド">
+<meta name="twitter:description" content="5章の前半では、主にActiveRecodeの解説を行っていて、データへのアクセスやバリデーションなどについて触れています。後半では、マイグレーションやデータの投入方法の詳細について触れています。
+この記事では、データを取得する際のメソッド群について書いていきます。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#データ取得の基本_-_findメソッド"><span class="toc-text">データ取得の基本 - findメソッド</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#より複雑な条件での検索を行う_-_クエリメソッド"><span class="toc-text">より複雑な条件での検索を行う - クエリメソッド</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#データ取得のためのその他のメソッド"><span class="toc-text">データ取得のためのその他のメソッド</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP5章-モデル開発-その①-データ取得関連のメソッド" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 5章 モデル開発 その① データ取得関連のメソッド
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2015/10/31/1/" class="article-date">
+  	<time datetime="2015-10-31T02:59:50.000Z" itemprop="datePublished">2015-10-31</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>5章の前半では、主にActiveRecodeの解説を行っていて、データへのアクセスやバリデーションなどについて触れています。<br>後半では、マイグレーションやデータの投入方法の詳細について触れています。</p>
+<p>この記事では、データを取得する際のメソッド群について書いていきます。</p>
+<a id="more"></a>
+
+<br>
+<br>
+
+<h2 id="データ取得の基本_-_findメソッド">データ取得の基本 - findメソッド</h2><p>データ取得メソッドの中で最も基本的な手段であるfindメソッドとその仲間たち。</p>
+<ul>
+<li><strong>findメソッド</strong><br>主キーによるレコード検索を行う。<br>（大抵はid）<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find(keys)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>keys: 主キー値（配列指定も可）</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>複数の主キーを設定する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.find([<span class="number">2</span>, <span class="number">5</span>, <span class="number">10</span>])</span><br><span class="line">  render <span class="string">'books/list'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" WHERE  "books"."id" IN (2, 5 ,10)</span></span><br></pre></td></tr></table></figure>
+<p>指定されたそれぞれの主キー値にが合致するレコードを全て取得する。</p>
+
+<br>
+
+<ul>
+<li><strong>find_byメソッド</strong><br>指定した任意のキーに合致する最初の1レコードを取得する。<br>なお、ここでいう「キー」とは「キー = プロパティ = フィールド = カラム」である。<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find_by <span class="symbol">key:</span> value [,..]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>key: 検索するフィールド名, value: 検索値</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>複数条件によるレコード取得例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.find_by(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>, <span class="symbol">price:</span> <span class="number">500</span>)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" WHERE  "books"."publish" = '大動脈切れ造出版' AND "books"."price" = 500 LIMIT 1</span></span><br></pre></td></tr></table></figure>
+<p>複数指定した場合は、上記のように論理積演算子(AND)を含んだ検索が可能になる。</p>
+
+<br>
+
+<h2 id="より複雑な条件での検索を行う_-_クエリメソッド">より複雑な条件での検索を行う - クエリメソッド</h2><p>find,find_by,allメソッドなどの手軽なメソッドでは実現できないような複雑な条件式など<br>ソート、グループ化、範囲抽出、結合などを行いたい場合などなど。</p>
+<p>以下は、主なクエリメソッド</p>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>where</td>
+<td>条件でフィルタリング</td>
+</tr>
+<tr>
+<td>not</td>
+<td>否定の条件式を表す</td>
+</tr>
+<tr>
+<td>order</td>
+<td>並び替え</td>
+</tr>
+<tr>
+<td>reorder</td>
+<td>ソート式を上書き</td>
+</tr>
+<tr>
+<td>select</td>
+<td>列の指定(フィールド)</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>重複の無いレコードを取得</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>抽出するレコード数を指定</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>抽出を開始する数を指定。limitと併用</td>
+</tr>
+<tr>
+<td>group</td>
+<td>特定のキーで結果をグループ化</td>
+</tr>
+<tr>
+<td>having</td>
+<td>GROUP BY に対し更に制約を付ける</td>
+</tr>
+<tr>
+<td>joins</td>
+<td>他のテーブルと結合</td>
+</tr>
+<tr>
+<td>includes</td>
+<td>関連するモデルをまとめて取得</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>取得したオブジェクトを読み取り専用に</td>
+</tr>
+<tr>
+<td>none</td>
+<td>空の結果セットを取得</td>
+</tr>
+</tbody>
+</table>
+<p>これらの「クエリメソッド」はfind,find_byなどのメソッドと異なり、その場ではデータベースにアクセスを行わない。<br>結果が必要になった時にデータベースに問い合わせを行う。<br>（遅延ロードと呼ぶ）</p>
+<p>中でもよく使いそうなメソッドについて触れる↓<br>
+<br>
+</p>
+<ul>
+<li><strong>whereメソッド</strong><br>条件句を設定するためのメソッド。<br>条件式を「ハッシュで指定する方法」と「プレイスホルダ付きの文字列で指定する方法」が存在する。<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ハッシュで指定</span></span><br><span class="line">where(exp)</span><br><span class="line"><span class="comment"># プレイスホルダ付き文字列で指定</span></span><br><span class="line">where(exp [,value,...])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>exp: 条件式(プレイスホルダを含む事も出来る)、value: プレイスホルダに渡すパラメータ値</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>ハッシュ指定によるレコード取得例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" WHERE  "books"."publish" = '大動脈切れ造出版'</span></span><br></pre></td></tr></table></figure>
+<p>find_byメソッドと似た実行結果だが、limitが1ではない点で異なっている。</p>
+<figure class="highlight ruby"><figcaption><span>プレイスホルダ付き文字列指定によるレコード取得例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.where(<span class="string">'publish = ? AND price &gt;= ?'</span>, params[<span class="symbol">:publish</span>], params[<span class="symbol">:price</span>])</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" WHERE  (publish = '大動脈切れ造出版' AND price &gt;= '3000')</span></span><br></pre></td></tr></table></figure>
+<p>プレイスホルダを利用する事で、条件式とパラメータ値を分離できるため、コードの見通しが良くなる。</p>
+<p>なお、プレイスホルダ<code>?</code>の記述は「名前なしパラメータ」と呼ばれ、条件式とパラメータ値の関係を明示した「名前付きパラメータ」という定義方法も存在する。</p>
+<figure class="highlight ruby"><figcaption><span>名前付きパラメータ(プレイスホルダ付き文字列指定)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.where(<span class="string">'publish = :publish AND price &gt;= :price'</span>, <span class="symbol">publish:</span> params[<span class="symbol">:publish</span>], <span class="symbol">price:</span> params[<span class="symbol">:price</span>])</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果は名前なしパラメータと同様</span></span><br></pre></td></tr></table></figure>
+<p>名前付きでパラメータを定義するメリットは「パラメータと値の対応が分かり易い、パラメータの増減や定義順序に影響を受けない」という点が挙げられる。</p>
+
+<br>
+
+<ul>
+<li><strong>orderメソッド</strong><br>取得したデータを特定のキーで並び替えるメソッド。<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order(sort)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>sort: ソート式。並び順はasc/desc</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>複数のキーを指定した例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>).order(<span class="symbol">published:</span> <span class="symbol">:desc</span>,<span class="symbol">price:</span> <span class="symbol">:asc</span>)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" WHERE  "books"."publish" = '大動脈切れ造出版' ORDER BY "books"."published" DESC, "books"."price" ASC</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>selectメソッド</strong><br>ActiveRecodeは、デフォルトで全ての列を取得する。<br>しかし、パフォーマンスの観点上は必要な列・行のみ取得するのが望ましい。<br>selectメソッドは、取得列を指定することが出来る。<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(cols)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>cols: 取得する列</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>2000円以上の書籍に関する書籍名・価格列レーコードを取得する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.where(<span class="string">'price: &gt;= 2000'</span>).select(<span class="symbol">:title</span> <span class="symbol">:price</span>)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT title,price FROM "books" WHERE  price &gt;= 2000</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>distinctメソッド</strong><br>distinctメソッドは、結果セットから重複したレコードを削除する。<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distinct([flag])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>flag: 重複を除去するか（デフォルトはtrue）</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>booksテーブルpublish列について、重複の無いレコードを取得する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.select(<span class="symbol">:publish</span>).distinct.order(<span class="symbol">:publish</span>)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT DISTINCT publish FROM "books" ORDER BY "books"."publish" ASC</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>limit/offsetメソッド</strong><br>limit/offsetメソッドを併用する事で、特定範囲のレコードのみを取得する事が可能。(orderも使う)<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">limit(rows)</span><br><span class="line">offset(off)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><em>rows: 最大取得行数、off: 取得開始位置(先頭行を0でカウント)</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>published列について降順の場合、5~7件目を取得する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.order(<span class="symbol">published:</span> <span class="symbol">:desc</span>).limit(<span class="number">3</span>).offset(<span class="number">4</span>)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" ORDER BY "books"."published" DESC LIMIT 3 OFFSET 4</span></span><br></pre></td></tr></table></figure>
+<p>また、ここで良く利用するページャーの実装について触れる。<br><figure class="highlight ruby"><figcaption><span>ページャー実装の例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  page_size = <span class="number">3</span> <span class="comment"># ページあたりの表示件数</span></span><br><span class="line">  current = params[<span class="symbol">:id</span>] == <span class="keyword">nil</span> ? <span class="number">0</span> <span class="symbol">:</span> params[<span class="symbol">:id</span>].to_i -<span class="number">1</span> <span class="comment"># 現在のページ数</span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.order(<span class="symbol">published:</span> <span class="symbol">:desc</span>).limit(page_size).offset(page_size * current)</span><br><span class="line">  render <span class="string">'books/show'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>params[:id]が取得できなかった場合の判定を行い、先頭ページのid=0を代入している。</p>
+
+<br>
+
+<ul>
+<li><strong>first/lastメソッド</strong><br>結果セットの先頭/末尾レコードを取得する際に利用される。<br>order,limitを併用しても同様の結果が得られるが、こちらの方がスマート(簡潔)。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>published列について降順似並べた場合、末尾レコードを取得する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.order(<span class="symbol">published:</span> <span class="symbol">:desc</span>).last</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" ORDER BY "books"."published" ASC LIMIT 1</span></span><br></pre></td></tr></table></figure>
+<p>上記では、ActiveRecodeによる最適化が行われているため、「降順の末尾 =&gt; 照準の先頭」という結果が返る。<br>※なお、first/lastメソッドはクエリメソッドでは無いため、遅延ロードの対象外。（find,find_byメソッドと同様にメソッドチェーンの末尾しか定義できない）</p>
+
+<br>
+
+<ul>
+<li><strong>groupメソッド</strong><br>特定のキーで結果をグループ化する際に利用する。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group(key)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>key: グループ化キー（カンマ区切りで複数指定も可）</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>publish列でグループ化を行い、publish毎にpriceの平均値を求める例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.select(<span class="string">'publish, AVG(price) AS avg_price'</span>).group(<span class="symbol">:publish</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT publish, AVG(price) AS avg_price FROM "books" GROUP BY publish</span></span><br></pre></td></tr></table></figure>
+<p>上記における<code>AVG()</code>はSQL関数。<br>selectメソッド内において演算子や関数を利用した際は、エイリアス（別名）を付けて演算列にアクセスできるようにしておく。<br>演算列には<code>オブジェクト名.エイリアス</code>でアクセスが可能。</p>
+<figure class="highlight html"><figcaption><span>演算列（エイリアス）にアクセスする例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">th</span>&gt;</span>出版社<span class="tag">&lt;/<span class="title">th</span>&gt;</span><span class="tag">&lt;<span class="title">th</span>&gt;</span>価格<span class="tag">&lt;/<span class="title">th</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">%</span> @<span class="attribute">books.each</span> <span class="attribute">do</span> |<span class="attribute">book</span>| %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">book.publish</span> %&gt;</span><span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">td</span>&gt;</span><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">book.avg_price</span> %&gt;</span>円<span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">%</span> <span class="attribute">end</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>havingメソッド</strong><br>集計した結果を元に、更に絞り込む事が可能。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">having(exp [,value,...])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>条件式(プレイスホルダを埋め込める)、value: プレイスホルダに渡すパラメータ値</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>平均価格が2500円以上であるpublish列を取得する例(プレイスホルダを利用)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.select(<span class="string">'publish, AVG(price) AS avg_price'</span>).group(<span class="symbol">:publish</span>).having(<span class="string">'AVG(price) &gt;= ?'</span>, <span class="number">2500</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT publish, AVG(price) AS avg_price FROM "books" GROUP BY publish HAVING AVG(price) &gt;= 2500</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>where!メソッド</strong><br>条件句を破壊的に追加するメソッド。<br>他のクエリメソッドも同様に感嘆符<code>!</code>を接尾に付加する事で、破壊的な振る舞いを行う。<br>なお、ここでいう破壊的とは、戻り値としての結果セットでなく、オブジェクト自身の内容を変更する事を指す。</li>
+</ul>
+<p>メソッドチェーンを利用しなくても良いため、場合によっては可読性が上がる。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.all</span><br><span class="line">  <span class="variable">@books</span>.where!(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>)</span><br><span class="line">  <span class="variable">@books</span>.order!(<span class="symbol">:published</span>)</span><br><span class="line">  render <span class="string">'books/index'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books"."publish" = '大動脈切れ造出版' ORDER BY "books"."published" ASC</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>noneメソッド</strong><br>空の結果セットを取得するメソッド。<br><code>NilClass</code>には、eachメソッドなどが用意されていないため、空の結果を返す場合には、noneメソッドを利用するのがスマート。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="keyword">case</span> params[<span class="symbol">:id</span>]</span><br><span class="line">    <span class="keyword">when</span> <span class="string">'all'</span></span><br><span class="line">      <span class="variable">@books</span> = <span class="constant">Book</span>.all</span><br><span class="line">    <span class="keyword">when</span> <span class="string">'new'</span></span><br><span class="line">      <span class="variable">@books</span> = <span class="constant">Book</span>.order(<span class="string">'published DESC'</span>).linit(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">when</span> <span class="string">'cheep'</span></span><br><span class="line">      <span class="variable">@books</span> = <span class="constant">Book</span>.order(<span class="symbol">:price</span>).limit(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="variable">@books</span> = <span class="constant">Book</span>.none</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  render <span class="string">'books/index'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><code>nil</code>の代入を利用するようなケースでは、eachメソッドなどを呼び出す前に、<code>nil</code>では無いか判定を入れる必要がある。</p>
+
+<br>
+<br>
+
+<h2 id="データ取得のためのその他のメソッド">データ取得のためのその他のメソッド</h2><p>ActiveRecordでは、<code>find,クエリメソッド,allメソッド</code>を理解しておけば基本的な処理は賄える。<br>以下にはその他の、知っていると便利なメソッドを紹介する。</p>
+
+<br>
+
+<ul>
+<li><strong>pluckメソッド</strong><br>指定された列を配列オブジェクトで取得できる。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pluck(column, ...)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>column: フィールド名</em></p>
+</blockquote>
+<p>Rails3では単一の列のみの指定に限定されていたが、Rails4からは複数列の指定が可能になった。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  render <span class="symbol">text:</span> <span class="constant">Book</span>.where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>).pluck(<span class="symbol">:title</span>, <span class="symbol">:price</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt;</span></span><br><span class="line">[</span><br><span class="line">  [<span class="string">"書籍①"</span>, <span class="number">3600</span>],</span><br><span class="line">  [<span class="string">"書籍②"</span>, <span class="number">1200</span>],</span><br><span class="line">  [<span class="string">"書籍③"</span>, <span class="number">600</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>exists?メソッド</strong><br>データの存在を確認するメソッド。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  flag = <span class="constant">Book</span>.<span class="constant">Where</span>(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>).exists?</span><br><span class="line">  render <span class="symbol">text:</span> <span class="string">"存在するか? : <span class="subst">#&#123;flag&#125;</span>"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT 1 AS one FROM "books" WHERE "books"."publish" = "大動脈切れ造出版" LIMIT 1</span></span><br></pre></td></tr></table></figure>
+<p>他にも、以下のような使い方が出来る。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Book</span>.exists?(<span class="number">1</span>)</span><br><span class="line"><span class="constant">Book</span>.exists?([<span class="string">'price &gt; ?'</span>, <span class="number">5000</span>])</span><br><span class="line"><span class="constant">Book</span>.exists?(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>)</span><br><span class="line"><span class="constant">Book</span>.exists?</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>名前付きスコープ</strong><br><code>scope構文</code>によって、共通のクエリ(検索条件)を再利用する事が出来る。<br>特定の条件式やソート式などをあらかじめモデル側で名前付けしておく事で、呼び出しや修正を簡略化する事が出来る。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scope name, -&gt; &#123; exp &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>scope: スコープの名前、exp: 条件式</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Book.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecode::Base</span></span></span></span><br><span class="line">  scope <span class="symbol">:gihyo</span>, -&gt; &#123; where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>) &#125;</span><br><span class="line">  scope <span class="symbol">:newer</span>, -&gt; &#123; order(<span class="symbol">published:</span> <span class="symbol">:desc</span>) &#125;</span><br><span class="line">  scope <span class="symbol">:top10</span>, -&gt; &#123; newer.limit(<span class="number">10</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># book_controller.rb</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.gihyo.top1<span class="number">0</span></span><br><span class="line">  render <span class="string">'hello/list'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>なお、以下のように引数を渡す事も出来る。(パラメータ化)<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 名前付きscope定義</span></span><br><span class="line">scope <span class="symbol">:whats_new</span>, -&gt;(hoge) &#123;</span><br><span class="line">  where(<span class="symbol">publish:</span> hoge).order(<span class="symbol">published:</span> <span class="symbol">:desc</span>).limit(<span class="number">5</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 呼び出し</span></span><br><span class="line"><span class="variable">@books</span> = <span class="constant">Book</span>.whats_new(<span class="string">'大動脈切れ造出版'</span>)</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<ul>
+<li><strong>デフォルトのスコープを定義する</strong><br><code>default_scope構文</code>によって、モデル呼び出し時にデフォルトで共通のクエリ(検索条件)を適用する事が出来る。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default_scope  &#123; exp &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>exp: 条件式</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Book.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecode::Base</span></span></span></span><br><span class="line">  default_scope  &#123; order(<span class="symbol">update_at:</span> <span class="symbol">:desc</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># book_controller.rb</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  render <span class="symbol">text:</span> <span class="constant">Book</span>.all.inspect</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT "books".* FROM "books" ORDER BY "books"."update_at" DESC</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>集計メソッド</strong><br>検索結果のレコード数や平均/最大/最小などを求めるメソッド群が用意されている。<br>以下に代表的なものを列挙する。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>行数</td>
+</tr>
+<tr>
+<td>average(col)</td>
+<td>平均値</td>
+</tr>
+<tr>
+<td>minimum(col)</td>
+<td>最小値</td>
+</tr>
+<tr>
+<td>maximum(col)</td>
+<td>最大値</td>
+</tr>
+<tr>
+<td>sum(col)</td>
+<td>合計値</td>
+</tr>
+</tbody>
+</table>
+<p>以下に使用例を記載する。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># countメソッド</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span></span></span><br><span class="line">  hoge = <span class="constant">Book</span>.where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>).count</span><br><span class="line">  render <span class="symbol">text:</span> <span class="string">"<span class="subst">#&#123;hoge&#125;</span>件 見つかりました"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT COUNT(*) FROM "books" WHERE "books"."publish" = '大動脈切れ造出版'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># averageメソッド</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">average</span></span></span><br><span class="line">  hoge = <span class="constant">Book</span>.where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>).average(<span class="symbol">:price</span>)</span><br><span class="line">  render <span class="symbol">text:</span> <span class="string">"平均価格: <span class="subst">#&#123;hoge&#125;</span>円"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; SELECT AVG("books"."price") AS avg_id FROM "books" WHERE "books"."publish" = '大動脈切れ造出版'</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<ul>
+<li><strong>find_by_sqlメソッド</strong><br>生のSQL命令を直接指定するメソッド。</li>
+</ul>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find_by_sql(sql)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>sql: SQL命令と検索値の配列</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># countメソッド</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.find_by_sql([<span class="string">'SELECT publish, AVG(price) AS avg_price FROM "books" GROUP BY publish HAVING AVG(price) &gt;= ?'</span>, <span class="number">2500</span>])</span><br><span class="line">  render <span class="string">'record/groupby'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>ここまで、「findメソッド・クエリメソッド・その他データアクセスのメソッド」を紹介しました。<br>次回は「レコードの登録/更新/削除」を書いていきます。</p>
+<p>それにしても5章は長い…<br>実は、7章のルーティング編まで読み終わっていますが、5章モデル編と6章コントローラー編が膨大で、書くのが億劫になっていました λ…………</p>
+<p>しかしながら、基礎を学習しているため、この1册は辛抱強く読み書ききりたいと思います٩( ‘ω’ )و</p>
+<p>では</p>
+
+<br>
+<br>
+
+<p>追伸: Thunderboltディスプレイ購入しました</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/27/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
