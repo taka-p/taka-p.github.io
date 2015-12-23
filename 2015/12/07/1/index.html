@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="VagueLog">
 <meta property="og:description" content="5章の前半として、前回は「SELECT命令に関わるデータ操作」について紹介しました。この記事では、その他の「レコードの登録/更新/削除」を書いていきます。
 また、ボリューム的な兼ね合いで「検証機能」まで書いていこうと思います。">
-<meta property="og:updated_time" content="2015-12-06T15:32:23.000Z">
+<meta property="og:updated_time" content="2015-12-20T15:46:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RoR4_AP 5章 モデル開発 その② レコード操作・検証機能">
 <meta name="twitter:description" content="5章の前半として、前回は「SELECT命令に関わるデータ操作」について紹介しました。この記事では、その他の「レコードの登録/更新/削除」を書いていきます。
@@ -126,7 +126,7 @@ _:(´ཀ`」 ∠):_</div>
 	</header>
 	
 		<div id="js_toc_left" class="toc-left-area">
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#レコードの登録/更新/削除"><span class="toc-text">レコードの登録/更新/削除</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#リレーションシップと命名規則"><span class="toc-text">リレーションシップと命名規則</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参照先テーブルと参照元テーブル"><span class="toc-text">参照先テーブルと参照元テーブル</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参照元から被参照テーブルにアクセスするbelongs_toアソシエーション"><span class="toc-text">参照元から被参照テーブルにアクセスするbelongs_toアソシエーション</span></a></li></ol>
 		</div>
 	
 	
@@ -213,10 +213,337 @@ _:(´ཀ`」 ∠):_</div>
 <br>
 <br>
 
-<h2 id="レコードの登録/更新/削除">レコードの登録/更新/削除</h2><p>アンカータグ、URL文字列の生成を行うヘルパーなどがある。</p>
+<h2 id="レコードの登録・更新・削除">レコードの登録・更新・削除</h2><p>前回の記事で、データの参照を行うSELECT命令について書いた。<br>ここでは、INSERT(追加)/UPDATE(更新)/DELETE(削除)処理について書いていく。</p>
 
 <br>
 
+<h3 id="update_allメソッド">update_allメソッド</h3><p>特定の条件に合致するレコードをまとめて更新する事が出来る。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update_all(updates)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>updates: SET句(更新値)</em></p>
+</blockquote>
+<p>下記の例は、publish列を修正する例である。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  hoge = <span class="constant">Book</span>.where(<span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>).update_all(<span class="symbol">publish:</span> <span class="string">'田中太郎出版'</span>)</span><br><span class="line">  render <span class="symbol">text:</span> <span class="string">"<span class="subst">#&#123;hoge&#125;</span>件のデータを更新しました。"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果</span></span><br><span class="line"><span class="comment"># =&gt; UPDATE "books" SET "publish" = '田中太郎出版' WHERE "books"."publish" = '大動脈切れ造出版'</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="destroy_allメソッド">destroy_allメソッド</h3><p>特定の条件に合致するレコードをまとめて削除する事が出来る。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">destroy_all(cond)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>cond: WHERE句([条件式,パラメータ値, …]の配列)</em></p>
+</blockquote>
+<p>下記の例は、publish列が特定の文字列でないものを全て削除する例である。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="constant">Book</span>.destroy_all([<span class="string">'publish: &lt;&gt; ?'</span>, <span class="string">'大動脈切れ造出版'</span>])</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SQL実行結果 (id = 4,5が該当留守場合)</span></span><br><span class="line"><span class="comment"># =&gt;</span></span><br><span class="line"><span class="constant">SELECT</span> <span class="string">"books"</span>.* <span class="constant">FROM</span> <span class="string">"books"</span> <span class="constant">WHERE</span> (publish &lt;&gt; <span class="string">'大動脈切れ造出版'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span> transaction</span><br><span class="line"><span class="constant">DELETE</span> <span class="constant">FROM</span> <span class="string">"books"</span> <span class="constant">WEHRE</span> <span class="string">"books"</span>.<span class="string">"id"</span> = ? [[<span class="string">"id"</span>], <span class="number">4</span>]</span><br><span class="line">commit transaction</span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span> transaction</span><br><span class="line"><span class="constant">DELETE</span> <span class="constant">FROM</span> <span class="string">"books"</span> <span class="constant">WEHRE</span> <span class="string">"books"</span>.<span class="string">"id"</span> = ? [[<span class="string">"id"</span>], <span class="number">5</span>]</span><br><span class="line">commit transaction</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="その他更新系メソッド">その他更新系メソッド</h3><p>その他、ActiveRecordにおいて用意されている更新系メソッドの中で結うようなものを紹介する。</p>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>increment(attr, num)</td>
+<td>指定された列<code>attr</code>を値<code>num(デフォルトは1)</code>でインクリメント</td>
+</tr>
+<tr>
+<td>decrement(attr, num)</td>
+<td>指定された列<code>attr</code>を値<code>num(デフォルトは1)</code>でデクリメント</td>
+</tr>
+<tr>
+<td>new_record?</td>
+<td>現在のオブジェクトは未保存か判定(新規レコード)</td>
+</tr>
+<tr>
+<td>presisted?</td>
+<td>現在のオブジェクトは保存済か判定(new_record?の反対)</td>
+</tr>
+<tr>
+<td>toggle(attr)</td>
+<td>指定されたブール型列<code>attr</code>の値を反転</td>
+</tr>
+<tr>
+<td>touch([name])</td>
+<td>update_at/on列を現在時刻で更新(引数name指定時はその列も更新)</td>
+</tr>
+<tr>
+<td>changed</td>
+<td>取得してから変更された列名の配列</td>
+</tr>
+<tr>
+<td>changed?</td>
+<td>取得してから何らかの変更されたか判定</td>
+</tr>
+<tr>
+<td>changed_attributes</td>
+<td>変更された列の情報(「列名 =&gt; 変更前の値」のハッシュ)</td>
+</tr>
+<tr>
+<td>changes</td>
+<td>変更された列の情報(「列名 =&gt; [変更前の値, 変更後の値]」のハッシュ)</td>
+</tr>
+<tr>
+<td>previous_changes</td>
+<td>保存前の変更情報(「列名 =&gt; [変更前の値, 変更後の値]」のハッシュ)</td>
+</tr>
+<tr>
+<td>destroyed?</td>
+<td>現在のオブジェクトが削除済みか判定</td>
+</tr>
+<tr>
+<td>lock</td>
+<td>オブジェクトをロック</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+<br>
+
+<h2 id="検証機能">検証機能</h2><p>Railsにおいては、Active ModelのValidation機能を利用する事によって、必須検証・文字列検証・正規表現検証のようにアプリケーションで良く利用するような検証処理をシンプルなコードで実装する事が出来る。</p>
+
+<br>
+
+<h3 id="Active_Modelで利用できる検証機能一覧">Active Modelで利用できる検証機能一覧</h3><p>Active Modelでは処理内容に応じて、それぞれ専用の検証クラスを提供する。<br>実際のクラス名は、acceptance検証であれば<code>ActiveModel::Validations::AcceptanceValidator</code>になる。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2"><b>検証名</b></th>
+      <th><u>検証内容</u></th>
+      <th><u>エラーメッセージ</u></th>
+    </tr>
+    <tr>
+      <th>パラメータ</th>
+      <th>意味</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>acceptance</b></td>
+      <td><u>チェックボックスにチェックが入っているか</u></td>
+      <td><u>must be accepted</u></td>
+    </tr>
+    <tr>
+      <td>accept</td>
+      <td>チェック時の値(デフォルトは1)</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>confirmation</b></td>
+      <td><u>2つのフィールドが等しいか</u></td>
+      <td><u>dosen't match confirmation</u></td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>exclusion</b></td>
+      <td><u>値が配列/範囲に含まれていないか</u></td>
+      <td><u>is reserved</u></td>
+    </tr>
+    <tr>
+      <td>in</td>
+      <td>比較対象の配列、または範囲オブジェクト</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>inclusion</b></td>
+      <td><u>値が配列/範囲に含まれているか</u></td>
+      <td><u>is not included in the list</u></td>
+    </tr>
+    <tr>
+      <td>in</td>
+      <td>比較対象の配列、または範囲オブジェクト</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>format</b></td>
+      <td><u>正規表現パターンに一致しているか</u></td>
+      <td><u>is invalid</u></td>
+    </tr>
+    <tr>
+      <td>with</td>
+      <td>正規表現パターン</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="9"><b>length</b></td>
+      <td><u>文字列の長さ（範囲、完全一致）をチェック</u></td>
+      <td><u>-</u></td>
+    </tr>
+    <tr>
+      <td>minimum</td>
+      <td>最小の文字列長</td>
+    </tr>
+    <tr>
+      <td>miximum</td>
+      <td>最大の文字列長</td>
+    </tr>
+    <tr>
+      <td>in</td>
+      <td>文字列長の範囲（range型）</td>
+    </tr>
+    <tr>
+      <td>tokenizer</td>
+      <td>文字列の分割方法（ラムダ式）</td>
+    </tr>
+    <tr>
+      <td>is</td>
+      <td>文字列長（長さが完全一致している事）</td>
+    </tr>
+    <tr>
+      <td>too_long</td>
+      <td>maximumパラメータに違反したときのエラーメッセージ</td>
+    </tr>
+    <tr>
+      <td>too_short</td>
+      <td>manimumパラメータに違反したときのエラーメッセージ</td>
+    </tr>
+    <tr>
+      <td>wrond_length</td>
+      <td>isパラメータに違反したときのエラーメッセージ</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="9"><b>numericality</b></td>
+      <td><u>数値の大小、型をチェックチェック内容はパラメータで指定可能）</u></td>
+      <td><u>is not a number</u></td>
+    </tr>
+    <tr>
+      <td>only_integer</td>
+      <td>整数であるかを検証</td>
+    </tr>
+    <tr>
+      <td>greater_than</td>
+      <td>指定値より大きいか</td>
+    </tr>
+    <tr>
+      <td>greater_than_or_equal_to</td>
+      <td>指定値以上か</td>
+    </tr>
+    <tr>
+      <td>equal_to</td>
+      <td>指定値と等しいか</td>
+    </tr>
+    <tr>
+      <td>less_than</td>
+      <td>指定値未満か</td>
+    </tr>
+    <tr>
+      <td>less_than_or_equal_to</td>
+      <td>指定値以下か</td>
+    </tr>
+    <tr>
+      <td>odd</td>
+      <td>奇数か</td>
+    </tr>
+    <tr>
+      <td>even</td>
+      <td>偶数か</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>presence</b></td>
+      <td><u>値が空でないか</u></td>
+      <td><u>can't be empty</u></td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="2"><b>absence</b></td>
+      <td><u>値が空であるか</u></td>
+      <td><u>must be blank</u></td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td rowspan="3"><b>uniqueness</b></td>
+      <td><u>値が一意であるか</u></td>
+      <td><u>has already been taken</u></td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>一意性制約を決めるために使用する他の例</td>
+    </tr>
+    <tr>
+      <td>case_sensitive</td>
+      <td>大文字小文字を区別するか（デフォルトではtrue）</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<br>
+
+<h3 id="検証機能の基本">検証機能の基本</h3><p>上記で紹介した検証機能を用いた、具体的な実装を見ていく。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validates field [,...] <span class="symbol">name:</span> params [,...]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>field: 検証対象のフィールド名（複数指定も可）、name: 検証名<br>prams: 検証パラメータ([パラメータ名:値]のハッシュ、またはtrue)、</em></p>
+</blockquote>
+
+<br>
+
+<p>まず、モデルクラスに検証ルールを定義する。<br><figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  validates <span class="symbol">:isbn</span>,</span><br><span class="line">    <span class="symbol">presence:</span> <span class="keyword">true</span>,</span><br><span class="line">    <span class="symbol">uniqueness:</span> <span class="keyword">true</span></span><br><span class="line">    <span class="symbol">length:</span> &#123; <span class="symbol">is:</span> <span class="number">17</span> &#125;</span><br><span class="line">    <span class="symbol">format:</span> &#123; <span class="symbol">with:</span> /¥<span class="constant">A</span>[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">3</span>&#125;-[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">1</span>&#125;-[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">3</span>,<span class="number">5</span>&#125;-[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">4</span>&#125;-[<span class="number">0</span>-<span class="number">9</span>X]&#123;<span class="number">1</span>&#125;¥z/ &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>なお、<code>¥A</code>・<code>¥z</code>は先頭・末尾を意味する正規表現であるが、Rails4からは行頭・行末の意味を含む<code>^</code>・<code>$</code>は、利用できなくなっている。<br>（意図しない不正コードが混入できないよう、より意味が限定的な<code>¥A</code>・<code>¥z</code>で代替する仕様）</p>
+<p>次に、books#createアクションにおいて、検証を実行する。<br><figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span></span></span><br><span class="line">  <span class="variable">@book</span> = <span class="constant">Book</span>.new(book_prams)</span><br><span class="line">  respond_to <span class="keyword">do</span> |format|</span><br><span class="line">    <span class="keyword">if</span> <span class="variable">@book</span>.save</span><br><span class="line">      ...保存（検証）に成功した場合の処理</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      ...保存（検証）に失敗した場合の処理</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>上記の場合、saveメソッドが呼び出されるタイミングで入力値の検証が自動的に実施される。</p>
+
+<br>
+
+<h3 id="自作検証クラスの定義">自作検証クラスの定義</h3><p>実際にアプリケーションを構築する中で標準の検証機能だけでは賄えない場合、自作の検証機能を用意する必要がある。<br>ここでは、パラメータを持たない検証クラスの例を紹介する。</p>
+<figure class="highlight ruby"><figcaption><span>isbn_format_validator.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IsbnFormatValidator</span> <span class="inheritance">&lt; <span class="parent">ActiveModel::EachValidator</span></span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">validate_each</span><span class="params">(record, attribute, value)</span></span></span><br><span class="line">    record.errors.add(attribute, <span class="string">'は正しい形式ではありません。'</span>) <span class="keyword">unless</span> value =~ <span class="regexp">/¥A[0-9]&#123;3&#125;-[0-9]&#123;1&#125;-[0-9]&#123;3,5&#125;-[0-9]&#123;4&#125;-[0-9X]&#123;1&#125;¥z/</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>検証クラスは、<code>ActiveModel::EachValidator</code>の派生クラスとして<code>&lt;検証名&gt;Validator</code>の形式で命名する必要がある。<br>上記validate_eachメソッドの引数は以下である。</p>
+<blockquote>
+<p><em>record: 検証対象のモデルオブジェクト、attribute: 検証対象のフィールド名、value: 検証対象の値</em><br>この例では、valueを定義した正規表現パターンと比較して、合致しない場合にエラーメッセージを登録している。</p>
+</blockquote>
+<p>以下はモデルクラスにおいて、IsbnFormatValidatorを利用する例である。<br><figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...中略...</span><br><span class="line">  <span class="symbol">length:</span> &#123; <span class="symbol">is:</span> <span class="number">17</span> &#125;</span><br><span class="line">  <span class="symbol">isbn_format:</span> <span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
+<p>なお、検証名は検証クラス名の末尾から「Validator」を除き、アンダースコア形式に変換したものとなる。<br><code>IsbnFormatValidator</code> → <code>isbn_format</code></p>
+
+<br>
+
+<h3 id="プライベートメソッドとして検証ルールを定義する">プライベートメソッドとして検証ルールを定義する</h3><p>上記で紹介したように、カスタマイズされた検証ルールを用意する場合は、ActiveModel::EachValidatorクラスを継承して実装するのが基本である。<br>しかし、他のモデルで使い回さないような、特定のモデルでの利用に限定される場合、そのモデル内において、プライベートメソッドとして検証ルールを定義する事が出来る。<br>（検証クラスを定義せずにカスタム検証を定義する）</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validate methid [,...]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>method: 検証メソッド（シンボル指定）</em></p>
+</blockquote>
+<p>以下は、先ほど紹介した検証クラス<code>IsbnFormatValidator</code>をモデル内で定義した用例である。<br><figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span></span></span><br><span class="line">  ...中略</span><br><span class="line">  validate <span class="symbol">:isbn_valid?</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isbn_valid?</span></span></span><br><span class="line">    errors.add(<span class="symbol">:isbn</span>, <span class="string">'は正しい形式ではありません。'</span>) <span class="keyword">unless</span> isbn =~ <span class="regexp">/¥A[0-9]&#123;3&#125;-[0-9]&#123;1&#125;-[0-9]&#123;3,5&#125;-[0-9]&#123;4&#125;-[0-9X]&#123;1&#125;¥z/</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="データベースに関連づかないモデルを定義する">データベースに関連づかないモデルを定義する</h3><p>Active Mdelの機能である、ActiveModel::Modelモジュールを利用する事によってデータベースと対応関係に無いモデルを実装する事が可能である。<br>たとえば「データベースの項目ではないが、フォームからの入力を受け取って検証を行う」必要がある処理をモデルクラスとしてまとめるような用途で利用できる。<br>（アクションメソッドを汚さない）</p>
+<p>以下は、検索フォームを想定したサンプルで、ページから入力された検索キーワードをSearchKeywordモデルとしてまとめ、必須検証を実施している。<br><figure class="highlight ruby"><figcaption><span>search_keyword.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SearchKeyword</span></span></span><br><span class="line">  <span class="keyword">include</span> <span class="constant">ActiveModel::Model</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">attr_accessor</span> <span class="symbol">:keyword</span></span><br><span class="line"></span><br><span class="line">  validates <span class="symbol">:keyword</span>, <span class="symbol">presence:</span> <span class="keyword">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>非データベース系のモデルを定義する際のルールは、主に以下の2点である。</p>
+<ul>
+<li>ActiveModel::Modelモジュールをインクルードする</li>
+<li>モデルとして管理すべき項目をアクセサ（attr_accessorメソッド）で定義する</li>
+</ul>
+<p>以下は、利用する際の例である。<br><figure class="highlight ruby"><figcaption><span>record_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ページを表示するためのアクション</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@search</span> = searchKeyword.new</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 検索ボタンがクリックされた際に呼び出されるアクション</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">keywd_process</span></span></span><br><span class="line">  <span class="variable">@search</span> = <span class="constant">SearchKeyword</span>.new(params[<span class="symbol">:search_keyword</span>])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> <span class="variable">@search</span>.valid?</span><br><span class="line">    render <span class="symbol">text:</span> <span class="variable">@serch</span>.keyword</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    render <span class="symbol">text:</span> <span class="variable">@search</span>.errors.full_message[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><figcaption><span>record/hoge.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;% form_for <span class="variable">@seach</span>, <span class="symbol">url:</span> &#123; <span class="symbol">action:</span> <span class="symbol">:keywd_process</span> &#125; <span class="keyword">do</span> |f| %&gt;</span><br><span class="line">  &lt;% f.text_field <span class="symbol">:keyword</span>, <span class="symbol">size:</span> <span class="number">25</span> %&gt;</span><br><span class="line">  &lt;% f.submit <span class="string">'検索'</span> %&gt;</span><br><span class="line">&lt;% <span class="keyword">end</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+
+<p>ここまでで今回は終了。<br>次回は「アソシエーション」について書いていきます。</p>
 
       
     </div>
@@ -225,6 +552,15 @@ _:(´ཀ`」 ∠):_</div>
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/12/21/1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RoR4_AP 5章 モデル開発 その③ アソシエーションによる複数テーブルの処理
+        
+      </div>
+    </a>
   
   
     <a href="/2015/10/31/1/" id="article-nav-older" class="article-nav-link-wrap">
