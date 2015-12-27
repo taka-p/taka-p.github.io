@@ -5,19 +5,16 @@
   
   <title>RoR4_AP 5章 モデル開発 その③ アソシエーションによる複数テーブルの処理 | VagueLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今回は、5章の後半「アソシエーション」について触れていきます。アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。
-例えば、「書籍情報のテーブルと書籍レビューのテーブル」において、「id=1」である書籍に属するレビューを取得する。上述のケースで">
+  <meta name="description" content="今回は、5章の後半「アソシエーション」について触れていきます。アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RoR4_AP 5章 モデル開発 その③ アソシエーションによる複数テーブルの処理">
 <meta property="og:url" content="http://taka-p.github.io/2015/12/21/1/index.html">
 <meta property="og:site_name" content="VagueLog">
-<meta property="og:description" content="今回は、5章の後半「アソシエーション」について触れていきます。アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。
-例えば、「書籍情報のテーブルと書籍レビューのテーブル」において、「id=1」である書籍に属するレビューを取得する。上述のケースで">
-<meta property="og:updated_time" content="2015-12-23T07:30:51.000Z">
+<meta property="og:description" content="今回は、5章の後半「アソシエーション」について触れていきます。アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。">
+<meta property="og:updated_time" content="2015-12-27T14:55:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RoR4_AP 5章 モデル開発 その③ アソシエーションによる複数テーブルの処理">
-<meta name="twitter:description" content="今回は、5章の後半「アソシエーション」について触れていきます。アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。
-例えば、「書籍情報のテーブルと書籍レビューのテーブル」において、「id=1」である書籍に属するレビューを取得する。上述のケースで">
+<meta name="twitter:description" content="今回は、5章の後半「アソシエーション」について触れていきます。アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。">
   
     <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
   
@@ -126,7 +123,7 @@ _:(´ཀ`」 ∠):_</div>
 	</header>
 	
 		<div id="js_toc_left" class="toc-left-area">
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#リレーションシップと命名規則"><span class="toc-text">リレーションシップと命名規則</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参照先テーブルと参照元テーブル"><span class="toc-text">参照先テーブルと参照元テーブル</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参照元から被参照テーブルにアクセスするbelongs_toアソシエーション"><span class="toc-text">参照元から被参照テーブルにアクセスするbelongs_toアソシエーション</span></a></li></ol>
+			
 		</div>
 	
 	
@@ -207,6 +204,7 @@ _:(´ཀ`」 ∠):_</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>今回は、5章の後半「アソシエーション」について触れていきます。<br>アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。</p>
+<a id="more"></a>
 <p>例えば、「書籍情報のテーブルと書籍レビューのテーブル」において、「id=1」である書籍に属するレビューを取得する。<br>上述のケースでは以下のように記述する事が出来ます。</p>
 <p>なお、アソシエーションの仕組みを利用しないケースも添える。<br><figure class="highlight ruby"><figcaption><span>「id=1」である書籍に属するレビューを取得</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># アソシエーションを用いないケース</span></span><br><span class="line"><span class="variable">@book</span> = <span class="constant">Book</span>.find(<span class="number">1</span>)</span><br><span class="line"><span class="variable">@reviews</span> = <span class="constant">Review</span>.where(<span class="symbol">book_id:</span> <span class="variable">@book</span>.id)</span><br><span class="line"></span><br><span class="line"><span class="comment"># アソシエーションを用いたケース</span></span><br><span class="line"><span class="variable">@book</span> = <span class="constant">Book</span>.find(<span class="number">1</span>)</span><br><span class="line"><span class="variable">@reviwes</span> = <span class="variable">@book</span>.reviews</span><br></pre></td></tr></table></figure></p>
 <p>いちいち主キー/外部キーを意識して条件式を記述しなければならない前者に比べ、後者は直感的なコードになっている。<br>この節では、これらアソシエーションを利用するためのモデルの設定から操作方法までを紹介しています。</p>
@@ -225,8 +223,227 @@ _:(´ཀ`」 ∠):_</div>
 
 <br>
 
-<h2 id="参照元から被参照テーブルにアクセスするbelongs_toアソシエーション">参照元から被参照テーブルにアクセスするbelongs_toアソシエーション</h2><p>belongs_toメソッドは、現在のモデルから指定されたモデルを参照するという意味を持つ。<br>（現在のモデルが指定されたモデルに従属している）</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="アソシエーションの種類">アソシエーションの種類</h2><p>アソシエーションの種類は「1:1、1:n、m:n」の3つに分類出来る。<br>3つのアソシエーションを表現する際に必要となるメソッドを以下に紹介していく。</p>
+
+<br>
+
+<h3 id="参照元から被参照テーブルにアクセスするbelongs_toアソシエーション">参照元から被参照テーブルにアクセスするbelongs_toアソシエーション</h3><p>belongs_toメソッドは、現在のモデルから指定されたモデルを参照するという意味を持つ。<br>（現在のモデルが指定されたモデルに従属している）</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">belongs_to assoc_id [,opt]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>assoc_id: 関連名、opt: 動作オプション</em></p>
+</blockquote>
+<p>例えば、reviewsテーブルがbook_id列を外部キーとして、booksテーブルを参照する関係を表す場合は以下のようになる。<br><figure class="highlight ruby"><figcaption><span>review.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Review</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  belongs_to <span class="symbol">:book</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>上記のような関連を定義する事で、以下のような記述が可能になる。<br><figure class="highlight sql"><figcaption><span>「id=3」であるレビューと対応する書籍名を取得する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># record_controller.rb</span><br><span class="line">def hoge</span><br><span class="line">  @review = Review.find(3)</span><br><span class="line"><span class="operator"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"># <span class="built_in">record</span>/hoge.html.erb</span><br><span class="line">&lt;h2&gt;書籍名: &lt;%= @review.book.title %&gt;&lt;/h2&gt; # &lt;- これ</span><br><span class="line">&lt;<span class="keyword">p</span>&gt;レビュー: &lt;%= @review.<span class="keyword">body</span> %&gt;&lt;/<span class="keyword">p</span>&gt;</span><br><span class="line">&lt;<span class="keyword">p</span>&gt;更新日: &lt;%= @review.update_at %&gt;&lt;/<span class="keyword">p</span>&gt;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">SQL</span>実行結果</span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">"reviews"</span>.* <span class="keyword">FROM</span> <span class="string">"reviews"</span> <span class="keyword">WHERE</span> <span class="string">"reviews"</span>.<span class="string">"id"</span> = ? <span class="keyword">LIMIT</span> <span class="number">1</span> [[<span class="string">"id"</span>, <span class="number">3</span>]]</span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">"books"</span>.* <span class="keyword">FROM</span> <span class="string">"books"</span> <span class="keyword">WHERE</span> <span class="string">"books"</span>.<span class="string">"id"</span> = ? <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="string">"books"</span>.<span class="string">"id"</span> <span class="keyword">ASC</span> <span class="keyword">LIMIT</span> <span class="number">1</span> [[<span class="string">"id"</span>, <span class="number">2</span>]]</span></span><br></pre></td></tr></table></figure></p>
+<p>@review.bookを参照したタイミングで、reviewsテーブルのbook_id列（外部キー）の値をもとにbooksテーブルの検索が行われている事が確認できる。</p>
+
+<br>
+
+<h3 id="1:nの関係を表現するhas_manyアソシエーション">1:nの関係を表現するhas_manyアソシエーション</h3><p>前項のbelongs_toメソッドでは参照元テーブル→参照先テーブルという一方向の関係を表すのみであったが、has_manyアソシエーションを利用する事で双方向の関係を定義できる。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">has_many assoc_id [,opt]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>assoc_id: 関連名、opt: 動作オプション</em></p>
+</blockquote>
+<p>1:nの関係を表すには、参照先のモデルに対して以下のようなコードを追加する必要がある。<br><figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  has_many <span class="symbol">:reviews</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>引数のassoc_idに、モデルの複数形を指定している事が着目点である。</p>
+<p>例えば、isbn列をキーに書籍情報を取得する場合は以下のようになる。<br><figure class="highlight erb"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># record_controller.rb</span><br><span class="line">def hoge</span><br><span class="line">  @book = Book.find_by(isbn: '978-4-7741-5878-5')</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># record/hoge.html.erb</span><br><span class="line"><span class="tag">&lt;<span class="title">h2</span>&gt;</span>書籍名: </span>&lt;%=<span class="ruby"> <span class="variable">@book</span>.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="variable">@book</span>.reviews.each <span class="keyword">do</span> |review| </span>%&gt;<span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span>&lt;%=<span class="ruby"> review.body </span>%&gt;<span class="xml"> (</span>&lt;%=<span class="ruby"> review.update_at </span>%&gt;<span class="xml">)<span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>上記では、reviewsメソッドの戻り値として配列が返ってくる。</p>
+
+<br>
+
+<h3 id="1:1の関係を表現するhas_oneアソシエーション">1:1の関係を表現するhas_oneアソシエーション</h3><p>1:1の関係とは、users・authorsテーブルのような関係であり、参照元のレコードに対して参照先のレコードが1つしかない状態を意味する。<br>（1つのUserオブジェクトに対して最大1つのAuthorオブジェクトが存在）</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">has_one assoc_id [,opt]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>assoc_id: 関連名、opt: 動作オプション</em></p>
+</blockquote>
+<p>1:1の関係を表すには、関連双方のモデルに対して以下のようなコードを追加する必要がある。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># book.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  has_many <span class="symbol">:author</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># author.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Author</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>以下は、username列をキーにユーザー情報を取得し、対応する著者情報がある場合は表示行う例である。<br><figure class="highlight erb"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># record_controller.rb</span><br><span class="line">def hoge</span><br><span class="line">  @user = User.find_by(username: 'takap')</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># record/hoge.html.erb</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>ユーザー名: </span>&lt;%=<span class="ruby"> <span class="variable">@user</span>.username </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>メールアドレス: </span>&lt;%=<span class="ruby"> <span class="variable">@user</span>.email </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="keyword">unless</span> <span class="variable">@user</span>.author.<span class="keyword">nil</span>? </span>%&gt;<span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span>著者名: </span>&lt;%=<span class="ruby"> user.author.name </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span>住所: </span>&lt;%=<span class="ruby"> user.author.address </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="m:nの関係を表現するhas_many_throuthアソシエーション">m:nの関係を表現するhas_many throuthアソシエーション</h3><p>前項のhas_and_belongs_to_manyアソシエーションは、m:nの関係を便宜的な中間テーブルを用意する事によって実現しているが、has_many throughアソシエーションでは、モデルが存在する（便宜的でない）テーブルを中間テーブルとして扱い、関連を表す事が出来る。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">has_many assoc_id, through middle_id [,opt]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>assoc_id: 関連名、middle_id: 中間テーブルの関連名、opt: 動作オプション</em></p>
+</blockquote>
+<p>books/usersテーブルがreviewsテーブルを挟んで、m:nの関係にあるという構成を表すには、3つのモデルに対して以下のようなアソシエーションを設置する必要がある。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># book.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  has_many <span class="symbol">:reviews</span></span><br><span class="line">  has_many <span class="symbol">:users</span>, <span class="symbol">through:</span> <span class="symbol">:reviews</span> <span class="comment"># &lt;- ここ</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Review.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Review</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  belogns_to <span class="symbol">:book</span></span><br><span class="line">  belogns_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># user.rb</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  has_many <span class="symbol">:reviews</span></span><br><span class="line">  has_many <span class="symbol">:books</span>, <span class="symbol">through:</span> <span class="symbol">:reviews</span> <span class="comment"># &lt;- ここ</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>book/userモデルからreviewモデルを介して双方向にモデル参照するため、「<code>has_many :参照先のモデル</code>を<code>through: :中間テーブル</code>を介して参照する」という記述になっている。</p>
+<p>以下は、username列をキーにユーザー情報とレビューを書いた事のある書籍名を取得する例である。<br><figure class="highlight erb"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># record_controller.rb</span><br><span class="line">def hoge</span><br><span class="line">  @user = User.find_by(username: 'takap')</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># record/hoge.html.erb</span><br><span class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>ユーザー名: </span>&lt;%=<span class="ruby"> <span class="variable">@user</span>.username </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>メールアドレス: </span>&lt;%=<span class="ruby"> <span class="variable">@user</span>.email </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">unless</span> <span class="variable">@user</span>.books.empty? </span>%&gt;<span class="xml"></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>レビューした書籍:<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="variable">@user</span>.books.each <span class="keyword">do</span> |book| </span>%&gt;<span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span>&lt;%=<span class="ruby"> book.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line">  <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h2 id="アソシエーションで利用できるオプション">アソシエーションで利用できるオプション</h2><p>アソシエーションで利用できるオプションには、以下のようなものがある。</p>
+<table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>belongs_to</th>
+<th>has_one</th>
+<th>has_many</th>
+<th>has_and_belongs_to_many</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>as</td>
+<td>×</td>
+<td>○</td>
+<td>○</td>
+<td>×</td>
+<td>ポリモーフィック関連を有効化（親モデルの関連名）</td>
+</tr>
+<tr>
+<td>associaiton_foreign_key</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>○</td>
+<td>m:n関係で関連先への外部キー（Bookモデルから見たauthor_idなど）</td>
+</tr>
+<tr>
+<td>autosave</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>親モデルに併せて保存/削除を行うか</td>
+</tr>
+<tr>
+<td>class_name</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>関連モデルのクラス名（完全修飾名）</td>
+</tr>
+<tr>
+<td>counter_cache</td>
+<td>○</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>モデル数を取得する際にキャッシュを利用するか</td>
+</tr>
+<tr>
+<td>dependent</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>×</td>
+<td>モデル削除時に関連先のモデルも削除するか</td>
+</tr>
+<tr>
+<td>foreigh_key</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>関連で使用する外部キー列の名前</td>
+</tr>
+<tr>
+<td>join_table</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>○</td>
+<td>中間テーブルの名前</td>
+</tr>
+<tr>
+<td>primary_key</td>
+<td>○</td>
+<td>×</td>
+<td>○</td>
+<td>×</td>
+<td>関連で使用する主キー列の名前</td>
+</tr>
+<tr>
+<td>polimorphic</td>
+<td>○</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>ポリモーフィック関連を有効化</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>○</td>
+<td>関連先のオブジェクトを読み取り専用にするか</td>
+</tr>
+<tr>
+<td>touch</td>
+<td>○</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>モデル保存時に関連先オブジェクトのcreated_at/update_atも更新</td>
+</tr>
+<tr>
+<td>through</td>
+<td>×</td>
+<td>○</td>
+<td>○</td>
+<td>×</td>
+<td>前節のhas_many throughを参照</td>
+</tr>
+<tr>
+<td>validate</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>現在のモデルを保存する際、関連先の検証も実行するか</td>
+</tr>
+</tbody>
+</table>
+<p>主なオプションについて、以下に紹介していく。</p>
+
+<br>
+
+<h3 id="関連の命名を変更する">関連の命名を変更する</h3><p>デフォルトの命名規則から外れて独自に命名を行う場合、<code>class_name</code>オプションを利用する。</p>
+<p>以下は、AuthorモデルからFanCommentモデルを「comments」というメソッドで参照する例である。<br>（モデル名の変更-デフォルトはfan_comments）<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Author</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  has_many <span class="symbol">:comments</span>, -&gt; <span class="symbol">class_name:</span> <span class="string">'FanComment'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>以下は、AuthorモデルからFanCommentモデルを参照する際に「author_no」という外部キーで参照する例である。<br>（外部キー名の変更-デフォルトはauthor_id）<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Author</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  has_many <span class="symbol">:comments</span>, -&gt; <span class="symbol">foreign_key:</span> <span class="string">'author_no'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="関連するモデルと結合する">関連するモデルと結合する</h3><p>アソシエーションを利用せず、複数のテーブルを結合する場合、joinsメソッドを利用する事でほぼ同様の事が実現できる。<br>関連するメソッドを結合し、まとめて取得する。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">joins assoc_id(exp)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>exp: 結合条件</em></p>
+</blockquote>
+<p><code>exp</code>には以下のような3通りの式を指定できる。</p>
+<ul>
+<li><p>関連名（シンボル）<br>→指定した関連名でINNER JOIN句を生成する</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.joins(<span class="symbol">:reviews</span>, <span class="symbol">:authors</span>).</span><br><span class="line">  order(<span class="string">'books.title, reviews.update_at'</span>).</span><br><span class="line">  select(<span class="string">'books.*, reviews.body, authors.name'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>関連名1:関連名2<br>→複数モデルにまたがる結合を表す</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.joins(<span class="symbol">reviews:</span> <span class="symbol">:author</span>).</span><br><span class="line">  select(<span class="string">'books.*, reviews.body, authors.name'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文字列<br>→LEFT JOIN/RIGHT JOINなど、INNER JOIN以外の結合条件を表す場合に利用する。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hoge</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.joins(<span class="string">'LEFT JOINS reviews ON reviews.book_id = book.id'</span>).</span><br><span class="line">  select(<span class="string">'books.*, reviews.body'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>なお、文中にある内部結合と外部結合については<a href="http://gihyo.jp/dev/serial/01/sql_academy2/001003" target="_blank" rel="external">こちら</a>を参照<br>（簡単に説明すると、内部結合は結合するテーブル双方の該当レコードにデータが存在している場合、該当レコードの結果出力を行う。外部結合は片方にデータが存在しない場合でも、左右の優先されたテーブルのデータが格納された該当レコードの結果出力を行う…日本語難しい）</p>
+<p>また、joinsメソッドを利用した場合、関連モデル列には現在のモデルからアクセスを行う。<br>以下は、Bookモデルから<code>Reviewモデルのbody列</code>・<code>Authorモデルのname列</code>にアクセスする例である。<br><figure class="highlight erb"><figcaption><span>record/hoge.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span>&lt;%<span class="ruby"> <span class="variable">@books</span>.each <span class="keyword">do</span> |book| </span>%&gt;<span class="xml"></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>書籍名: </span>&lt;%=<span class="ruby"> book.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>書籍のレビュー: </span>&lt;%=<span class="ruby"> book.body </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>書籍の著者名: </span>&lt;%=<span class="ruby"> book.name </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="関連するモデルをまとめて取得する">関連するモデルをまとめて取得する</h3><p>アソシエーションで関連モデルを読み込むのは、それが必要になったタイミングである。<br>つまり、複数のモデルをeachメソッドなどで処理し、それぞれの関連モデルを取得する際には、元モデルの数だけデータアクセスが発生する。</p>
+<p>このような状況は効率的ではないため、<code>include</code>メソッドを利用する事によって、関連モデルを元モデルの読み込み時にまとめて取得する事が望ましい。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">includes (assoc_id)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>assoc_id: 関連名</em></p>
+</blockquote>
+<p>以下は、書籍の著者名を取得する例である。<br><figure class="highlight erb"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"># record_controller.rb</span><br><span class="line">def hoge</span><br><span class="line">  @books = Book.includes(:authors).all</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># record_controller.rb</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="variable">@books</span>.each <span class="keyword">do</span> |book| </span>%&gt;<span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">p</span>&gt;</span>書籍名</span>&lt;%=<span class="ruby"> book.title </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">p</span>&gt;</span>著者一覧<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">      </span>&lt;%=<span class="ruby"> book.authors.each <span class="keyword">do</span> |author| </span>%&gt;<span class="xml"></span><br><span class="line">        </span>&lt;%<span class="ruby"> author.name </span>%&gt;<span class="xml"></span><br><span class="line">      </span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+<br>
+
+<p>ここまでで、アソシエーションの説明は終わりです。<br>次回はモデルの最後「コールバック、マイグレーション」について書いていきます。</p>
+<p>サイドバーの目次、そろそろ修正しよかな..</p>
+
       
     </div>
     
@@ -234,6 +451,15 @@ _:(´ཀ`」 ∠):_</div>
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/12/27/1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション
+        
+      </div>
+    </a>
   
   
     <a href="/2015/12/07/1/" id="article-nav-older" class="article-nav-link-wrap">

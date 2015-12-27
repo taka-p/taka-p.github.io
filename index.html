@@ -122,7 +122,7 @@ _:(´ཀ`」 ∠):_</div>
 	</header>
 	
 		<div id="js_toc_left" class="toc-left-area">
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#リレーションシップと命名規則"><span class="toc-text">リレーションシップと命名規則</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参照先テーブルと参照元テーブル"><span class="toc-text">参照先テーブルと参照元テーブル</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参照元から被参照テーブルにアクセスするbelongs_toアソシエーション"><span class="toc-text">参照元から被参照テーブルにアクセスするbelongs_toアソシエーション</span></a></li></ol>
+			
 		</div>
 	
 	
@@ -167,6 +167,53 @@ _:(´ཀ`」 ∠):_</div>
 </nav>
       <div class="body-wrap">
   
+    <article id="post-RoR4-AP-5章-モデル開発-その④-コールバック、マイグレーション" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/27/1/">RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-RoR4-AP-5章-モデル開発-その③-アソシエーションによる複数テーブルの処理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -187,26 +234,6 @@ _:(´ཀ`」 ∠):_</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>今回は、5章の後半「アソシエーション」について触れていきます。<br>アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。</p>
-<p>例えば、「書籍情報のテーブルと書籍レビューのテーブル」において、「id=1」である書籍に属するレビューを取得する。<br>上述のケースでは以下のように記述する事が出来ます。</p>
-<p>なお、アソシエーションの仕組みを利用しないケースも添える。<br><figure class="highlight ruby"><figcaption><span>「id=1」である書籍に属するレビューを取得</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># アソシエーションを用いないケース</span></span><br><span class="line"><span class="variable">@book</span> = <span class="constant">Book</span>.find(<span class="number">1</span>)</span><br><span class="line"><span class="variable">@reviews</span> = <span class="constant">Review</span>.where(<span class="symbol">book_id:</span> <span class="variable">@book</span>.id)</span><br><span class="line"></span><br><span class="line"><span class="comment"># アソシエーションを用いたケース</span></span><br><span class="line"><span class="variable">@book</span> = <span class="constant">Book</span>.find(<span class="number">1</span>)</span><br><span class="line"><span class="variable">@reviwes</span> = <span class="variable">@book</span>.reviews</span><br></pre></td></tr></table></figure></p>
-<p>いちいち主キー/外部キーを意識して条件式を記述しなければならない前者に比べ、後者は直感的なコードになっている。<br>この節では、これらアソシエーションを利用するためのモデルの設定から操作方法までを紹介しています。</p>
-
-<br>
-<br>
-
-<h2 id="リレーションシップと命名規則">リレーションシップと命名規則</h2><p>Railsにおいてリレーションシップを表現する場合は、以下のような命名規則が存在する。</p>
-<ul>
-<li>外部キー列は<code>参照先のモデル名_id</code>の形式である事（ex. book_id、user_id※）</li>
-<li>中間テーブルは参照先のテーブル名を<code>_</code>で連結したものであること。連結順は辞書順（ex. authors_books）<br>※なお、主キーはデフォルトで<code>id</code>固定となる。</li>
-</ul>
-<p>中間テーブルとは、「m:n - 多対多」の関係を表現する際に、互いの関連付けを管理するための便宜的なテーブルであり、結合テーブルと呼ぶ場合もある。</p>
-<h3 id="参照先テーブルと参照元テーブル">参照先テーブルと参照元テーブル</h3><p>関連を扱う際に頻出する用語として、<strong>参照先テーブル（被参照テーブル）、参照元テーブル</strong>という言葉が頻出する。<br><mark>参照先テーブルとは、関連において主キーを持つテーブル</mark>の事であり、<mark>参照元テーブルとは関連において外部キーを持つテーブル</mark>の事を指す。</p>
-<p>もちろん、参照先/参照元という区別は相対的なものであり、ある関連においては特定のテーブルが参照先/参照元、どちらにもなり得る。</p>
-
-<br>
-
-<h2 id="参照元から被参照テーブルにアクセスするbelongs_toアソシエーション">参照元から被参照テーブルにアクセスするbelongs_toアソシエーション</h2><p>belongs_toメソッドは、現在のモデルから指定されたモデルを参照するという意味を持つ。<br>（現在のモデルが指定されたモデルに従属している）</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -219,6 +246,10 @@ _:(´ཀ`」 ∠):_</div>
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/12/21/1/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -642,59 +673,6 @@ _:(´ཀ`」 ∠):_</div>
       
         <p class="article-more-link">
           <a  href="/2015/10/02/3/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-埋め込みテスト" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/28/2/">埋め込みテスト</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Codepen">Codepen</h1>
-<p data-height="268" data-theme-id="16359" data-slug-hash="xGYKxd" data-default-tab="result" data-user="taka-p" class='codepen'>See the Pen <a href='http://codepen.io/taka-p/pen/xGYKxd/'>xGYKxd</a> by Takashi Sato (<a href='http://codepen.io/taka-p'>@taka-p</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/">test</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/28/2/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
