@@ -5,16 +5,16 @@
   
   <title>RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション | VagueLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="今回は、5章の後半「コールバック」と「マイグレーション」について触れていきます。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション">
 <meta property="og:url" content="http://taka-p.github.io/2015/12/27/1/index.html">
 <meta property="og:site_name" content="VagueLog">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-12-27T14:54:42.000Z">
+<meta property="og:description" content="今回は、5章の後半「コールバック」と「マイグレーション」について触れていきます。">
+<meta property="og:updated_time" content="2016-01-24T14:44:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション">
-<meta name="twitter:description">
+<meta name="twitter:description" content="今回は、5章の後半「コールバック」と「マイグレーション」について触れていきます。">
   
     <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
   
@@ -123,7 +123,7 @@ _:(´ཀ`」 ∠):_</div>
 	</header>
 	
 		<div id="js_toc_left" class="toc-left-area">
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#コールバック"><span class="toc-text">コールバック</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用可能なコールバックと実行タイミング"><span class="toc-text">利用可能なコールバックと実行タイミング</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#コールバック実装の基本"><span class="toc-text">コールバック実装の基本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#コールバックの様々な定義方法"><span class="toc-text">コールバックの様々な定義方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ブロック形式で定義する"><span class="toc-text">ブロック形式で定義する</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#コールバッククラスとして定義する"><span class="toc-text">コールバッククラスとして定義する</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#マイグレーション"><span class="toc-text">マイグレーション</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#マイグレーションのしくみ"><span class="toc-text">マイグレーションのしくみ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#マイグレーションファイルの構造"><span class="toc-text">マイグレーションファイルの構造</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引数toptionテーブルオプション"><span class="toc-text">引数toptionテーブルオプション</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#フィールド定義は「t-データ型」で行う"><span class="toc-text">フィールド定義は「t.データ型」で行う</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列フラグも定義できる（制約の追加）"><span class="toc-text">列フラグも定義できる（制約の追加）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#マイグレーションファイルの作成"><span class="toc-text">マイグレーションファイルの作成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#マイグレーションファイルで利用できる主なメソッド"><span class="toc-text">マイグレーションファイルで利用できる主なメソッド</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#テーブル定義を変更するchange_tableメソッド"><span class="toc-text">テーブル定義を変更するchange_tableメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#インデックスの追加と削除add_index、remove_indexメソッド"><span class="toc-text">インデックスの追加と削除add_index、remove_indexメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#任意のSQL命令を実行するexcuteメソッド"><span class="toc-text">任意のSQL命令を実行するexcuteメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HABTM中間テーブルを生成するcreate_join_tableメソッド"><span class="toc-text">HABTM中間テーブルを生成するcreate_join_tableメソッド</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#マイグレーションファイルの実行"><span class="toc-text">マイグレーションファイルの実行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#リバーシブルなマイグレーションファイル"><span class="toc-text">リバーシブルなマイグレーションファイル</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ロールバックのための情報を追加するremove_column、drop_tableメソッド"><span class="toc-text">ロールバックのための情報を追加するremove_column、drop_tableメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#バージョンアップ、ダウンの処理を分岐するreversibleメソッド"><span class="toc-text">バージョンアップ、ダウンの処理を分岐するreversibleメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#バージョンアップ、ダウンの処理を分岐するup、downメソッド"><span class="toc-text">バージョンアップ、ダウンの処理を分岐するup、downメソッド</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#データの初期化"><span class="toc-text">データの初期化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#シードファイル"><span class="toc-text">シードファイル</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#フィクスチャ"><span class="toc-text">フィクスチャ</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#フィクスチャで大量のデータを生成する"><span class="toc-text">フィクスチャで大量のデータを生成する</span></a></li></ol></li></ol></li></ol></li></ol>
 		</div>
 	
 	
@@ -203,7 +203,588 @@ _:(´ཀ`」 ∠):_</div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>今回は、5章の後半「コールバック」と「マイグレーション」について触れていきます。</p>
+<a id="more"></a>
+
+<br>
+
+<h2 id="コールバック">コールバック</h2><p>コールバックとは、ActiveRecordによる検索、登録、更新、削除、検証処理のタイミングで実行されるメソッドの事です。<br>例えば、以下のようなモデル操作のタイミングでまとめて実行するべき処理は、コールバックとして定義する事で、同じようなコードがモデルやコントローラーに分散するのを防げます。</p>
+<ul>
+<li>ユーザー情報を登録する際にパスワードが指定されていなかったら、ランダムのパスワードを生成</li>
+<li>書籍情報を削除する際に、削除される書籍情報を履歴情報として記録する。</li>
+<li>著者情報を削除する際に、ファイルシステムで管理していたサムネイル画像も削除</li>
+<li>著者情報が登録/更新されたタイミングで、管理者にメールを送信</li>
+</ul>
+<p>またActiveRecordは、実際の保存処理とコールバックを一つのトランザクションとして実行するため、関連する一連の処理をトランザクションを意識する事無く記述できるというメリットもあります。</p>
+
+<br>
+
+<h3 id="利用可能なコールバックと実行タイミング">利用可能なコールバックと実行タイミング</h3><p>新規登録/更新/削除タイミングで呼び出されるコールバックには、以下のようなものがある。<br>なお、記載順序はコールバックの発生順序に準拠している。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>登録</th>
+      <th>更新</th>
+      <th>削除</th>
+      <th>検索</th>
+      <th>実行タイミング</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2">before_validation</td>
+      <td>-</td>
+      <td>-</td>
+      <td>検証処理の直前</td>
+    </tr>
+    <tr>
+      <td colspan="2">after_validation</td>
+      <td>-</td>
+      <td>-</td>
+      <td>検証処理の直後</td>
+    </tr>
+    <tr>
+      <td colspan="2">before_save</td>
+      <td>-</td>
+      <td>-</td>
+      <td>保存の直前</td>
+    </tr>
+    <tr>
+      <td colspan="2">around_save</td>
+      <td>-</td>
+      <td>-</td>
+      <td>保存の前後</td>
+    </tr>
+    <tr>
+      <td>before_create</td>
+      <td>before_update</td>
+      <td>before_destroy</td>
+      <td>-</td>
+      <td>作成/更新/削除の直前</td>
+    </tr>
+    <tr>
+      <td>around_create</td>
+      <td>around_update</td>
+      <td>around_destroy</td>
+      <td>-</td>
+      <td>作成/更新/削除の前後</td>
+    </tr>
+    <tr>
+      <td>after_create</td>
+      <td>after_update</td>
+      <td>after_destroy</td>
+      <td>-</td>
+      <td>作成/更新/削除の直前</td>
+    </tr>
+    <tr>
+      <td colspan="2">after_save</td>
+      <td>-</td>
+      <td>-</td>
+      <td>保存の直後</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>after_find</td>
+      <td>データベースの検索時</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>after_initialize</td>
+      <td>newによる生成、データベースからのロード</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h3 id="コールバック実装の基本">コールバック実装の基本</h3><p>コールバックはモデルに以下のような形式で登録する必要がある。<br>after_destroyでの用例を挙げる。</p>
+<figure class="highlight ruby"><figcaption><span>after_destroyのコールバック構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">after_destroy <span class="symbol">:method</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>method: メソッド名</em></p>
+</blockquote>
+<p>以下は、書籍情報が削除されたタイミングで、ログに削除された書籍情報を記録する例である。<br><figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  after_destroy <span class="symbol">:history_book</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">history_book</span></span></span><br><span class="line">    logger.info(<span class="string">'deleted: + self.inspect'</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>また、特定の条件を満たした場合のみコールバックを作動させたい場合は、以下のように記述する。<br><figure class="highlight ruby"><figcaption><span>publish列がunknownでない場合にのみhistory_bookコールバックを実行する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  after_destroy <span class="symbol">:history_book</span>,</span><br><span class="line">    <span class="symbol">unless:</span> <span class="constant">Proc</span> &#123; |book| book.publish == <span class="string">"unknown"</span> &#125;</span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">history_book</span></span></span><br><span class="line">    logger.info(<span class="string">'deleted: + self.inspect'</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="コールバックの様々な定義方法">コールバックの様々な定義方法</h3><p>前提として、コールバックはプライペーとメソッドとして定義するのが基本である。<br>しかし、状況によって以下のような2通りの構文で定義した方が良い場合もある。</p>
+
+<br>
+
+<h4 id="ブロック形式で定義する">ブロック形式で定義する</h4><p>after_destroyメソッドに対して、コールバック処理を直接ブロックとして指定する事も可能。<br>ブロックの内容がごくシンプルである場合に、有効な記法である。</p>
+<figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  after_destroy <span class="keyword">do</span> |book|</span><br><span class="line">    logger.info(<span class="string">'delete: '</span> + book.inspect)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>ブロック構文では、引数として現在のモデルを受け取る。</p>
+
+<br>
+
+<h4 id="コールバッククラスとして定義する">コールバッククラスとして定義する</h4><p>コールバックを複数のモデルで共有するようなケースでは、コールバックメソッドを別のクラス（コールバッククラス）として外部化した方が再利用性という点で有利である。</p>
+<figure class="highlight ruby"><figcaption><span>book_callbacks.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookCallbacks</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  cattr_accessor <span class="symbol">:logger</span></span><br><span class="line">  <span class="keyword">self</span>.logger ||= <span class="constant">Rails</span>.logger</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">after_destroy</span><span class="params">(book)</span></span></span><br><span class="line">    logger.info(<span class="string">'delete: '</span> + book.inspect)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>上記では、cattr_accessor(クラス変数のアクセサー)メソッドでクラス変数loggerを定義した上で、loggerにRails.loggerプロパティ経由でアプリケーションデフォルトのロガーをセットしている。</p>
+<figure class="highlight ruby"><figcaption><span>book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  after_destroy <span class="constant">BookCallbacks</span>.new</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>モデル側では、インスタンスを渡してコールバッククラスを呼び出している。</p>
+
+<br>
+<br>
+
+<h2 id="マイグレーション">マイグレーション</h2><p>Railsでは、テーブルレイアウトを作成・変更するしくみとして<strong>マイグレーション</strong>という機能を提供している。<br>Migration(移行)という名の通り、マイグレーション機能は開発途中でのスキーマの変化に際して真価を発揮する。</p>
+
+<br>
+
+<h3 id="マイグレーションのしくみ">マイグレーションのしくみ</h3><p>まず、データベースのスキーマ変更を担うのが<strong>マイグレーションファイル</strong>であり、<code>rails generate</code>コマンドで生成できる。<br>マイグレーションファイルには生成時のタイムスタンプ値が含まれる。<br>Rialsではこの値を用いて、マイグレーション機能実行時、データベースの<strong>schema_maigrations</strong>テーブルにタイムスタンプを記録する。<br>schema_migrationsテーブルとdb/migrateフォルダ配下のマイグレーションファイルを比較して、未実行のマイグレーションを自動的に認識・実行する仕組みである。<br>なお、マイグレーションの実行履歴は<code>rake db:migrate:status</code>コマンドで確認できる。</p>
+
+<br>
+
+<h3 id="マイグレーションファイルの構造">マイグレーションファイルの構造</h3><p>マイグレーションファイルでは、まず<code>change</code>メソッドでスキーマ操作の実処理を表すのが基本になる。<br>利用できるメソッドにはテーブルの作成/削除をはじめ、フィールドの追加/変更/削除、インデックスの設置/破棄などのメソッドが存在する。</p>
+<p>下記に、booksテーブルを作成するマイグレーションファイルの例を示す。<br><figure class="highlight ruby"><figcaption><span>20160113041910_create_books.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateBooks</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Migration</span></span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">    create_table <span class="symbol">:books</span> <span class="keyword">do</span> |t|</span><br><span class="line">      t.string <span class="symbol">:isbn</span></span><br><span class="line">      t.string <span class="symbol">:title</span></span><br><span class="line">      t.integer <span class="symbol">:price</span></span><br><span class="line">      t.string <span class="symbol">:publish</span></span><br><span class="line">      t.date <span class="symbol">:published</span></span><br><span class="line">      t.boolean <span class="symbol">:cd</span></span><br><span class="line"></span><br><span class="line">      t.timestamp</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create_table tname [,toption] <span class="keyword">do</span> |t|</span><br><span class="line">  t.type fname [flag ,...]</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>tname: テーブル名、toption: テーブル([オプション名→値]の形式)<br>type: データ型、fname: フィールド名、flag: 列フラグ([フラグ名→値]の形式)</em></p>
+</blockquote>
+<p>下記に、引数の内容を順に紹介する。</p>
+
+<br>
+
+<h4 id="引数toptionテーブルオプション">引数toptionテーブルオプション</h4><p>引数toptionは、テーブル全体に関わる、またはその他、SQLのCREATE TABLE命令に付与すべきオプション情報を指定できる。</p>
+<table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>概要</th>
+<th>デフォルト値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>主キー列idを自動生成するか</td>
+<td>true</td>
+</tr>
+<tr>
+<td>primary_key</td>
+<td>主キー列の名前（idオプションがtrueの場合のみ）</td>
+<td>id</td>
+</tr>
+<tr>
+<td>temporary</td>
+<td>一時テーブルとして作成するか</td>
+<td>false</td>
+</tr>
+<tr>
+<td>force</td>
+<td>テーブルを作成する前にいったん既存テーブルを削除するか</td>
+<td>false</td>
+</tr>
+<tr>
+<td>options</td>
+<td>その他のテーブルオプション（ex. options: ‘ENGINE=innoDB CHARSET=utf-8’）</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Railsでは、デフォルトで主キー列idを生成するが、特別な理由が無い限り、出来るだけこのルールを変更すべきではない。<br>（システムのリプレイスを行う場合などに留めるべき）<br>もし、データベース側でid以外の主キーを設定した場合は、対応するモデル側でも以下のように主キー名を変更する必要がある。<br><figure class="highlight ruby"><figcaption><span>主キーを変更する場合はモデル側でも主キー名を宣言する</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Base</span></span></span></span><br><span class="line">  set_primary_key <span class="string">'book_no'</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h4 id="フィールド定義は「t-データ型」で行う">フィールド定義は「t.データ型」で行う</h4><p>テーブルに属するフィールド定義は、create_tableメソッドは以下の「t.データ型」メソッドで行う。<br>下記に、利用できるデータ型とSQLiteデータベースRubyのデータ型との対応関係表を示す。</p>
+<table>
+<thead>
+<tr>
+<th>マイグレーション</th>
+<th>Ruby</th>
+<th>SQlite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>integer</td>
+<td>Fixnum</td>
+<td>INTEGER</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>BigDecimal</td>
+<td>DECIMAL</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+<td>FLOAT</td>
+</tr>
+<tr>
+<td>string</td>
+<td>string</td>
+<td>VARCHAR(255)</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>TEXT</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>string</td>
+<td>BLOB</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date</td>
+<td>DATE</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>Time</td>
+<td>DATETIME</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Time</td>
+<td>DATETIME</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Time</td>
+<td>TIME</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>TrueClass/FalseClass</td>
+<td>BOOLEAN</td>
+</tr>
+</tbody>
+</table>
+<p>その他、日付時刻指定型のcreated_at/updated_at列を生成する<code>timestamp</code>メソッドや外部キーを生成する<code>references</code>メソッドが利用できる。<br>（referrencesメソッドの例として、<code>t.references :book</code>とした場合、booksテーブルへの外部キーとしてbook_idを生成する）</p>
+
+<br>
+
+<h4 id="列フラグも定義できる（制約の追加）">列フラグも定義できる（制約の追加）</h4><p>「t.データ型」メソッドには、「フラグ名:値」の形式で列フラグも定義できます。</p>
+<table>
+<thead>
+<tr>
+<th>フラグ名</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>limit</td>
+<td>列の桁数</td>
+</tr>
+<tr>
+<td>default</td>
+<td>デフォルト値</td>
+</tr>
+<tr>
+<td>null</td>
+<td>null値を許容するか（デフォルトはtrue）</td>
+</tr>
+<tr>
+<td>precision</td>
+<td>数値全体桁（decimal型）、123.45の場合5</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>小数点以下の桁数（decimal型）、123.45であれば2</td>
+</tr>
+</tbody>
+</table>
+<p>下記に、各種制約を付与したマイグレーションファイルのサンプルを示す。</p>
+<figure class="highlight ruby"><figcaption><span>xxx_create_books.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">  create_table <span class="symbol">:books</span> <span class="keyword">do</span> |t|</span><br><span class="line">    t.string <span class="symbol">:isbn</span>, <span class="symbol">limit:</span> <span class="number">17</span>, <span class="symbol">null:</span> <span class="keyword">false</span></span><br><span class="line">    t.string <span class="symbol">:publish</span>, <span class="symbol">limit:</span> <span class="number">20</span>, <span class="symbol">default:</span> <span class="string">'大動脈切れ造出版'</span></span><br><span class="line">    t.decimal <span class="symbol">:price</span>, <span class="symbol">precision:</span> <span class="number">5</span>, <span class="symbol">scale:</span> <span class="number">0</span></span><br><span class="line">    t.date <span class="symbol">:published</span></span><br><span class="line">    t.boolean <span class="symbol">:cd</span></span><br><span class="line"></span><br><span class="line">    t.timestamps</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="マイグレーションファイルの作成">マイグレーションファイルの作成</h3><p>マイグレーションファイルを作成する方法は、以下の2種類に大別できる。</p>
+<ol>
+<li><code>rails generate model</code>コマンドでモデルと併せて作成する</li>
+<li><code>rails generate migration</code>コマンドを使ってマイグレーションファイル単体で作成する</li>
+</ol>
+<p>新規テーブルを作成する場合は、1でモデルを含めて作成するのが手軽である。<br>既存テーブルのレイアウト修正を行いたい場合には、2の方法を利用する。</p>
+<p>以前の記事で1は紹介済みのため、今回は2について紹介する。<br><figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails generate migration name [<span class="symbol">field:</span>type ...][options]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><em>name: ファイル名、field: フィールド名、type: データ型、options: 動作オプション</em></p>
+</blockquote>
+<p>ファイル名に関しては、処理内容を識別し易くする意味でも下記のような命名が推奨される。</p>
+<ul>
+<li>AddXxxxTo<table名></table名></li>
+<li>RemoveXxxxFrom<table名></table名></li>
+</ul>
+<p>更にRailsでは、上記のようなファイル名にする事によって、具体的な追加/削除のコードも自動生成してくれる。<br>以下は、authorテーブルに日付型のbirth列を追加する場合の例である。<br><figure class="highlight ruby"><figcaption><span>用例@コマンドライン</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails generate migration <span class="constant">AddBirthToAuhors</span> <span class="symbol">birth:</span>date</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><figcaption><span>生成されるコード</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddBirthToAuthors</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Migraiton</span></span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">    add_column <span class="symbol">:authors</span>, <span class="symbol">:birth</span>, <span class="symbol">:date</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>また、上記はあくまで骨組みのため、必要に応じて処理を追加できる。<br>なお、手作業でマイグレーションファイルを作成する場合には、下記2点に注意する。</p>
+<ul>
+<li>ファイル名とクラス名は対応関係にする事</li>
+<li><code>ActiveRecord::Migration</code>クラスを継承する事</li>
+</ul>
+
+<br>
+
+<h3 id="マイグレーションファイルで利用できる主なメソッド">マイグレーションファイルで利用できる主なメソッド</h3><p>マイグレーションファイルでは下記のようなメソッドが利用できる。</p>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add_column(tname, fname, type [,opt])</td>
+<td>新規に列を追加</td>
+</tr>
+<tr>
+<td>add_index(tname, fname [,i_opt])</td>
+<td>新規にインデックスを追加</td>
+</tr>
+<tr>
+<td>add_timestamps(tname)</td>
+<td>created_at/updated_at 列を追加</td>
+</tr>
+<tr>
+<td>change_column(tname, fname, type [,opt])</td>
+<td>既存の列定義を変更</td>
+</tr>
+<tr>
+<td>change_column_default(tname, fname, default)</td>
+<td>列のデフォルト値を<code>default</code>に変更</td>
+</tr>
+<tr>
+<td>change_table(tname)</td>
+<td>テーブル定義を変更</td>
+</tr>
+<tr>
+<td>column_exists?(tname, fname [,type [,opt]])</td>
+<td>指定列が存在するかを確認</td>
+</tr>
+<tr>
+<td>create_join_table(tname1, tname2 [,t_opt])</td>
+<td>tname1とtname2を紐づける中間テーブルを生成</td>
+</tr>
+<tr>
+<td>drop_table(tname [,t_opt])</td>
+<td>既存のテーブルを削除</td>
+</tr>
+<tr>
+<td>index_exists?(tname, fname [.i_opt])</td>
+<td>インデックスが存在するかを確認</td>
+</tr>
+<tr>
+<td>remove_column(tname, fname [,i_opt])</td>
+<td>既存の列を削除</td>
+</tr>
+<tr>
+<td>remove_columns(tname [,i_opt])</td>
+<td>既存の列を削除（複数列対応）</td>
+</tr>
+<tr>
+<td>remove_index(tname [,i_opt])</td>
+<td>インデックスが存在するかを確認</td>
+</tr>
+<tr>
+<td>remove_timestamps(tname)</td>
+<td>既存のcreated_at/updated_at列を削除</td>
+</tr>
+<tr>
+<td>remove_column(tname, old, new)</td>
+<td>既存の列名をoldからnewに変更</td>
+</tr>
+<tr>
+<td>remove_index(tname, old, new)</td>
+<td>既存のインデックス名をoldからnewに変更</td>
+</tr>
+<tr>
+<td>remove_table(tname, new)</td>
+<td>既存のテーブル名をtnameからnewに変更</td>
+</tr>
+<tr>
+<td>excute(sql)</td>
+<td>任意のSQL命令を実行</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>tname: テーブル名、fname: フィールド名、type: データ型<br>opt: 列オプション、i_opt: インデックスオプション、t_opt: テーブルオプション</em></p>
+</blockquote>
+
+<br>
+
+<h4 id="テーブル定義を変更するchange_tableメソッド">テーブル定義を変更するchange_tableメソッド</h4><p>change_tableメソッドは、テーブルレイアウトの変更やインデックスの追加/削除をまとめて行いたい場合に便利なメソッドです。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">change_table tname <span class="keyword">do</span> |t|</span><br><span class="line">  ...definition...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>tname: テーブル名、definition: 修正のための命令</em></p>
+</blockquote>
+<p>以下に、booksテーブルの操作例を示す。<br><figure class="highlight ruby"><figcaption><span>xxx_chnage_books.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">change_table <span class="symbol">:books</span> <span class="keyword">do</span> |t|</span><br><span class="line">  t.string <span class="symbol">:author</span></span><br><span class="line">  t.remove <span class="symbol">:published</span>, <span class="symbol">:cd</span></span><br><span class="line">  t.index <span class="symbol">:title</span></span><br><span class="line">  t.rename <span class="symbol">:isbn</span>, <span class="symbol">:isbn_code</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>change_tableメソッドを利用する事で、他のメソッドに比べ、テーブル名を都度定義しなくてよい・カラム操作メソッドを省略できる。<br>といった、スマートなコードで記述できる。</p>
+<p>change_tableメソッドで利用可能なメソッドは下記。<br>
+<table>
+  <tbody>
+    <tr>
+      <td>index</td>
+      <td>change</td>
+      <td>change_default</td>
+      <td>rename</td>
+    </tr>
+    <tr>
+      <td>remove</td>
+      <td>remove_references</td>
+      <td>remove_index</td>
+      <td>remove_timestamps</td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<br>
+
+<h4 id="インデックスの追加と削除add_index、remove_indexメソッド">インデックスの追加と削除add_index、remove_indexメソッド</h4><p>インデックスを追加するのは、add_indexメソッドの役割である。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_index(tname, fname [,opt])</span><br><span class="line">remove_index(tname [,opt])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>tname: テーブル名、fname: インデックスを付与するフィールド名、opt: インデックスオプション</em></p>
+</blockquote>
+<p>以下に、用例を示す。<br><figure class="highlight ruby"><figcaption><span>add_indexメソッドの用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_index <span class="symbol">:books</span>, <span class="symbol">:title</span></span><br><span class="line">add_index <span class="symbol">:books</span>, [<span class="symbol">:publish</span>, <span class="symbol">:title</span>]</span><br><span class="line">add_index <span class="symbol">:books</span>, [<span class="symbol">:publish</span>, <span class="symbol">:title</span>], <span class="symbol">unique:</span> <span class="keyword">true</span>, <span class="symbol">name:</span> <span class="string">'idx_pub_title'</span></span><br><span class="line">add_index <span class="symbol">:books</span>, [<span class="symbol">:publish</span>, <span class="symbol">:title</span>], <span class="symbol">length:</span> &#123; <span class="symbol">publish:</span> <span class="number">10</span>, title <span class="number">20</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>add_indexメソッドで利用可能なオプションは下記。</p>
+<table>
+<thead>
+<tr>
+<th>オプション名</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unique</td>
+<td>一意性制約を付与するか</td>
+</tr>
+<tr>
+<td>name</td>
+<td>インデックス名</td>
+</tr>
+<tr>
+<td>length</td>
+<td>インデックスに含まれる列の長さ（SQLiteでは未対応）</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<h4 id="任意のSQL命令を実行するexcuteメソッド">任意のSQL命令を実行するexcuteメソッド</h4><p>マイグレーションファイルには、様々なメソッドが提供されており、基本的なスキーマ定義はおおよそ賄う事が出来るが、それでも全てのSQL命令をサポートしている訳ではない。<br>例えば、データベース固有のデータ型や外部キー制約、ビューやトリガーの作成機能は備えていない。<br>（※references型はあくまでモデル上での関連を表現しており、データベース上に外部キーを設定している訳ではない）</p>
+<p>そのため、これらを表現したい場合には、excuteメソッドで直接SQL命令を記述する必要がある。<br>下記は、booksテーブルから技術評論社の書籍情報だけを取り出した<code>gihyo_booksビュー</code>を定義する例である。<br><figure class="highlight ruby"><figcaption><span>excuteメソッドの用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">excute <span class="string">"CREATE VIEW gihyo_books AS SELECT * FROM books WHERE publish = '大動脈切れ造出版'"</span></span><br></pre></td></tr></table></figure></p>
+<p>ただし、excuteメソッドは往々にしてソースコード、マイグレーションファイルの可搬性を損ねるため、あくまで最終的な手段として利用すべきである。<br>（※データベースの種類 - MySQL、SQLiteで互換性が保証されない）<br>ますは、標準的なメソッドでの操作を検討することが推奨される。</p>
+
+<br>
+
+<h4 id="HABTM中間テーブルを生成するcreate_join_tableメソッド">HABTM中間テーブルを生成するcreate_join_tableメソッド</h4><p>HABTM(has_and_belongs_to_many)関係とは、m:nの関係である。<br>このメソッドは、HABTM関係での中間テーブルを作成する。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create_join_table(table1, table2 [,opts])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>table1、table2: 紐づけるテーブル、opts: 中間テーブルオプション</em></p>
+</blockquote>
+<p>中間テーブルは、外部キー以外の列を持っては行けないという制約があるが、create_join_tableメソッドを利用すれば、こうした制約も意識する必要がなくなる。</p>
+<figure class="highlight ruby"><figcaption><span>xxx_create_join_table_author_book.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateJoinTableAuthorBook</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Migration</span></span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">    create_join_table <span class="symbol">:author</span>, <span class="symbol">:books</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="マイグレーションファイルの実行">マイグレーションファイルの実行</h3><p>以前の記事で、基本的な使い方は紹介したため、こちらではコマンドの一覧を掲載する。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>コマンド</th>
+      <th>概要</th>
+    </tr>
+    <tr>
+      <th colspan="2"><u>利用例</u></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>db:migrate</b></td>
+      <td>指定されたバージョンまで移行（VERSION未指定の場合は最新）</td>
+    </tr>
+    <tr>
+      <td colspan="2"><u>rake db:migrate VERSION=20160134143910</u></td>
+    </tr>
+    <tr>
+      <td><b>db:rollback</b></td>
+      <td>指定ステップだけバージョンを戻す</td>
+    </tr>
+    <tr>
+      <td colspan="2"><u>rake db:rollback STEP=5</u></td>
+    </tr>
+    <tr>
+      <td><b>db:migrate:redo</b></td>
+      <td>指定ステップだけバージョンを戻して、再度実行</td>
+    </tr>
+    <tr>
+      <td colspan="2"><u>rake db:migrate:redo STEP=5</u></td>
+    </tr>
+    <tr>
+      <td><b>db:migrate:reset</b></td>
+      <td>データベースを一旦削除し、再作成の上で最新バージョンになるようマイグレーションを実行</td>
+    </tr>
+    <tr>
+      <td colspan="2"><u>rake db:migrate:reset</u></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h3 id="リバーシブルなマイグレーションファイル">リバーシブルなマイグレーションファイル</h3><p>マイグレーションのルールを記述する基本は、changeメソッドを活用する事である。<br>Rails4のchangeメソッドは、スキーマをバージョンダウンする際も自動的に逆の処理を生成して、特定の状態までロールバックできる。<br>しかし、全てのケースでロールバックが可能な訳ではなく、<code>drop_tableメソッド</code>や<code>remove_columnメソッド</code>などは、「どのようなテーブル」を作成してよいかという情報をRailsが判断できないため、ロールバック用の記述を加えておく必要がある。</p>
+
+<br>
+
+<h4 id="ロールバックのための情報を追加するremove_column、drop_tableメソッド">ロールバックのための情報を追加するremove_column、drop_tableメソッド</h4><p>remove_column、drop_tableメソッドは、削除すべき列の情報を引数で明記しておく事で、ロールバックが可能となる。</p>
+<figure class="highlight ruby"><figcaption><span>xxx_remove_salt_from_users.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RemoveSaltFromUsers</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Migration</span></span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">    remove_column <span class="symbol">:users</span>, <span class="symbol">:salt</span>, <span class="symbol">:string</span></span><br><span class="line">    <span class="comment"># remove_column :users, :saltではデータ型が不明なためロールバック不可</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>上記はremove_columnメソッドの例だが、drop_tableについても同様の記述となる。<br>(ブロック配下の列定義はcreate_tableメソッドに準じる)</p>
+<p>なお、複数列をまとめて削除できる<code>remove_columnsメソッド</code>もあるが、こちらは列情報を指定できないためロールバックが出来ない。</p>
+
+<br>
+
+<h4 id="バージョンアップ、ダウンの処理を分岐するreversibleメソッド">バージョンアップ、ダウンの処理を分岐するreversibleメソッド</h4><p>reversibleメソッドを利用する事で、changeメソッドの中でバージョンアップ・バージョンダウンの処理を分岐して記述できるようになる。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">reversible <span class="keyword">do</span> |dir|</span><br><span class="line">  dir.up <span class="keyword">do</span></span><br><span class="line">    ...バージョンアップ時の処理...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  dir.down <span class="keyword">do</span></span><br><span class="line">    ...バージョンダウン時の処理...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>dir: マイグレーション処理を管理するためのオブジェクト</em></p>
+</blockquote>
+<p>下記は、reviewsテーブルを作成する際に、併せてbooksテーブルに対する外部キー制約を付与する例である。</p>
+<figure class="highlight ruby"><figcaption><span>xxx_create_reviews.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateReviews</span> <span class="inheritance">&lt; <span class="parent">ActiveRecord::Migration</span></span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">    create_table <span class="symbol">:reviews</span> <span class="keyword">do</span> |t|</span><br><span class="line">      ...中略...</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    reversible <span class="keyword">do</span> |dir|</span><br><span class="line">      dir.up <span class="keyword">do</span></span><br><span class="line">        excute <span class="string">'ALTER TABLE reviews ADD CONSTRAINT fk_reviews_books FOREIGN KEY (book_id) REFERENCES books(id)'</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      dir.down <span class="keyword">do</span></span><br><span class="line">        excute <span class="string">'ALTER TABLE reviews DROP FOREIGN KEY fk_reviews_books'</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>なお、マイグレーションでは外部キー制約を付与するためのメソッドは存在しないため、excuteメソッドを用いている。</p>
+
+<br>
+
+<h4 id="バージョンアップ、ダウンの処理を分岐するup、downメソッド">バージョンアップ、ダウンの処理を分岐するup、downメソッド</h4><p>changeメソッドの代わりに、バージョンアップ・バージョンダウン時の処理をup/downメソッドに分離して表す事も可能である。<br>なお、この記述はRails3以前の記法でもある。</p>
+<figure class="highlight ruby"><figcaption><span>xxx_create_reviews.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">up</span></span></span><br><span class="line">  create_table <span class="symbol">:reviews</span> <span class="keyword">do</span> |t|</span><br><span class="line">    ...中略...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  excute <span class="string">'ALTER TABLE reviews ADD CONSRAINT fk_reviews_books FOREIGN KEY (book_id) REFERENCES books(id)'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">down</span></span></span><br><span class="line">  excute <span class="string">'ALTER TABLE reviews DROP FOREIGN KEY fk_reviews_books'</span></span><br><span class="line">  drop_table <span class="symbol">:reviews</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>なお、reversible(change)メソッド、up/downメソッドの使い分けとしては、全体のうち、どの程度がマイグレーション可能かによって判断を行う。<br>処理の大半がロールバックできない場合にはup/downメソッドに分離した方が、可読性は向上する。<br>一方、一部だけの場合は、そこだけを二重で記述した方がスマートにまとめられる。</p>
+
+<br>
+
+<h3 id="データの初期化">データの初期化</h3><p>スキーマが準備できたら、データを初期化する方法としてRailsでは<strong>シードファイル</strong>と<strong>フィクスチャ</strong>という2種類のアプローチを提供している。<br>いずれもrakeコマンド経由でデータベースにデータを提供できるため、使い分けが曖昧になりやすい。</p>
+<p>シードとは種、フィクスチャとはテスト時のアプリケーションの初期状態を表す言葉だが、語源からすると<strong>シードファイル</strong>はマスタテーブルなどの初期データ投入、フィクスチャはテストデータの投入に利用するのが基本と考えられる。</p>
+
+<br>
+
+<h4 id="シードファイル">シードファイル</h4><p>シードファイルは、Rubyスクリプトでデータを生成・保存するコードを記述していく。<br>作成したコードはdb/seed.rbとして保存を行う。</p>
+<p>下記は、booksテーブルにデータを投入する例である。<br><figure class="highlight ruby"><figcaption><span>seeds.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Book</span>.create(<span class="symbol">id:</span> <span class="number">1</span>, <span class="symbol">isbn:</span> <span class="string">'978-7741-5878-5'</span>, <span class="symbol">title:</span> <span class="string">'AndroidエンジニアのためのモダンJava'</span>, <span class="symbol">price:</span> <span class="number">3360</span>, <span class="symbol">publish:</span> <span class="string">'大動脈切れ造出版'</span>, <span class="symbol">published:</span> <span class="string">'2016-01-16'</span>, <span class="symbol">cd:</span> <span class="keyword">false</span>)</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure></p>
+<p>作成したシードファイルは<code>rake db:seed</code>で実行可能である。</p>
+
+<br>
+
+<h4 id="フィクスチャ">フィクスチャ</h4><p>純粋なRubyスクリプトであるシードファイルに対して、フィクスチャファイルはYAML形式で記述が可能である。<br>下記は、booksテーブルに投入する事を想定したフィクスチャの例である。<br><figure class="highlight ruby"><figcaption><span>books.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">modernjava:</span></span><br><span class="line">  <span class="symbol">id:</span> <span class="number">1</span></span><br><span class="line">  <span class="symbol">isbn:</span> <span class="number">978</span>-<span class="number">4</span>-<span class="number">7741</span>-<span class="number">5878</span>-<span class="number">5</span></span><br><span class="line">  <span class="symbol">title:</span> <span class="constant">Android</span>エンジニアのためのモダン<span class="constant">Java</span></span><br><span class="line">  <span class="symbol">price:</span> <span class="number">3360</span></span><br><span class="line">  <span class="symbol">publish:</span> 大動脈切れ造出版</span><br><span class="line">  published <span class="number">2016</span>-<span class="number">01</span>-<span class="number">16</span></span><br><span class="line">  <span class="symbol">cd:</span> <span class="keyword">false</span></span><br><span class="line">  <span class="symbol">user:</span> piyotarou</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure></p>
+<p>上記の最後の列では、<code>user</code>が定義されているが、これは外部キーを表現していて、BookモデルからUserモデルを参照するのに「モデル名: 参照先のラベル」という記述で関連付けを定義している。<br>(※参照先テーブルのid値を意識せずに、自動採番してくれる仕組み)</p>
+<p>なお、作成したフィクスチャは<code>rake db:fixture:load FIXTURES=users,reviews</code>で実行できる。<br>FIXTUREオプションを省略した場合には、/test/fixturesディレクトリ配下の全てのフィクスチャが展開される。</p>
+
+<br>
+
+<h5 id="フィクスチャで大量のデータを生成する">フィクスチャで大量のデータを生成する</h5><p>フィクスチャには、テンプレートファイルのように、スクリプトブロックを埋め込む事が出来る。<br>そのため、一定の規則を持った大量のデータを作成する事が可能である。</p>
+<p>下記は、0~9の番号が振られた書籍データを生成する例である。<br><figure class="highlight ruby"><figcaption><span>books.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="number">0</span>.upto(<span class="number">9</span>) <span class="keyword">do</span> |n| %&gt;</span><br><span class="line">book&lt;%= n %&gt;</span><br><span class="line">  <span class="symbol">isbn:</span> <span class="number">978</span>-<span class="number">4</span>-<span class="number">7741</span>-<span class="number">5878</span>-&lt;%= n %&gt;</span><br><span class="line">  <span class="symbol">title:</span> 書籍タイトル&lt;%= n %&gt;</span><br><span class="line">  <span class="symbol">price:</span> &lt;%= <span class="number">1000</span> + n %&gt;</span><br><span class="line">  <span class="symbol">published:</span> <span class="number">2016</span>-<span class="number">01</span>-<span class="number">16</span></span><br><span class="line">&lt;% <span class="keyword">end</span> %&gt;</span><br></pre></td></tr></table></figure></p>
+
+<br>
+<br>
+
+<p>かなりの長編になりましたが、ここまででモデルは終わりです。<br>次回から、「コントローラ開発編」を書いていきます。</p>
+<p>この<strong>写経で叩き込むスタイル</strong>も、だんだんと慣れてきましたが、記事を書きながら2時間に一回は、意味あるのかな。。<br>という不安が頭をよぎりっております現在独身27歳身長165cm頭おかCかも。</p>
+
       
     </div>
     
@@ -248,7 +829,7 @@ _:(´ཀ`」 ∠):_</div>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 taka-p
+    		&copy; 2016 taka-p
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
