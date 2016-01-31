@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 6章 コントローラ開発 その① リクエスト情報、レスポンスの操作 | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今回から、6章に入っていきます。
+リクエスト処理の基点となるController。処理過程においてModelを呼び出し、その結果をViewに引き渡す役割を持ち、リクエスト受信からレスポンス送信までを管理するRailsアプリケーションの中核となる機能です。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 6章 コントローラ開発 その① リクエスト情報、レスポンスの操作">
+<meta property="og:url" content="http://taka-p.github.io/2016/01/26/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="今回から、6章に入っていきます。
+リクエスト処理の基点となるController。処理過程においてModelを呼び出し、その結果をViewに引き渡す役割を持ち、リクエスト受信からレスポンス送信までを管理するRailsアプリケーションの中核となる機能です。">
+<meta property="og:updated_time" content="2016-01-31T07:19:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 6章 コントローラ開発 その① リクエスト情報、レスポンスの操作">
+<meta name="twitter:description" content="今回から、6章に入っていきます。
+リクエスト処理の基点となるController。処理過程においてModelを呼び出し、その結果をViewに引き渡す役割を持ち、リクエスト受信からレスポンス送信までを管理するRailsアプリケーションの中核となる機能です。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 10px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#リクエスト情報"><span class="toc-text">リクエスト情報</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#リクエスト情報を取得するparamメソッド"><span class="toc-text">リクエスト情報を取得するparamメソッド</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#マスアサインメント脆弱性を回避するStrongParameters"><span class="toc-text">マスアサインメント脆弱性を回避するStrongParameters</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#レスポンスの操作"><span class="toc-text">レスポンスの操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#テンプレートファイルを呼び出すrenderメソッド"><span class="toc-text">テンプレートファイルを呼び出すrenderメソッド</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#アクション名と異なるテンプレートを呼び出す"><span class="toc-text">アクション名と異なるテンプレートを呼び出す</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#異なるフォルダのテンプレートを呼び出す"><span class="toc-text">異なるフォルダのテンプレートを呼び出す</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#アプリケーション外のテンプレートを呼び出す"><span class="toc-text">アプリケーション外のテンプレートを呼び出す</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上記オプションの省略形"><span class="toc-text">上記オプションの省略形</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ファイルの内容を出力するsend_fileメソッド"><span class="toc-text">ファイルの内容を出力するsend_fileメソッド</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ログを出力するloggerオブジェクト"><span class="toc-text">ログを出力するloggerオブジェクト</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ログの出力レベルを変更する"><span class="toc-text">ログの出力レベルを変更する</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一部のログをフィルタする"><span class="toc-text">一部のログをフィルタする</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML以外のレスポンス処理"><span class="toc-text">HTML以外のレスポンス処理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#モデルの内容をXML、JSON形式で出力する"><span class="toc-text">モデルの内容をXML、JSON形式で出力する</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#テンプレート経由でJSON、XMLデータを生成するJBuilder、Builder"><span class="toc-text">テンプレート経由でJSON、XMLデータを生成するJBuilder、Builder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Rubyスクリプトの結果を出力するRubyテンプレート"><span class="toc-text">Rubyスクリプトの結果を出力するRubyテンプレート</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#マルチフォーマット出力に対応するrespond_toメソッド"><span class="toc-text">マルチフォーマット出力に対応するrespond_toメソッド</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#利用できるフォーマットのカスタマイズ"><span class="toc-text">利用できるフォーマットのカスタマイズ</span></a></li></ol></li></ol></li></ol></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP-6章-コントローラ開発-その①-リクエスト情報" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 6章 コントローラ開発 その① リクエスト情報、レスポンスの操作
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/01/26/1/" class="article-date">
+  	<time datetime="2016-01-26T12:53:25.000Z" itemprop="datePublished">2016-01-26</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今回から、6章に入っていきます。</p>
+<p>リクエスト処理の基点となるController。<br>処理過程においてModelを呼び出し、その結果をViewに引き渡す役割を持ち、リクエスト受信からレスポンス送信までを管理するRailsアプリケーションの中核となる機能です。</p>
+<a id="more"></a>
+
+<br>
+
+<h2 id="リクエスト情報">リクエスト情報</h2><p>コントローラの役割は大きく<strong>リクエスト(要求)</strong>の取得と<strong>レスポンス(応答)</strong>の生成に分けられる。<br>まずは、処理の入り口にあたるリクエスト情報の取得から紹介を行っていく。</p>
+
+<br>
+
+<h3 id="リクエスト情報を取得するparamメソッド">リクエスト情報を取得するparamメソッド</h3><p>Railsでは、クライアントから送信された値(<strong>リクエスト情報</strong>)を一つにまとめ、<code>param[:パラメータ名]</code>という形式でアクセスできるようにしている。</p>
+<p>下記は、<code>paramメソッド</code>で取得できるリクエスト情報である。</p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ポストデータ</td>
+<td><form method="POST">で定義されたフォームから送信された情報</form></td>
+</tr>
+<tr>
+<td>クエリ情報</td>
+<td>URLの末尾「?」以降に「キー名=値&amp;…」の形式で付与された情報</td>
+</tr>
+<tr>
+<td>ルートパラメータ</td>
+<td>ルートで定義されたパラメータ「/books/1」の「1」の部分など</td>
+</tr>
+</tbody>
+</table>
+<p>下記は、ルートパラメータを取得する例である。<br>なお、コメント部分は「~/ctrl/para/108」のようなURLでアスセスする前提の出力である。<br><figure class="highlight ruby"><figcaption><span>ctrl_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">para</span></span></span><br><span class="line">  render <span class="symbol">text:</span> <span class="string">'idパラメータ: '</span> + param[<span class="symbol">:id</span>]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; idパラメータ: 108</span></span><br></pre></td></tr></table></figure></p>
+<p>また、「~/ctrl/para?id=108」のようなURLでアスセスした場合も同様の結果が得られる。</p>
+
+<br>
+
+<h3 id="マスアサインメント脆弱性を回避するStrongParameters">マスアサインメント脆弱性を回避するStrongParameters</h3><p><code>StrongParameters</code>は、増すアサインメント脆弱性に対するホワイトリスト対策で、フィールド値の一括設定に先立って、予め設定しても良い値を宣言しておく仕組みである。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">params.<span class="keyword">require</span>(model).permit(attr,...)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>model: モデル名、attr: 取得を許可する列名</em></p>
+</blockquote>
+<p>処理の流れとしてまず、<code>requireメソッド</code>に指定されたモデルに対応するキーが存在するか確認し、存在する場合は値を返し、存在しない場合にはParameterMissing例外を発生させる。<br>次に、モデルへの一括設定を許可したプロパティが指定された<code>permitメソッド</code>にハッシュ値が渡ってきた際、指定のキーだけを含んだハッシュを返す。<br>指定されないキーが含まれている場合、この段階ではじかれる。</p>
+<p>下記は、StrongParametersの用例である。<br><figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span></span></span><br><span class="line">  <span class="variable">@book</span> = <span class="constant">Book</span>.new(book_params)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">...中略...</span><br><span class="line"></span><br><span class="line">private</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">book_param</span></span></span><br><span class="line">    params.<span class="keyword">require</span>(<span class="symbol">:book</span>).permit(<span class="symbol">:isbn</span>, <span class="symbol">:title</span>, <span class="symbol">:price</span>, <span class="symbol">:publish</span>, <span class="symbol">:published</span>, <span class="symbol">:cd</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>require/permitメソッドでフィルタしたパラメータ値をnewメソッドに引き渡している。</p>
+<p>なお、StrongParametersはRails4から採用された仕組みであり、Rails3ではモデル内に定義する<code>attr_accessible</code>という機能でマスアサインメント対策がなされている。<br>ざっくりだが、「ビューからの値を受け取るのはコントローラの役割」という理由でStrongParametersが採用された模様。</p>
+
+<br>
+
+<h2 id="レスポンスの操作">レスポンスの操作</h2><p>Railsでは、アクションの処理結果を出力するために下記のようなメソッドを提供している。<br>以降、便宜的にこれらのメソッドをレスポンスメソッドと呼ぶ。</p>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>render</td>
+<td>テンプレートの呼び出しやテキスト/スクリプトの出力など汎用的な結果出力手段</td>
+</tr>
+<tr>
+<td>redirect_to</td>
+<td>指定されたアドレスに処理をリダイレクト</td>
+</tr>
+<tr>
+<td>send_file</td>
+<td>指定されたファイルを出力</td>
+</tr>
+<tr>
+<td>send_data</td>
+<td>指定されたバイナリデータを出力</td>
+</tr>
+<tr>
+<td>head</td>
+<td>応答ヘッダのみを出力</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<h3 id="テンプレートファイルを呼び出すrenderメソッド">テンプレートファイルを呼び出すrenderメソッド</h3><p>レスポンスメソッドの中でも最も頻繁に利用するのが<code>renderメソッド</code>である。<br>以前の記事でも述べたように、アクションにおいて明示的にレスポンスメソッドを定義しない場合は、<code>renderメソッド</code>が呼び出される。</p>
+<p>renderメソッドは、様々なオプションを持っているが、本項ではテンプレートファイルの呼び出しに関わるオプションについて紹介する。</p>
+
+<br>
+
+<h4 id="アクション名と異なるテンプレートを呼び出す">アクション名と異なるテンプレートを呼び出す</h4><p>例えば、<code>ctrl#res_renderアクション</code>がデフォルトで呼び出すテンプレートは、<code>ctrl/res_render.html.erb</code>になる。<br>もしも、<code>ctrl/index.html.erb</code>を呼び出したい場合は、<code>actionオプション</code>を利用して、下記のように記述する。</p>
+<figure class="highlight ruby"><figcaption><span>actionオプションの用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render <span class="symbol">action:</span> <span class="string">'index'</span></span><br></pre></td></tr></table></figure>
+<p>※呼び出されているのは<code>index</code>という名称のテンプレートであり、<code>index</code>アクションが呼び出される訳ではない。</p>
+
+<br>
+
+<h4 id="異なるフォルダのテンプレートを呼び出す">異なるフォルダのテンプレートを呼び出す</h4><p>actionオプションは、現在のコントローラを基点としてテンプレートを呼び出す。<br>よって、現在のコントローラがctrlで<code>action: &#39;index&#39;</code>が指定された場合には、<code>ctrl/index.html.erb</code>が呼び出される。</p>
+<p>もしも、異なるコントローラ配下のテンプレートを呼び出す場合は、<code>templateオプション</code>を利用する。<br>下記は、hello/view.html.erbを呼び出したい場合の記述である。</p>
+<figure class="highlight ruby"><figcaption><span>templateオプションの用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render <span class="symbol">template:</span> <span class="string">'hello/view'</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="アプリケーション外のテンプレートを呼び出す">アプリケーション外のテンプレートを呼び出す</h4><p>複数のアプリケーションでテンプレートを共有している場合、アプリケーションの外部にテンプレートを配置したいケースが出てくる。<br>この場合は、<code>fileオプション</code>で絶対パスを指定する必要がある。</p>
+<figure class="highlight ruby"><figcaption><span>fileオプションの用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render <span class="symbol">file:</span> <span class="string">'data/template/list'</span></span><br></pre></td></tr></table></figure>
+<p>これによって、Windows環境であれば<code>c:/data/template/list.html.erb</code>が呼び出されるようになる。</p>
+
+<br>
+
+<h4 id="上記オプションの省略形">上記オプションの省略形</h4><p>上記で紹介したオプションいずれにおいても、オプション名を省略して、下記のように記述する事が可能である。</p>
+<figure class="highlight ruby"><figcaption><span>オプション名の省略</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">render <span class="string">'index'</span></span><br><span class="line">render <span class="string">'hello/view'</span></span><br><span class="line">render <span class="string">'data/template/list'</span></span><br></pre></td></tr></table></figure>
+<p>いずれもシンプルな記述になっている。<br>「基点を曖昧にしない」という意味では、<code>fileオプション</code>のみオプション名付きで定義して、他は省略形で記述するのが良い。</p>
+
+<br>
+
+<h3 id="ファイルの内容を出力するsend_fileメソッド">ファイルの内容を出力するsend_fileメソッド</h3><p><code>send_fileメソッド</code>は、指定されたパスに存在するファイルを読み込み、その内容をクライアントに送信する。<br>例えば、特定のユーザーにのみ開示するファイルは原則としてドキュメントルートに配置するが、send_fileメソッドを利用する事で一部んで記述が可能になる。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">send_file path [,opts]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>path: 読み込むファイルのパス、opts: 動作オプション</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>概要</th>
+<th>デフォルト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>ダウンロード時に使用するファイル名</td>
+<td>元のファイル名</td>
+</tr>
+<tr>
+<td>type</td>
+<td>コンテンツタイプ</td>
+<td>application/octect-stream</td>
+</tr>
+<tr>
+<td>disposotion</td>
+<td>ファイルをブラウザインラインで表示するか(:inline)、ダウンロードするか(:attachment)</td>
+<td>:attachment</td>
+</tr>
+<tr>
+<td>status</td>
+<td>ステータスコード</td>
+<td>200 (OK)</td>
+</tr>
+<tr>
+<td>url_based_filename</td>
+<td>ダウンロード時のファイル名を、URLをもとに生成するか（filenameが指定されている場合はそちらを優先）</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>具体的な例を下記に示す。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定された圧縮ファイルをダウンロード</span></span><br><span class="line">sendfile <span class="string">'c:/data/sample.zip'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定画像をブラウザインラインで表示</span></span><br><span class="line">sendfile <span class="string">'c:/data/photo.jpg'</span>, <span class="symbol">type:</span> <span class="string">'image/jpeg'</span>, <span class="symbol">disposition:</span> <span class="symbol">:inline</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PDF文書をGuideline.pdfという名前でダウンロード</span></span><br><span class="line">send_file <span class="string">'c:/data/docment.pdf'</span>, <span class="symbol">filename:</span> <span class="string">'Guideline.pdf'</span></span><br></pre></td></tr></table></figure></p>
+<p>このメソッドの注意点として、下記のようなコードは利用しないようにする。<br>ユーザーが自由にサーバ内のファイルにアクセス出来てしまうためである。<br><figure class="highlight ruby"><figcaption><span>利用してはいけないコード例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">send_file param[<span class="symbol">:path</span>]</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="ログを出力するloggerオブジェクト">ログを出力するloggerオブジェクト</h3><p>ログを標準出力(WEBrickのコンソール)したいという場合、次のようなメソッドが利用できる。</p>
+<table>
+<thead>
+<tr>
+<th>メソッド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unknown (msg)</td>
+<td>不明なエラー</td>
+</tr>
+<tr>
+<td>fatal (msg)</td>
+<td>致命的なエラー</td>
+</tr>
+<tr>
+<td>error (msg)</td>
+<td>エラー</td>
+</tr>
+<tr>
+<td>warn (msg)</td>
+<td>警告</td>
+</tr>
+<tr>
+<td>info (msg)</td>
+<td>情報</td>
+</tr>
+<tr>
+<td>debug (msg)</td>
+<td>デバッグ情報</td>
+</tr>
+</tbody>
+</table>
+<p>上から優先度の高い順に列挙している。<br>なお、<code>debugメソッド</code>はdumpする際にも用いられる。</p>
+<figure class="highlight ruby"><figcaption><span>ctrl_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span></span></span><br><span class="line">  logger.unknown(<span class="string">'unknown'</span>)</span><br><span class="line">  logger.fatal(<span class="string">'fatal'</span>)</span><br><span class="line">  logger.error(<span class="string">'error'</span>)</span><br><span class="line">  logger.warn(<span class="string">'warn'</span>)</span><br><span class="line">  logger.info(<span class="string">'info'</span>)</span><br><span class="line">  logger.debug(<span class="string">'debug'</span>)</span><br><span class="line"></span><br><span class="line">  render <span class="symbol">text:</span> <span class="string">'ログはコンソール、またはログファイルから確認ください'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight"><figcaption><span>WEBrickのコンソール表示</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Started GET &#34;/ctrl/log&#34; for 127.0.0.1 at 2013-09-18 13:58:37 +0900&#10;  Processing by CtrlController#log as HTML&#10;&#10;unknown&#10;fatal&#10;error&#10;warn&#10;info&#10;debug&#10;&#10;Rendered text template (0.0ms)&#10;Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="ログの出力レベルを変更する">ログの出力レベルを変更する</h4><p>設定ファイルに下記のような記述を追加する。</p>
+<figure class="highlight ruby"><figcaption><span>development.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.log_level = <span class="symbol">:error</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><figcaption><span>コンソール表示</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unknown</span><br><span class="line">fatal</span><br><span class="line">error</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="一部のログをフィルタする">一部のログをフィルタする</h4><p>パスワードなどのログに記録したくない情報については、filter_parametersを設定する。</p>
+<figure class="highlight ruby"><figcaption><span>filter_parameter_logging.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Rails</span>.application.config.filter_parameters += [<span class="symbol">:password</span>]</span><br></pre></td></tr></table></figure>
+<p>このように記述する事でログ上では<code>[FILTERED]</code>という表記でマスクされる。</p>
+
+<br>
+
+<h3 id="HTML以外のレスポンス処理">HTML以外のレスポンス処理</h3><p>コンテンツを外部アプリケーションに対して公開したい場合などに、XML/JSON形式のデータを出力する事が出来る。</p>
+
+<br>
+
+<h4 id="モデルの内容をXML、JSON形式で出力する">モデルの内容をXML、JSON形式で出力する</h4><p>前節で紹介した<code>renderメソッド</code>に、xml/jsonオプションを指定するだけで可能になる。</p>
+<p>下記はbooksテーブルから全てのレコードを取得して、内容をXML形式で出力する例である。<br><figure class="highlight ruby"><figcaption><span>cyrl_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_xml</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.all</span><br><span class="line">  render <span class="symbol">xml:</span> <span class="variable">@books</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><figcaption><span>xml出力結果</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.8" encoding="UTF-8"&gt;</span><br><span class="line">&lt;books type="array"&gt;</span><br><span class="line">  &lt;book&gt;</span><br><span class="line">    &lt;id type="integer"&gt;1&lt;/id&gt;</span><br><span class="line">    &lt;isbn&gt;978-4-7723-3452-5&lt;/isbn&gt;</span><br><span class="line">    ...中略...</span><br><span class="line">  &lt;/book&gt;</span><br><span class="line">&lt;/books&gt;</span></span><br></pre></td></tr></table></figure>
+<p>なお、以下のように文字列指定も可能である。<br><figure class="highlight ruby"><figcaption><span>xmlオプションに文字列を指定する例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render <span class="symbol">xml:</span> <span class="string">'&lt;error&gt;123 Failed&lt;/error&gt;'</span></span><br></pre></td></tr></table></figure></p>
+<p>jsonの場合は下記のようになる。<br><figure class="highlight ruby"><figcaption><span>jsonオプション</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_json</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.all</span><br><span class="line">  render <span class="symbol">json:</span> <span class="variable">@books</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><figcaption><span>json出力結果</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"id"</span><span class="symbol">:</span><span class="number">1</span>,<span class="string">"isbn"</span><span class="symbol">:<span class="string">"978-4-7743-3456-5"</span></span>,</span><br><span class="line">    ...中略...</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="テンプレート経由でJSON、XMLデータを生成するJBuilder、Builder">テンプレート経由でJSON、XMLデータを生成するJBuilder、Builder</h4><p>前節では、モデルの内容を機械的に変換した結果を出力していたが、フォーマットを厳密に決めたいような場合は<code>JBuilder/Builder</code>テンプレートを利用する。</p>
+<p><code>JBuilder</code>はJSONデータを<code>Bilder</code>はXML文章を生成してくれる。</p>
+<p>なお、いずれもテンプレートではあるが純粋なRubyスクリプトでの記述を行う。<br>ここではJBuilderの例のみ取り上げる。</p>
+<figure class="highlight ruby"><figcaption><span>Jbuilder json.array!メソッド構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.array!(any) <span class="keyword">do</span> |e|</span><br><span class="line">  ...body...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>ary: オブジェクト配列、e: 配列要素を表す仮変数、body: 個別の配列要素を処理するコード</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>Jbuilder jsonメソッド構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.key value</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>key: キー、value: 値</em></p>
+</blockquote>
+<figure class="highlight ruby"><figcaption><span>Jbuilder json.extract!メソッド構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.extract! obj, prop, ...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>obj: モデルオブジェクト、prop: プロパティ</em></p>
+</blockquote>
+<p>以下に用例を記載する。<br><code>http://localhost:3000/books.json</code>のようなURLでの呼び出しを想定する。<br><figure class="highlight ruby"><figcaption><span>books/index.json.jbuilder</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json.array!(<span class="variable">@books</span>) <span class="keyword">do</span> |book|</span><br><span class="line">  json.url book_url(book, <span class="symbol">format:</span> <span class="symbol">:json</span>)</span><br><span class="line">  json.extract! book, <span class="symbol">:isbn</span>, <span class="symbol">:title</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><figcaption><span>出力結果</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"url"</span><span class="symbol">:<span class="string">"http://localhost:3000/books/1.json"</span></span></span><br><span class="line">    <span class="string">"isbn"</span><span class="symbol">:<span class="string">"978-4-7743-3456-5"</span></span>,</span><br><span class="line">    <span class="string">"title"</span><span class="symbol">:<span class="string">"AndroidエンジニアのためのモダンJava"</span></span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>なお、入れ子のキーを生成したい場合は、以下のように記述する。<br><figure class="highlight ruby"><figcaption><span>入れ子のキー配列を生成したい場合の例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = book.athours[<span class="number">0</span>]</span><br><span class="line">json.author <span class="keyword">do</span></span><br><span class="line">  json.name a.name</span><br><span class="line">  json.birth a.birth</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h4 id="Rubyスクリプトの結果を出力するRubyテンプレート">Rubyスクリプトの結果を出力するRubyテンプレート</h4><p>Rails4からは、Rubyテンプレートが追加され、<code>テンプレート名.拡張子.ruby</code>で呼び出せるようになった。<br>Rubyテンプレートは純粋なRubyスクリプトで記述できるため、ほとんどがRubyスクリプトで占められるようなテンプレートでは、ERBテンプレートよりもすっきりとコードを表現できる。</p>
+<p>下記はbooksテーブルの内容をCSV形式で出力する例である。<br><figure class="highlight ruby"><figcaption><span>ctrl_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span></span></span><br><span class="line">  <span class="variable">@books</span> = <span class="constant">Book</span>.all</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><figcaption><span>ctrl/download.csv.<ruby></ruby></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">reqire <span class="string">"kconv"</span></span><br><span class="line"></span><br><span class="line">result = <span class="string">''</span></span><br><span class="line"><span class="comment"># モデルのプロパティをカンマ区切りで出力（ヘッダ行）</span></span><br><span class="line">result &lt;&lt; <span class="variable">@books</span>.attribute_names.join(<span class="string">','</span>)</span><br><span class="line">result &lt;&lt; <span class="string">"¥r"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># テーブルの内容を順にカンマ区切りで出力（データ行）</span></span><br><span class="line"><span class="variable">@books</span>.each <span class="keyword">do</span> |b|</span><br><span class="line">  result &lt;&lt; b.attributes.values.join(<span class="string">','</span>)</span><br><span class="line">  result &lt;&lt; <span class="string">"¥r"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最終的な結果の文字コードをShift-JISに変換</span></span><br><span class="line">result.kconv(<span class="constant">Kconv::SJIS</span>, <span class="constant">Kconv::UTF8</span>)</span><br></pre></td></tr></table></figure>
+<p>上記において<code>attribute_namesメソッド</code>は、モデルに属する全てのプロパティ名を配列として返し、<code>joinメソッド</code>でカンマ区切りの文字列として結合している。<br><code>attributesメソッド</code>では、モデルの全てのプロパティを「名前:値」のハッシュ形式で取得して、’valueメソッド’で値のみの配列を取り出した上で、これを<code>joinメソッド</code>でカンマ区切りの文字列として結合している。</p>
+
+<br>
+
+<h4 id="マルチフォーマット出力に対応するrespond_toメソッド">マルチフォーマット出力に対応するrespond_toメソッド</h4><p>Railsでマルチフォーマット対応するには、まずERB/JBuilder/Builder/Rubyなどのテンプレートを利用してビューを複数用意するのが基本である。</p>
+<p>しかし、簡易的なエラーメッセージを出力するなど、テンプレートを用意するまでもない場合、あるいはフォーマットによってはリダイレクトしたい、ヘッダだけを出力したいなどのケースでは<code>respond_toメソッド</code>を利用する事で簡単に分岐できる。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">respond_to <span class="keyword">do</span> |format|</span><br><span class="line">  format.type &#123; statusments &#125;</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>format: フォーマット制御オブジェクト、type: 応答フォーマット、statusments: 描画コード</em></p>
+</blockquote>
+<p>下記は、scaffolding機能によって自動生成されたbooks#createメソッドの例である。<br><figure class="highlight ruby"><figcaption><span>books_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span></span></span><br><span class="line">  <span class="variable">@book</span> = <span class="constant">Book</span>.new(book_params)</span><br><span class="line"></span><br><span class="line">  respond_to <span class="keyword">do</span> |format|</span><br><span class="line">    <span class="keyword">if</span> <span class="variable">@book</span>.save</span><br><span class="line">      format.html &#123; redirect_to <span class="variable">@book</span>, <span class="symbol">notice:</span> <span class="string">'Book was successfully created.'</span> &#125;</span><br><span class="line">      format.json &#123; render <span class="symbol">action:</span> <span class="string">'show'</span>, <span class="symbol">status:</span> <span class="symbol">:created</span>, <span class="symbol">location:</span> <span class="variable">@book</span> &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      format.html &#123; render <span class="symbol">action:</span> <span class="string">'new'</span> &#125;</span><br><span class="line">      format.json &#123; render <span class="symbol">json:</span> <span class="variable">@book</span>.errors, <span class="symbol">status:</span> <span class="symbol">:unprocessable_entry</span> &#125;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>respond_toメソッドは以下のブロックでは<code>format.type</code>の形式で、対応するフォーマットtypeを列挙できる。<br>format.typeは対応したいフォーマットの数だけ記述を行う。</p>
+<h5 id="利用できるフォーマットのカスタマイズ">利用できるフォーマットのカスタマイズ</h5><p>respond_toメソッドで利用できるフォーマットは、Railsのaction_dispatch/http/mime_types.rbで定義されており、デフォルトではhtml,xml,json,rss,atom,yaml,text,js,css,csv,icsなどが定義されている。</p>
+<p>もしもこれ以外のフォーマットを利用したい場合には、<code>/config/initializers/mime_types.rb</code>であり、以下のような形式でフォーマットの登録を行う。<br><figure class="highlight ruby"><figcaption><span>mine_types.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Mime::Type</span>.register <span class="string">"text/richtext"</span>, <span class="symbol">:rtf</span></span><br><span class="line"><span class="constant">Mime::Type</span>.register_alias <span class="string">"text/html"</span>, <span class="symbol">:iphone</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+<br>
+
+<p>今回の記事はここまで。<br>次回はコントローラの後半「状態管理、フィルタ、Applicationコントローラ」について書いていきます。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/27/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
