@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>VagueLog</title>
+  <title>RoR4_AP 6章 コントローラ開発 その② 状態管理、フィルタ、Applicationコントローラ | VagueLog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="VagueLog">
-<meta property="og:url" content="http://taka-p.github.io/index.html">
+  <meta name="description" content="前回の記事では、コントローラ開発におけるリクエスト・レスポンスについて紹介しました。今回は6章の後半、状態管理・フィルタ・Applicationコントローラについて書いていきます。
+
+
+
+状態管理状態管理とは、複数のページ（アクション）間で情報を維持するための仕組みの事を指す。状態管理の必要性を理解するには、改めてHTTP(HyperTextTransfer Protocol)の制約を理解しておく">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 6章 コントローラ開発 その② 状態管理、フィルタ、Applicationコントローラ">
+<meta property="og:url" content="http://taka-p.github.io/2016/01/31/1/index.html">
 <meta property="og:site_name" content="VagueLog">
-<meta property="og:description">
+<meta property="og:description" content="前回の記事では、コントローラ開発におけるリクエスト・レスポンスについて紹介しました。今回は6章の後半、状態管理・フィルタ・Applicationコントローラについて書いていきます。
+
+
+
+状態管理状態管理とは、複数のページ（アクション）間で情報を維持するための仕組みの事を指す。状態管理の必要性を理解するには、改めてHTTP(HyperTextTransfer Protocol)の制約を理解しておく">
+<meta property="og:updated_time" content="2016-02-07T05:57:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VagueLog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="RoR4_AP 6章 コントローラ開発 その② 状態管理、フィルタ、Applicationコントローラ">
+<meta name="twitter:description" content="前回の記事では、コントローラ開発におけるリクエスト・レスポンスについて紹介しました。今回は6章の後半、状態管理・フィルタ・Applicationコントローラについて書いていきます。
+
+
+
+状態管理状態管理とは、複数のページ（アクション）間で情報を維持するための仕組みの事を指す。状態管理の必要性を理解するには、改めてHTTP(HyperTextTransfer Protocol)の制約を理解しておく">
   
     <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
   
@@ -165,9 +178,7 @@ _:(´ཀ`」 ∠):_</div>
 		</header>
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-RoR4-AP-6章-コントローラ開発-その②-状態管理、フィルタ、Applicationコントローラ" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-RoR4-AP-6章-コントローラ開発-その②-状態管理、フィルタ、Applicationコントローラ" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -176,12 +187,30 @@ _:(´ཀ`」 ∠):_</div>
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/31/1/">RoR4_AP 6章 コントローラ開発 その② 状態管理、フィルタ、Applicationコントローラ</a>
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 6章 コントローラ開発 その② 状態管理、フィルタ、Applicationコントローラ
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/01/31/1/" class="article-date">
+  	<time datetime="2016-01-31T14:01:14.000Z" itemprop="datePublished">2016-01-31</time>
+</a>
+          </div>
+        
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -482,508 +511,42 @@ _:(´ཀ`」 ∠):_</div>
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/26/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 6章 コントローラ開発 その① リクエスト情報、レスポンスの操作</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-  
-    <article id="post-RoR4-AP-6章-コントローラ開発-その①-リクエスト情報" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/26/1/">RoR4_AP 6章 コントローラ開発 その① リクエスト情報、レスポンスの操作</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今回から、6章に入っていきます。</p>
-<p>リクエスト処理の基点となるController。<br>処理過程においてModelを呼び出し、その結果をViewに引き渡す役割を持ち、リクエスト受信からレスポンス送信までを管理するRailsアプリケーションの中核となる機能です。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-      
 
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/26/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
 
 
 
-
-
-
-
-  
-    <article id="post-RoR4-AP-5章-モデル開発-その④-コールバック、マイグレーション" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/27/1/">RoR4_AP 5章 モデル開発 その④ コールバック、マイグレーション</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今回は、5章の後半「コールバック」と「マイグレーション」について触れていきます。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/27/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RoR4-AP-5章-モデル開発-その③-アソシエーションによる複数テーブルの処理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/21/1/">RoR4_AP 5章 モデル開発 その③ アソシエーションによる複数テーブルの処理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今回は、5章の後半「アソシエーション」について触れていきます。<br>アソシエーション（関連）とは、テーブル間のリレーションシップをモデル上の関係として操作できるようにする仕組みの事で、関連を利用する事で、複数テーブルにまたがるデータ操作もより直感的に利用できるようになります。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/21/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RoR4-AP-5章-モデル開発-その②-レコード操作・検証機能" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/07/1/">RoR4_AP 5章 モデル開発 その② レコード操作・検証機能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>5章の前半として、前回は「SELECT命令に関わるデータ操作」について紹介しました。<br>この記事では、その他の「レコードの登録/更新/削除」を書いていきます。</p>
-<p>また、ボリューム的な兼ね合いで「検証機能」まで書いていこうと思います。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/07/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RoR4-AP5章-モデル開発-その①-データ取得関連のメソッド" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/31/1/">RoR4_AP 5章 モデル開発 その① データ取得関連のメソッド</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>5章の前半では、主にActiveRecodeの解説を行っていて、データへのアクセスやバリデーションなどについて触れています。<br>後半では、マイグレーションやデータの投入方法の詳細について触れています。</p>
-<p>この記事では、データを取得する際のメソッド群について書いていきます。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/31/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RoR4-AP-4章-ビュー開発②-その他のビューヘルパー" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/27/1/">RoR4_AP 4章 ビュー開発③ -  その他のビューヘルパー</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>4章ビュー開発のラスト、残りのビューヘルパーとrailsにおけるレイアウト管理について書いていきます。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/27/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RoR4-AP4-4章-ビュー開発①-文字列-数値関連のビューヘルパー" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/18/1/">RoR4_AP 4章 ビュー開発② - 文字列/数値関連のビューヘルパー</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>4章ビュー開発の続き、文字列/数値関連のビューヘルパーについて書いていきます。</p>
-<p>文字列/数値加工系メソッドのため、前回の「フォーム関連のビューヘルパー」に比べ、他のフレームワークにも共通する要素が多く、楽しく読み進められた気がします。</p>
-<p>今の仕事ではSmartyを使っていますが、文字列/数値加工系のヘルパーを良く利用するため、Railsでのアプリ開発においても利用機会は頻出するものだと思っています。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/18/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RubyonRails4アプリケーションプログラミング4章-ビュー開発" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/17/1/">RoR4_AP 4章 ビュー開発① - フォーム関連のビューヘルパー</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>4章を読み終えたので、要点をまとめていきます。<br>4章では、1~3章で学んだ全体像の内、Viewに焦点を当てた内容で、ここからはひたすらメソッド・ヘルパーの説明を行っていて、リファレンス的に使う方が向いているかも。</p>
-<p>この記事書いてる最中も、もしかして僕はRailsメソッドリファレンスを作っているんじゃなかろか。。<br>という不安に駆られた。<del>チョベリバ</del></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/17/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RubyonRails4アプリケーションプログラミング-3章" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/11/1/">RoR4_AP 3章 Scaffolding機能によるRails開発の基礎</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>3章を読み終えたので、要点をまとめていきます。<br>3章ではscaffoldingという機能で、アプリケーションの雛形コードを生成して、Railsにおける基本的なCRUD(Create-Read-Update-Delete)機能を解説していくという内容でした。</p>
-<p>なお、scaffolding機能は以下のような局面で役立つ模様。</p>
-<blockquote>
-<ul>
-<li>まずは動作するアプリケーションを作成したい</li>
-<li>マスターメンテナンスなど凝ったレイアウトを要求されないページを大量に作成したい</li>
-<li>Railsによる基本的なCRUD実装を理解したい</li>
-</ul>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/11/1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -1007,8 +570,8 @@ _:(´ཀ`」 ∠):_</div>
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
