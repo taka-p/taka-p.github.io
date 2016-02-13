@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 7章 ルーティング RESTfulインターフェイスとは、RESTfulインターフェイスのカスタマイズ、非RESTfulなルート定義 | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今回はルーティング編について書いていきます。ボリュームが少ないため、1記事に収まりそう。
+
+
+
+RESTfulインタフェースとはRESTfulなインターフェイスとは、RESTの特徴を備えたルートの事を指す。RESTの世界では、ネットワーク上のコンテンツ（リソース）を全て一意なURLで表現する。これらのURLに対して、HTTPメソッドのGET(取得)、POST(作成)、PATCH(更新)、DELET">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 7章 ルーティング RESTfulインターフェイスとは、RESTfulインターフェイスのカスタマイズ、非RESTfulなルート定義">
+<meta property="og:url" content="http://taka-p.github.io/2016/02/07/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="今回はルーティング編について書いていきます。ボリュームが少ないため、1記事に収まりそう。
+
+
+
+RESTfulインタフェースとはRESTfulなインターフェイスとは、RESTの特徴を備えたルートの事を指す。RESTの世界では、ネットワーク上のコンテンツ（リソース）を全て一意なURLで表現する。これらのURLに対して、HTTPメソッドのGET(取得)、POST(作成)、PATCH(更新)、DELET">
+<meta property="og:updated_time" content="2016-02-10T13:04:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 7章 ルーティング RESTfulインターフェイスとは、RESTfulインターフェイスのカスタマイズ、非RESTfulなルート定義">
+<meta name="twitter:description" content="今回はルーティング編について書いていきます。ボリュームが少ないため、1記事に収まりそう。
+
+
+
+RESTfulインタフェースとはRESTfulなインターフェイスとは、RESTの特徴を備えたルートの事を指す。RESTの世界では、ネットワーク上のコンテンツ（リソース）を全て一意なURLで表現する。これらのURLに対して、HTTPメソッドのGET(取得)、POST(作成)、PATCH(更新)、DELET">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RubyonRailsを勉強したお"><span class="toc-text">RubyonRailsを勉強したお</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#なまけた要因の分析"><span class="toc-text">なまけた要因の分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今後の行動指針"><span class="toc-text">今後の行動指針</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最後に"><span class="toc-text">最後に</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP-7章-ルーティング-RESTfulインターフェイスとは、RESTfulインターフェイスのカスタマイズ、非RESTfulなルート定義" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 7章 ルーティング RESTfulインターフェイスとは、RESTfulインターフェイスのカスタマイズ、非RESTfulなルート定義
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/02/07/1/" class="article-date">
+  	<time datetime="2016-02-07T06:00:28.000Z" itemprop="datePublished">2016-02-07</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今回はルーティング編について書いていきます。<br>ボリュームが少ないため、1記事に収まりそう。</p>
+
+<br>
+
+<h2 id="RESTfulインタフェースとは">RESTfulインタフェースとは</h2><p><strong>RESTful</strong>なインターフェイスとは、RESTの特徴を備えたルートの事を指す。<br>RESTの世界では、ネットワーク上のコンテンツ（リソース）を全て一意なURLで表現する。<br>これらのURLに対して、HTTPメソッドのGET(取得)、POST(作成)、PATCH(更新)、DELETE(削除)を使ってアクセスを行う。</p>
+<p>RESTとは、なに(リソース)をどうする(HTTPメソッド)かを表現する考え方であると言える。<br>RESTfulなインターフェイスを利用する事で、より統一感があり、意味がつかみやすいURLを設計出来る。</p>
+<p>（※HTTP POST,GET,PATCH,DELETEは、それぞれCRUD-Create,Read,Update,Deleteに相当するものと考えられる）</p>
+<p>Railsでは、RESTfulなインターフェイスに沿ってルート設計するのが基本である。<br>Railsが提供する<code>form_for&#39;や</code>url_for<code>や</code>link_to`などのビューヘルパーに関しても、RESTfulなインターフェイスを前提に機能設計されているため、RESTfulなインターフェイスの方がより自然に表現できるケースが多い。</p>
+
+<br>
+
+<h3 id="RESTfulインターフェイスを定義するresourcesメソッド">RESTfulインターフェイスを定義するresourcesメソッド</h3><p>RESTfulなインターフェイスを定義するには、routes.rbでresourcesメソッドを呼び出す。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:name</span> [, ...]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>リソース名</em></p>
+</blockquote>
+<p>リソースとはCRUDの対象となるコンテンツであると考えられ、具体的にはモデルによって取得/編集する書籍情報(books)、ユーザ情報(users)、レビュー情報(reviews)などが挙げられる。</p>
+<p>下記は、ユーザ情報(users)の取得/編集を意図したルート設計の例である。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Railsbook::Application</span>.routes.draw <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:users</span></span><br><span class="line"></span><br><span class="line">  ...中略...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>この場合、下記のようなURLとアクションがマッピングされる。</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>アクション</th>
+<th>HTTPメソッド</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/users(.:format)</td>
+<td>index</td>
+<td>GET</td>
+<td>ユーザ一覧画面を生成</td>
+</tr>
+<tr>
+<td>/users/:id(.:format)</td>
+<td>show</td>
+<td>GET</td>
+<td>個別ユーザ詳細画面を生成</td>
+</tr>
+<tr>
+<td>/users/new(.:format)</td>
+<td>new</td>
+<td>GET</td>
+<td>新規ユーザ登録画面を生成</td>
+</tr>
+<tr>
+<td>/users(.:format)</td>
+<td>create</td>
+<td>POST</td>
+<td>新規ユーザ登録画面からの入力を受けて登録処理</td>
+</tr>
+<tr>
+<td>/users/:id/edit(.:format)</td>
+<td>edit</td>
+<td>GET</td>
+<td>既存ユーザ編集画面を生成</td>
+</tr>
+<tr>
+<td>/users/:id(.:format)</td>
+<td>update</td>
+<td>PATCH/PUT</td>
+<td>編集画面からの入力を受けて更新処理</td>
+</tr>
+<tr>
+<td>/users/:id(.:format)</td>
+<td>destroy</td>
+<td>DELETE</td>
+<td>一覧画面で選択されたデータを削除処理</td>
+</tr>
+</tbody>
+</table>
+<p>アクションは全て、リソース名に対応するUsersControllerコントローラに属する。<br>また、resourcesメソッドは、ビューヘルパーlink_toなどで値用できるUrlヘルパーも自動生成する。</p>
+<p>生成されるビューヘルパーxxx_pathとxxx_urlの違いは、「xxx_pathは相対パス」「xxx_urlは絶対URL」を返す点である。</p>
+
+<br>
+
+<h3 id="単一のリソースを定義するresourceメソッド">単一のリソースを定義するresourceメソッド</h3><p><code>resourcesメソッド</code>が複数ののリソースを対象としたRESTfulインターフェイスを作成するのに対して、<code>resourceメソッド</code>は単一のリソースを対象としたRESTfulインターフェースを定義できる。</p>
+<p>単一のリソースとは、アプリケーション設定のように、唯一のリソースを指す。<br>「/config/15」ではなく、「/cofig」のようなURLである。<br><figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="symbol">:name</span> [, ...]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><em>リソース名</em></p>
+</blockquote>
+<p>下記は、configリソースの登録とそれによって生成されるルート定義である。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Railsbook::Application</span>.routes.draw <span class="keyword">do</span></span><br><span class="line">  resource <span class="symbol">:config</span></span><br><span class="line"></span><br><span class="line">  ...中略...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>アクション</th>
+<th>HTTPメソッド</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/config(.:format)</td>
+<td>show</td>
+<td>GET</td>
+<td>設定情報画面を表示</td>
+</tr>
+<tr>
+<td>/config/new(.:format)</td>
+<td>new</td>
+<td>GET</td>
+<td>新規の設定登録画面を表示</td>
+</tr>
+<tr>
+<td>/config(.:format)</td>
+<td>create</td>
+<td>POST</td>
+<td>登録画面からの入力を受けて登録処理</td>
+</tr>
+<tr>
+<td>/config/edit(.:format)</td>
+<td>edit</td>
+<td>GET</td>
+<td>既存設定編集画面を表示</td>
+</tr>
+<tr>
+<td>/config(.:format)</td>
+<td>update</td>
+<td>PATCH/PUT</td>
+<td>編集画面からの入力を受けて更新処理</td>
+</tr>
+<tr>
+<td>/config(.:format)</td>
+<td>destroy</td>
+<td>DELETE</td>
+<td>指定された設定情報を削除処理</td>
+</tr>
+</tbody>
+</table>
+<p><code>resourcesメソッド</code>と比較すると、indexアクション（一覧）に対応するルートが定義されないのと、show,edit,deleteなどで:idパラメータを要求しない点が異なる。</p>
+<p>注意点としては、resourceメソッドでもConfiggsControllerコントローラ（複数形）にマッピングされるという点である。</p>
+
+<br>
+
+<h2 id="RESTfulインターフェイスのカスタマイズ">RESTfulインターフェイスのカスタマイズ</h2><p>resources/resourceメソッドの各種オプションを活用する事によって、予め決められたマッピングルールを自由にカスタマイズする事が可能になる。<br>実際のアプリケーションにおいては、標準ルールだけで機能を実現する事は難しいため、主要なオプションは理解する必要がある。</p>
+
+<br>
+
+<h3 id="ルートパラメータの制約条件constraintsオプション">ルートパラメータの制約条件constraintsオプション</h3><p>resources/resourceメソッドで自動生成されるURLには、:idという名前のルートパラメータが含まれている。<br>例えば「/users/:id(fortmat)」というルート定義の場合は、「/users/108」のようなURLで:idパラメータに108という値を渡す事が出来る。</p>
+<p>ルートパラメータには、デフォルトで任意の値を渡す事が出来るが、予め渡される値が分かっている場合は、パラメータ自体の値に制限を設けておくのが望ましい。</p>
+<p>下記は、booksリソースのidパラメータに対して「1〜2桁の数値である事」という制限を設定した例である。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Railsbook::Application</span>.routes.draw <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:books</span>, <span class="symbol">constrains:</span> &#123; <span class="symbol">id:</span> /[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;/ &#125;</span><br><span class="line"></span><br><span class="line">  ...中略...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>ルートパラメータに対する制約条件は、このようにconstrainsオプションで「パラメータ名: 正規表現パターン」の形式で指定する事ができる。</p>
+<p>この状態で「~/books/108」のようなURLでアプリケーションにアクセスした場合、idパラメータの条件は2桁であるためbooksリソースにはマッチせず、結果「採用すべきルートが見つからない」というエラーが返される。</p>
+<p>リクエストパラメータの妥当性は、モデル側でチェックするのが基本であるが、ルートで遮断してしまうことで、不正な値をより確実に遮断できる。<br>複数のリソース定義に対して、同一の制約条件を課したい場合には、ブロック形式で制約条件を記述する事も可能である。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">constrains(<span class="symbol">:id</span> /[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;/) <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:books</span></span><br><span class="line">  resources <span class="symbol">:reviews</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="より複雑な制約条件の設定-制約クラスの定義">より複雑な制約条件の設定-制約クラスの定義</h3><p>正規表現パターンだけでは表現できないより複雑な制約条件を定義したい場合、制約クラスを利用する。</p>
+<p>下記は、現在時刻によってルーティングの有効/無効を判定するTimeConstraintクラスの例である。<br><figure class="highlight ruby"><figcaption><span>TimeConstraint.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeConstraint</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">matches?</span><span class="params">(request)</span></span></span><br><span class="line">    current = <span class="constant">Time</span>.new</span><br><span class="line">    current.hour &gt;= <span class="number">9</span> &amp;&amp; current.hour &lt; <span class="number">18</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>9〜18時の間だけルーティングを有効にし、それ以外の時間帯でのアクセスを拒否している。<br>なお、TimeConstrainsクラスは/modelsディレクトリに配置する。</p>
+<p>制約クラスである事の条件は、matches?メソッドを実装していることだけであり、matches?メソッドは下記のような振る舞いを行う必要がある。</p>
+<ul>
+<li>引数としてリクエスト情報（requestオブジェクト）を受け取り</li>
+<li>戻り値としてルートを有効にすべきかどうか（true/false）を返す</li>
+</ul>
+<p>ここでは、Time.nowでシステムの現在事項を取得して、その時刻（hourメソッド）が9〜17の間である場合のみtrueを返すようにしている。</p>
+<p>TimeConstraint制約クラスの適用は下記のように行う。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reqire <span class="string">'TimeConstraint'</span></span><br><span class="line"></span><br><span class="line"><span class="constant">Railsbook::Application</span>.routes.draw <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:books</span>, <span class="symbol">constrains:</span> <span class="constant">TimeConstraint</span>.new</span><br><span class="line"></span><br><span class="line">  ...中略...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>constraintオプションに対して、制約クラスのインスタンスを渡すだけである。</p>
+
+<br>
+
+<h3 id="コントローラクラス、Urlヘルパーの名前を修正するcontrollers、asオプション">コントローラクラス、Urlヘルパーの名前を修正するcontrollers、asオプション</h3><p>resources/resourceメソッドは、デフォルトで指定されたリソース名をもとに対応するコントローラを決定し、Urlヘルパーを生成する。<br>しかし、controller/asオプションを指定する事で、マッピングすべきコントローラや生成すべきUrlヘルパーの名前を変更する事も出来る。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:users</span>, <span class="symbol">controller:</span> <span class="symbol">:members</span></span><br><span class="line"><span class="symbol">resources:</span> <span class="symbol">:reviews</span>, <span class="symbol">as:</span> <span class="symbol">:comments</span></span><br></pre></td></tr></table></figure>
+<p>本来であれば、usersリソースに対応するのはUsersControllerコントローラであるが、上記ではControllerオプションが設定されているため、MembersControllerコントローラがマッピングされる。<br>同じくreviewsリソースに対しては、本来reviews_pathやreview_pathなどのUrlヘルパーが生成されるが、上記ではasオプションを指定する事で、conmments_pathやcomments_pathのようなUrlヘルパーを生成している。</p>
+
+<br>
+
+<h3 id="RESTfulインターフェイスのアクションを無効化するonly、exceptionオプション">RESTfulインターフェイスのアクションを無効化するonly、exceptionオプション</h3><p>resources/resourceメソッドによりデフォルトで生成されるアクションの一部を無効化したい場合には、only/exceptionオプションを指定する。</p>
+<p>不要なルート定義はアプリケーションのパフォーマンスを低下させるため、必ず無効化する。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:users</span>, <span class="symbol">except:</span> [ <span class="symbol">:show</span>, <span class="symbol">:destroy</span> ]</span><br></pre></td></tr></table></figure></p>
+<p>上記は、exceptオプションで指定されたアクション以外をルート定義する、という意味になる。</p>
+<p>下記は反対にonlyオプションで指定されたアクションだけをルート定義する、という記述である。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:users</span>, <span class="symbol">only:</span> [ <span class="symbol">:index</span>, <span class="symbol">:new</span>, <span class="symbol">:create</span>, <span class="symbol">:edit</span>, <span class="symbol">:update</span> ]</span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<p>なお、new,editアクションに関連づいたURLを修正する場合は、下記のように<code>:path_names</code>オプションを指定する。<br><figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:reviews</span>, <span class="symbol">path_names:</span> &#123; <span class="symbol">new:</span> <span class="symbol">:insert</span>, <span class="symbol">edit:</span> <span class="symbol">:revise</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>これによって、「/reviews/insert」「/reviews/:id/revise」というURLから、それぞれnew/editアクションを呼び出せるようになる。</p>
+
+<br>
+
+<h3 id="階層構造を持ったリソースを表現するresourcesメソッドのネスト">階層構造を持ったリソースを表現するresourcesメソッドのネスト</h3><p>アプリケーションの中でリソース同士が親子関係にあることは良くある事である。<br>例えば、booksリソースは配下にreviewsリソースを伴う。</p>
+<p>こうした親子関係にあるリソースは、URLとしても表現できた方が直感的である。<br>Railsでは、こうした関係をresources/resourceメソッドのネストによって表現する事が可能である。<br>下記は、books/reviewsリソースの親子関係を表現する例である。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">  <span class="symbol">resources:</span> reviews</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>上記の記述によって、定義されるルートはbooksの場合「resources :books」と同様であるが、:reviewsリソースに関しては「/books/:book<em>id/reviews」のように接頭辞として`books</em><code>がそれぞれ付与される。
+※この場合の</code>:book_id<code>は</code>:id`ではない。</p>
+<p>resources/resourceメソッドのネストは理論上いくらでも可能であるが、原則として2階層までにしておくのが無難である。<br>それ以上のネストは却って分かりにくくなるため、もはや直感的ではなくなる。<br>→「/books/12/reviews/5/images/1」など</p>
+
+<br>
+
+<h3 id="リソースの「浅い」ネストを表現するshallowオプション">リソースの「浅い」ネストを表現するshallowオプション</h3><p>resources/resourceメソッドのネストはリソース同士の関係を表すには便利であるが、反面、URLが冗長になるデメリットがある。</p>
+<p>例えば、id=10の書籍に属するレビューを表すために<code>~/books/10/reviews</code>のようなURLは妥当であるが、<br>id=10の書籍に属するid=8のレビューを表すのに<code>~/books/10/reviews/8</code>と表すよりは<br><code>~/reviews/8</code>と表せた方がシンプルである。<br>(レビューのid値が書籍のidに依らず一意な場合)</p>
+<p>そこで利用できるのが<code>shallowオプション</code>である。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">  <span class="symbol">resources:</span> <span class="symbol">:reviews</span>, <span class="symbol">shallow:</span> <span class="keyword">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p><code>shallowオプション</code>によって、:idパラメータ（レビューのid値）を受け取らないindex/new/createアクションでのみ、:book_idパラメータが付与され、それ以外のアクションではネストされない（浅い）URLが生成される。<br>（showアクションのURL例<code>/reviews/:id</code>）</p>
+<p>また、scopeメソッドとshallowオプションを併用する事で、「浅い」URLにプレフィックスを付与する事も出来る。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scope <span class="symbol">shallow_path:</span> <span class="symbol">:b</span> <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">    resources <span class="symbol">:reviews</span>, <span class="symbol">shallow:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>（showアクションのURL例<code>b/reviews/:id</code>）</p>
+
+<br>
+
+<h3 id="ルート定義を再利用可能にするconcernメソッド、concernsオプション">ルート定義を再利用可能にするconcernメソッド、concernsオプション</h3><p>concernメソッドを利用する事で、複数のルート定義で共通する内容を切り出す事が出来る。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">concern <span class="symbol">:name</span> <span class="keyword">do</span></span><br><span class="line">  definition</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>name: 定義名、definition: リソース定義</em></p>
+</blockquote>
+<p>例えば、次のルート定義はブロック配下が重複しているため、concernメソッドで分離すべきである。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:reviews</span> <span class="keyword">do</span></span><br><span class="line">  get <span class="symbol">:unapproval</span>, <span class="symbol">on:</span> <span class="symbol">:collection</span></span><br><span class="line">  get <span class="symbol">:draft</span>, <span class="symbol">on:</span> <span class="symbol">:member</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">resources <span class="symbol">:users</span> <span class="keyword">do</span></span><br><span class="line">  get <span class="symbol">:unapproval</span>, <span class="symbol">on:</span> <span class="symbol">:collection</span></span><br><span class="line">  get <span class="symbol">:draft</span>, <span class="symbol">on:</span> <span class="symbol">:member</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>↓<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">concern <span class="symbol">:additional</span>, <span class="symbol">on:</span> <span class="symbol">:collection</span></span><br><span class="line">  get <span class="symbol">:unapproval</span>, <span class="symbol">on:</span> <span class="symbol">:collection</span></span><br><span class="line">  get <span class="symbol">:draft</span>, <span class="symbol">on:</span> <span class="symbol">:member</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">resources <span class="symbol">:reviews</span>, <span class="symbol">concerns:</span> <span class="symbol">:additional</span></span><br><span class="line">resources <span class="symbol">:users</span>, <span class="symbol">concerns:</span> <span class="symbol">:additional</span></span><br></pre></td></tr></table></figure></p>
+<p>上記では、重複したルート定義を:additionalという名前で定義して、resourcesメソッドにおいてconcernsオプションで頻用している。</p>
+
+<br>
+
+<h2 id="非RESTfulなルートの定義">非RESTfulなルートの定義</h2><p>RailsではRESTfulインターフェイスが基本だが、必ずしもRESTの思想に沿うような状況ばかりではない。<br>そのような場合は、必ずしもREDTfulインターフェイスを適用するのではなく、よりシンプルな非RESRfulなルートの利用を検討するべきである。</p>
+
+<br>
+
+<h3 id="非RESTfulルートの定義matchメソッド">非RESTfulルートの定義matchメソッド</h3><p>非RESTfulなルートを定義するには、matchメソッドを利用する。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">match pattern ,<span class="symbol">via:</span> verb [,opts]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>pattern: URLパターン、verb: 許可するHTTPメソッド(複数指定も可)、opts: 動作オプション</em></p>
+</blockquote>
+<p>まずは、matchメソッドの最も汎用的なパターンである。<br><figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">match <span class="string">':controller(/:action(/:id))'</span>, via [ <span class="symbol">:get</span>, <span class="symbol">:post</span>, <span class="symbol">:patch</span> ]</span><br></pre></td></tr></table></figure></p>
+<p>↓<br><code>GET|POST|PATCH /:controller(/:action(/:id))(.:format) :controller#action</code></p>
+<p>上記は、下記のようなURLにマッチする。</p>
+<ul>
+<li>/books</li>
+<li>/hello/list</li>
+<li>/blog/details/20160204</li>
+<li>/blog/details/20160204.json</li>
+</ul>
+<p>()の部分は省略可能であるため、必須なのは「:controller」だけである。<br>なお、このような自由にアクションを呼び出せてしまう記述を「ワイルドコントローラ」と呼び、思わぬアクションで呼び出せてしまうことから、脆弱性の原因となるため、本番環境での利用には適さない。</p>
+<p><code>viaオプション</code>では、ルートを許可するHTTPメソッドを指定する。<br>Rails3では任意オプションであったが、Rails4から必須となっている。</p>
+<h3 id="ルートへのマッピングを定義するrootメソッド">ルートへのマッピングを定義するrootメソッド</h3><p>ルートに対して設定するには、rootメソッドを利用する。(ex. <code>http://www.example.com/</code>)<br><strong>rootメソッドはroutes.rbの末尾に記述するのが基本である</strong></p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root(opts)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>opts: 動作オプション</em></p>
+</blockquote>
+<p>例えば、ルートへのアクセス時にbooks#indexアクションにアクセスさせたい場合には、下記のように記述する。<br>toオプションはディスパッチ先（コントローラ#アクション名）を表す。</p>
+<figure class="highlight ruby"><figcaption><span>routes.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...前略...</span><br><span class="line"></span><br><span class="line">  root <span class="symbol">to:</span> <span class="string">'books#index'</span></span><br></pre></td></tr></table></figure>
+<p>この状態で<code>http://localhost:3000</code>にアクセスすると、books#indexアクションの結果が表示されることが確認できる。</p>
+<p><strong>ルートの優先順位</strong><br>routes.rbでルートを追加する際の記述位置は重要である。<br>ルートの優先順位は記述の順序通りになるため、汎用的な「:controller(:/action(:id)(.format)」のようなルートは出来るだけ最後に記述するべきである。<br>同じ理由から、rootメソッドはroutes.rbの末尾で定義するようにする。</p>
+
+<br>
+<br>
+
+<p>ここまでで、ルーティング編は終了です。<br>次回は、「8章 テスト」について書いていく。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/10/1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RoR4_AP 8章 テスト
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/31/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 6章 コントローラ開発 その② 状態管理、フィルタ、Applicationコントローラ</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

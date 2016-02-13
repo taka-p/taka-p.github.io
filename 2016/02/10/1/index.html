@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 8章 テスト | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今回はテスト編について書いていきます。これまた前回のルーティングに続いて、1記事に収まりそう。
+
+
+
+テストとはRailsでは、下記のようなテストをサポートしている。
+
+
+
+テスト名
+概要
+
+
+
+
+Unitテスト
+モデルやビューヘルパー単体の動作をチェック
+
+
+Functionalテスト
+コントローラ/テンプレートの呼び出し結果をチェック
+
+
+Integrationテスト
+複数のコントローラに跨が">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 8章 テスト">
+<meta property="og:url" content="http://taka-p.github.io/2016/02/10/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="今回はテスト編について書いていきます。これまた前回のルーティングに続いて、1記事に収まりそう。
+
+
+
+テストとはRailsでは、下記のようなテストをサポートしている。
+
+
+
+テスト名
+概要
+
+
+
+
+Unitテスト
+モデルやビューヘルパー単体の動作をチェック
+
+
+Functionalテスト
+コントローラ/テンプレートの呼び出し結果をチェック
+
+
+Integrationテスト
+複数のコントローラに跨が">
+<meta property="og:updated_time" content="2016-02-13T09:56:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 8章 テスト">
+<meta name="twitter:description" content="今回はテスト編について書いていきます。これまた前回のルーティングに続いて、1記事に収まりそう。
+
+
+
+テストとはRailsでは、下記のようなテストをサポートしている。
+
+
+
+テスト名
+概要
+
+
+
+
+Unitテスト
+モデルやビューヘルパー単体の動作をチェック
+
+
+Functionalテスト
+コントローラ/テンプレートの呼び出し結果をチェック
+
+
+Integrationテスト
+複数のコントローラに跨が">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RubyonRailsを勉強したお"><span class="toc-text">RubyonRailsを勉強したお</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#なまけた要因の分析"><span class="toc-text">なまけた要因の分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今後の行動指針"><span class="toc-text">今後の行動指針</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最後に"><span class="toc-text">最後に</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP-8章-テスト" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 8章 テスト
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/02/10/1/" class="article-date">
+  	<time datetime="2016-02-10T13:05:26.000Z" itemprop="datePublished">2016-02-10</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今回はテスト編について書いていきます。<br>これまた前回のルーティングに続いて、1記事に収まりそう。</p>
+
+<br>
+
+<h2 id="テストとは">テストとは</h2><p>Railsでは、下記のようなテストをサポートしている。</p>
+<table>
+<thead>
+<tr>
+<th>テスト名</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unitテスト</td>
+<td>モデルやビューヘルパー単体の動作をチェック</td>
+</tr>
+<tr>
+<td>Functionalテスト</td>
+<td>コントローラ/テンプレートの呼び出し結果をチェック</td>
+</tr>
+<tr>
+<td>Integrationテスト</td>
+<td>複数のコントローラに跨がるユーザの実際の操作に沿った挙動の正否をチェック</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<h3 id="テストの準備">テストの準備</h3><p>Railsでテストを行う際はデータベースとテストデータの準備が必要である。</p>
+<h4 id="テストデータベースの構築">テストデータベースの構築</h4><p>データベースを構築する際は、下記のようなRakeコマンドを利用する。</p>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rake db:test:clone</td>
+<td>RAILS_ENVオプションで指定されたデータベースからスキーマ情報schema.rbを生成し、その内容に基づいてテストデータベースを構築</td>
+</tr>
+<tr>
+<td>rake db:test:clone_structure</td>
+<td>開発環境のデータベースから.sqlファイルを生成し、それに基づいてテストデータベースを作成</td>
+</tr>
+<tr>
+<td>rake test:prepare</td>
+<td>未実行のマイグレーションが無い事を確認&amp; db:test:loadを実行</td>
+</tr>
+<tr>
+<td>rake db:test:load</td>
+<td>現在のschema.rbからテストデータベースを再作成</td>
+</tr>
+<tr>
+<td>rake db:test:purge</td>
+<td>テストデータベースを破棄</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight"><figcaption><span>コマンドライン</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62; rake db:migrate&#10;&#62; rake db:test:load</span><br></pre></td></tr></table></figure>
+<p>上記では、<code>rake db:migrate</code>コマンドで未実行のマイグレーションを実行して、schema.rbの情報を更新した上で、<code>rake db:test:load</code>コマンドでschema.rbに基づいてテストデータベースを構築している。<br>（開発データベースと同じ構造のテストデータベースを構築）</p>
+<p><code>rails dbconsole test</code>コマンドで、testデータベースにアクセスして、<code>.table</code>でテーブル構造が確認できる。<br>なお、テストデータベースを破棄したい場合には、<code>rake db:test:purge</code>コマンドを実行する。</p>
+
+<br>
+
+<h4 id="テストデータを準備する">テストデータを準備する</h4><p>Railsでテストデータを準備するのは、フィクスチャ(fixture)の役割である。<br><code>test/fixture</code>ディレクトリに下記のようなファイルが生成されている。<br>(この書籍の場合)</p>
+<p>authors.yml、authors_books.yml、books.ymlなど</p>
+<p>Railsのテストでは、フィクスチャはテストスクリプトの実行タイミングで自動的に展開されるため、データそのものを用意する以上の操作は必要ない。</p>
+
+<br>
+
+<h3 id="Unitテスト">Unitテスト</h3><p><strong>Unitテスト(ユニットテスト、単体テスト)</strong>とは、アプリケーションを構成するライブラリ（主にモデル）が正しく動作するかをチェックするためのテストである。<br>Railsで行うテストの中でも基本となるテストである。</p>
+<h4 id="Unitテストの基本">Unitテストの基本</h4><figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test name <span class="keyword">do</span></span><br><span class="line">  assertion</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>name: テスト名、assertion: テストコード</em></p>
+</blockquote>
+<p>引数nameには空白が混在しても良い。<br>なお、nameはテストスクリプトの中で一意と成東に命名する必要がある。</p>
+<figure class="highlight ruby"><figcaption><span>books_test.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'test_helper'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookTest</span> <span class="inheritance">&lt; <span class="parent">ActiveSupport::TestCase</span></span></span></span><br><span class="line">  test <span class="string">"book save"</span> <span class="keyword">do</span></span><br><span class="line">    book = <span class="constant">Book</span>.new(&#123;</span><br><span class="line">      <span class="symbol">isbn:</span> <span class="string">'978-4-7741-4466-X'</span>,</span><br><span class="line">      <span class="symbol">title:</span> <span class="string">'Ruby on Rails本格入門'</span></span><br><span class="line"></span><br><span class="line">      ...中略...</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">    assert book.save, <span class="string">'Succeed to save'</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>テストとして実行するコードは、testメソッドのブロックとして記述を行い、<code>Assertionメソッド</code>で処理の結果を確認する。<br><code>Assertionメソッド</code>とは、結果のチェックを行うメソッドの総称であり、Railsでは様々なAssertionメソッドを提供している。</p>
+<p>上記では、<code>assertメソッド</code>を利用して、第一引数の<code>book.save</code>が成功した際にtrueを返し、テストが成功したものと見なしている。</p>
+
+<mark>他のAssertionメソッドについては、後日追記する。</mark>
+
+<p>テストを実行する際は、<code>rake test:model</code>コマンドを用いる。<br>特定のテストのみ実行したい場合は、<code>TESTオプション</code>でテストスクリプトが記述されたファイル名を指定する。</p>
+<figure class="highlight"><figcaption><span>コマンドライン</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62; rake test:model TEST=&#34;test/models/book_test.rb&#34;</span><br></pre></td></tr></table></figure>
+<p>なお、テストメソッドが複数存在するな場合には、実行順序は記述順になるとは限らないため、実行順序に依存しないテストメソッドを書くことが重要である。</p>
+
+<br>
+
+<h3 id="Functionalテスト">Functionalテスト</h3><p><strong>Functionalテスト（機能テスト）</strong>とは、コントローラアクションの動作やテンプレートの出力をチェックするためのテストである。<br>Functionalテストでは、ブラウザによるHTTPリクエストを擬似的に作成する事で、アクションメソッドを実行して、<br>HTTPステータスやテンプレート変数、あるいは最終的な出力の構造までを確認することが出来る。<br>また、ルート定義のチェックも範疇である。</p>
+<h4 id="Functionalテストの基本">Functionalテストの基本</h4><p>下記はFunctionalテストの例である。<br><figure class="highlight ruby"><figcaption><span>hello_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'test_helper'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloControllerTest</span> <span class="inheritance">&lt; <span class="parent">ActionController::TestCase</span></span></span></span><br><span class="line">  test <span class="string">"list action"</span> <span class="keyword">do</span></span><br><span class="line">    get <span class="symbol">:list</span></span><br><span class="line">    assert_equal <span class="number">10</span>, assigns(<span class="symbol">:books</span>).length, <span class="string">'found rows is wrong.'</span></span><br><span class="line">    assert_response <span class="symbol">:success</span>, <span class="string">'list action failed'</span></span><br><span class="line">    assert_template <span class="string">'hello/list'</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>上記で利用されているメソッドについて、下記に説明してく。</p>
+
+<br>
+
+<p><strong>getメソッドでリクエストを生成する</strong></p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get(action [,params [settion [,flash]]])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>action: 実行するアクション、params: 実行時に渡すパラメータ<br>session: 実行時に利用するセッション情報、flash: 実行時に使用するフラッシュ情報</em></p>
+</blockquote>
+<p>引数は下記のように、ハッシュ形式で渡す必要がある。<br><code>get :show, { id: 108 }</code></p>
+<p>なお、post/put/patch/delete/headメソッドも用意されている。</p>
+
+<br>
+
+<p><strong>Functionalテストで利用できる予約変数</strong><br>Functionalテストでは、get/postなどのメソッドを実行した後、下記のような予約変数にアクセスできるようになる。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>分類</th>
+      <th>変数名</th>
+      <th>概要</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">オブジェクト</td>
+      <td>@controller</td>
+      <td>リクエストを処理したコントローラクラス</td>
+    </tr>
+    <tr>
+      <td>@request</td>
+      <td>リクエストオブジェクト</td>
+    </tr>
+    <tr>
+      <td>@response</td>
+      <td>レスポンスオブジェクト</td>
+    </tr>
+    <tr>
+      <td rowspan="4">ハッシュ</td>
+      <td>assigns(:key)、assigns['key']</td>
+      <td>ビューで利用できるテンプレート変数</td>
+    </tr>
+    <tr>
+      <td>cookies[:key]</td>
+      <td>クッキー情報</td>
+    </tr>
+    <tr>
+      <td>flash[:key]</td>
+      <td>フラッシュ情報</td>
+    </tr>
+    <tr>
+      <td>session[:key]</td>
+      <td>セッション情報</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>アクションメソッド内で生成された情報には、これらの変数を介してアクセスを行う必要がある。</p>
+
+<br>
+
+<p><strong>Functionalテストで利用できるassert_xxxメソッド</strong><br>Functionalテストでは、前項のUnitテストで示したAssertionメソッドに加えて、下記のようなメソッドも利用できる。</p>
+
+<mark>Functionalテストで利用できるAssertionメソッドについては、後日追記する。</mark>
+
+
+<br>
+
+<h3 id="Integrationテスト">Integrationテスト</h3><p><strong>Integrationテスト</strong>は、統合テストとも呼ばれ、複数のコントローラを跨がってユーザの実際の操作を追跡するような用途で利用する。</p>
+<p>例えば、ログインページの例を想定する。<br>アクセス制限が掛かったhello/viewアクションにアクセスするには、下記の手続きが必要である。</p>
+<ul>
+<li>hello#viewアクションにアクセス</li>
+<li>未認証のため、login#indexアクション（ログインページ）にリダイレクト</li>
+<li>ログインページユーザ名/パスワードを入力の上、認証処理</li>
+<li>login#authアクションで認証出来た場合、hello#viewアクションにリダイレクト</li>
+</ul>
+<p>Integrationテストを利用する事で、このような多段階プロセスを追跡し、それぞれのステップが正しく動作しているかをチェックする事が出来る。</p>
+<p>下記に、Integrationテストの手順を記してく。</p>
+<h4 id="テストスクリプトの作成">テストスクリプトの作成</h4><p>Unitテストはモデル作成時、Functionalテストはコントローラ作成時に、併せて自動生成されたが、Integrationテストは自らrails generateコマンドを利用して生成する必要がある。</p>
+<figure class="highlight ruby"><figcaption><span>コマンドライン</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; rails generate integration_test admin_login</span><br><span class="line"></span><br><span class="line">      invoke test_unit</span><br><span class="line">      create  test/integration/admin_login_test.rb</span><br></pre></td></tr></table></figure>
+<p>テストadmin_loginを作成すると、末尾に「_test」を付与したadmin_login_test.rbが生成される。<br>これが、Integrationテストのスケルトンとなる。</p>
+<h4 id="テストスクリプトを記述する">テストスクリプトを記述する</h4><p>上記で生成したテストスクリプトに、冒頭で述べたログインの挙動を確認するための<code>login test</code>テストを追加していく。</p>
+
+<mark>Integrationテストの用例については、後日追記する。</mark>
+
+<p>内容としては、Unitテスト・Functionalテストで利用できるメソッドを利用して記述を行っているが、着目点として<code>follow_redirect!</code>を利用している点が挙げられる。</p>
+<p><code>follow_redirect!</code>メソッドは直前のリダイレクトを追跡して、リクエスト処理を行うという機能を持つ。<br>これによって、未認証の場合にログインページにリダイレクト、というような処理を擬似的に再現している。</p>
+<p><strong>リダイレクトの自動追跡</strong><br><code>follow_redirect!メソッド</code>でリダイレクト追跡するのではなく、リクエスト時にまとめてリダイレクトまで追跡するには、<code>post_via_redirectメソッド</code>を利用する。<br>(postの他にget/put/patch/deleteが利用できる)</p>
+<p>例えば、/login/authアクションへのポストからリダイレクト先のテストを<code>post_via_redirectメソッド</code>で表すと、下記のようになる。</p>
+<figure class="highlight ruby"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">post_via_redirect <span class="string">'/login/auth'</span>, &#123;</span><br><span class="line"> <span class="symbol">username:</span> <span class="string">'yyamada'</span>,</span><br><span class="line">  <span class="symbol">password:</span> <span class="string">'12345'</span>, <span class="symbol">referer:</span> <span class="string">'/hello/view'</span></span><br><span class="line">&#125;</span><br><span class="line">assert_response <span class="symbol">:success</span></span><br></pre></td></tr></table></figure>
+<h4 id="テストを実行する">テストを実行する</h4><p>Integrationテストを実行するには、rake test:integrationコマンドを利用する。</p>
+<figure class="highlight"><figcaption><span>コマンドライン</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62; rake test:integration TEST=&#34;test/integration/admiin_login_test.rb&#34;</span><br></pre></td></tr></table></figure>
+<p>なお、Rails3では、/testディレクトリ構造とコマンドが「テスト種別」で分かれていたが、Rails4から「テスト対象」によってディレクトリ・コマンドを振り分ける構成に変更されている。<br>これによって、テストを配置する先が明確になっている。</p>
+<p><strong>Rails4における/testディレクトリの構成</strong></p>
+<ul>
+<li>/test<ul>
+<li>/models</li>
+<li>/helpers</li>
+<li>/controllers</li>
+<li>/mailers</li>
+<li>/integrations</li>
+<li>/fixtures</li>
+</ul>
+</li>
+</ul>
+
+<br>
+<br>
+
+<p>ここまでで、テストについては終了です。</p>
+
+<mark>後日追記します</mark>
+
+<p>を多用していますが、まだテストについて考慮できるレベルに達していないためパスします</p>
+
+<mark>_:(´ཀ`」 ∠):_</mark>
+
+<p>次回は「第9章 クライアントサイド開発」について書いていきます。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/13/1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          いまさら2015年の振り返り
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/07/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 7章 ルーティング RESTfulインターフェイスとは、RESTfulインターフェイスのカスタマイズ、非RESTfulなルート定義</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
