@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 9章 クライアントサイド開発 | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="この章に関しては本業のため(ｷﾘｯ)、Rails特有のものだけ抜粋しようと思います。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 9章 クライアントサイド開発">
+<meta property="og:url" content="http://taka-p.github.io/2016/02/13/2/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="この章に関しては本業のため(ｷﾘｯ)、Rails特有のものだけ抜粋しようと思います。">
+<meta property="og:updated_time" content="2016-02-17T15:11:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 9章 クライアントサイド開発">
+<meta name="twitter:description" content="この章に関しては本業のため(ｷﾘｯ)、Rails特有のものだけ抜粋しようと思います。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript、スタイルシートのインポート"><span class="toc-text">Javascript、スタイルシートのインポート</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#マニフェストの基本"><span class="toc-text">マニフェストの基本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AssetPipeline"><span class="toc-text">AssetPipeline</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AssetPipelineの仕組み"><span class="toc-text">AssetPipelineの仕組み</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#実行環境による挙動の違い"><span class="toc-text">実行環境による挙動の違い</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ajax開発"><span class="toc-text">Ajax開発</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax対応のハイパーリンクを生成するlink_toメソッド"><span class="toc-text">Ajax対応のハイパーリンクを生成するlink_toメソッド</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新コンテンツの生成を部分テンプレートに任せる"><span class="toc-text">更新コンテンツの生成を部分テンプレートに任せる</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax通信でJSONデータを利用する"><span class="toc-text">Ajax通信でJSONデータを利用する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax呼び出しの際に進捗メッセージを表示する"><span class="toc-text">Ajax呼び出しの際に進捗メッセージを表示する</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Turbolinks"><span class="toc-text">Turbolinks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Turbolinkの仕組み"><span class="toc-text">Turbolinkの仕組み</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Turbolinksの落とし穴"><span class="toc-text">Turbolinksの落とし穴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Turbolinkを無効にする"><span class="toc-text">Turbolinkを無効にする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#リンク単位でTurbolinksを無効にする"><span class="toc-text">リンク単位でTurbolinksを無効にする</span></a></li></ol></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP-9章-クライアントサイド開発" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 9章 クライアントサイド開発
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/02/13/2/" class="article-date">
+  	<time datetime="2016-02-13T12:49:35.000Z" itemprop="datePublished">2016-02-13</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>この章に関しては本業のため(ｷﾘｯ)、Rails特有のものだけ抜粋しようと思います。</p>
+<a id="more"></a>
+<h2 id="Javascript、スタイルシートのインポート">Javascript、スタイルシートのインポート</h2><p>まずは、Javascript/スタイルシートなどのアセットをインポートする方法である。<br>Rails4では、アセットを読み込むために<code>Sprockets</code>というライブラリを利用するのが基本である。<br><code>Sprockets</code>では、予め用意されたリスト（<strong>マニフェスト</strong>）をもとに、アセットを読み込む。</p>
+<p>なお、アセット-AssetとはJavascript/スタイルシート/画像など、アプリケーションで扱うリソース一式の総称である。</p>
+
+<br>
+
+<h3 id="マニフェストの基本">マニフェストの基本</h3><p><strong>マニフェストを定義する</strong><br>Sprocketsを利用するには、マニフェストの定義が必要である。<br>下記に、デフォルトで用意されているマニフェスト<code>application.js</code>、<code>application.css</code>を引用した例を示す。</p>
+<figure class="highlight javascript"><figcaption><span>application.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...前略...</span><br><span class="line"></span><br><span class="line"><span class="comment">//= require jquery</span></span><br><span class="line"><span class="comment">//= require jquery_ujs</span></span><br><span class="line"><span class="comment">//= require turbolinks</span></span><br><span class="line"><span class="comment">//= require_tree .</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><figcaption><span>application.css</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">...中略...</span><br><span class="line"> *= require_self</span><br><span class="line"> *= require_tree .</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure>
+<p>マニフェスト定義はコメントはいかに<code>=ディレクティブ 引数</code>の形式で表すのが基本である。<br>Sprocketsで利用できるディレクティブを下記にまとめる。</p>
+<table>
+<thead>
+<tr>
+<th>ディレクティブ</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reqire path</td>
+<td>指定されたファイルpathをインクルード。同じファイルをreqireしても一度しか読み込まない</td>
+</tr>
+<tr>
+<td>include path</td>
+<td>指定されたファイルpathをインクルード。同じファイルをincludeしたら何度でもその内容を読み込む</td>
+</tr>
+<tr>
+<td>reqire_directory path</td>
+<td>指定されたフォルダpathの内容をアルファベット順にをインクルード</td>
+</tr>
+<tr>
+<td>reqire_tree path</td>
+<td>指定されたフォルダpathを再起的にインクルード</td>
+</tr>
+<tr>
+<td>reqire_self</td>
+<td>現在のファイルの内容を、他のreqire/includeの前に挿入</td>
+</tr>
+</tbody>
+</table>
+<p>なお、<code>reqire_tree .</code>は「可憐とフォルダは以下のアセットを読み込む」という宣言になる。</p>
+<p><strong>標準ライブラリの在処</strong><br>jquery.js、jquery_ujs.js、turbolinksなどのライブラリはgemの中に配置されている。<br>jquery系   : jquery-rais<br>turbolinks : turbolinks</p>
+<p><strong>マニフェスト経由でJavascript/スタイルシートをインクルードする</strong><br>先ほど準備されたマニフェストをもとに、Javascript/スタイルシートを取り込むのは<code>javascript_include_tag</code>、<code>stylesheet_links</code>メソッドの役割である。</p>
+<figure class="highlight ruby"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript_include_tag(src [,opts])</span><br><span class="line">stylesheet_links(src [,opts])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>srcマニフェストのファイル名(拡張子を除く)、opts:動作オプション</em></p>
+</blockquote>
+<figure class="highlight erb"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>hoge<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">  </span>&lt;%=<span class="ruby"> stylesheet_links <span class="string">"application"</span>, <span class="symbol">media:</span> <span class="string">"all"</span>, data-turbolinks-track =&gt; <span class="keyword">true</span> </span>%&gt;<span class="xml"></span><br><span class="line">  </span>&lt;%=<span class="ruby"> javascript_include_tag <span class="string">"application"</span>, data-turbolinks-track =&gt; <span class="keyword">true</span> </span>%&gt;<span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="AssetPipeline">AssetPipeline</h2><p><strong>Asset Pipeline</strong>とは、Sprocketsによって提供される仕組みで、Javascript/スタイルシート/画像などのアセットをまとめて管理して、より効率的に返す機能を提供する。</p>
+<h3 id="AssetPipelineの仕組み">AssetPipelineの仕組み</h3><p>具体的には下記のような処理を段階的に行う仕組みである。</p>
+<ul>
+<li>メタ言語のコンパイル</li>
+<li>concat（結合）</li>
+<li>minifi/uglify（圧縮）</li>
+<li>ダイジェストの付与（キャッシュ防止のため、ファイルの末尾に付与するクエリ情報）</li>
+</ul>
+
+<br>
+
+<h3 id="実行環境による挙動の違い">実行環境による挙動の違い</h3><p>上記で挙げた処理は、develop環境/production環境で挙動が異なる。<br>produciton環境ではコンパイル以外の処理は全て実行されるが、develop環境では逆にコンパイルのみ行われる。<br>そのため、production環境においては、事前にプリコンパイルを行ってからデプロイする必要がある。</p>
+<p>このような挙動の制御は<code>config/environments/</code>配下にあるファイルを編集する事によって変更可能である。<br>下記は変更を行う際に編集する、Asset Pipelineにおける主なパラメータである。<br>なお、デフォルト値はdevelopment,productionの形式で示す。</p>
+<table>
+<thead>
+<tr>
+<th>パラメータ</th>
+<th>概要</th>
+<th>デフォルト値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>config.assets.prefix</td>
+<td>アセットパスのプレフィックス</td>
+<td>/assets , /assets</td>
+</tr>
+<tr>
+<td>config.assets.debug</td>
+<td>デバッグを有効にするか（結合しない）</td>
+<td>true , false</td>
+</tr>
+<tr>
+<td>config.assets.compile</td>
+<td>自動コンパイル機能を有効にするか</td>
+<td>true , false</td>
+</tr>
+<tr>
+<td>config.assets.digest</td>
+<td>ダイジェスト付与を有効にするか</td>
+<td>false , true</td>
+</tr>
+<tr>
+<td>config.assets.js_compressor</td>
+<td>jsの圧縮ライブラリ</td>
+<td>nil , :uglifier</td>
+</tr>
+<tr>
+<td>config.assets.css_compressor</td>
+<td>cssの圧縮ライブラリ</td>
+<td>nil , :sass</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<h2 id="Ajax開発">Ajax開発</h2><p>RailsはAjax機能に標準で対応しており、ごく定型的な手順でAjax対応アプリケーションの実装が可能になっている。</p>
+<h3 id="Ajax対応のハイパーリンクを生成するlink_toメソッド">Ajax対応のハイパーリンクを生成するlink_toメソッド</h3><p>Railsでは、<code>link_to</code>/<code>form_tag</code>/<code>form_for</code>などのビューヘルパーがAjax通信のための機能を提供している。</p>
+<p><strong>Ajax通信に対応したテンプレートを作成する</strong><br>まず、現在時刻を非同期通信するためのテンプレートを準備する。</p>
+<figure class="highlight erb"><figcaption><span>ajax/index.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span>現在時刻: </span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"result"</span>&gt;</span>現在時刻: </span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span>&lt;%=<span class="ruby"> link_to <span class="string">'更新'</span>, &#123; <span class="symbol">action:</span> <span class="symbol">:upanel</span> &#125;, <span class="symbol">remote:</span> <span class="keyword">true</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>link_toメソッドをAjax対応させるには、<code>remoteオプション</code>をtrueに設定する必要がある。<br>この設定によって、ハイパーリンクをクリックした際、リンク先が非同期で呼び出されるようになる。</p>
+
+<br>
+
+<p><strong>非同期呼び出し時の処理を記述する</strong><br>Ajax対応のリンクがクリックされた際、Railsではリンク先にアクションから結果をJavascriptとして受け取り、その結果を利用して画面の更新処理を行う。<br>Ajax呼び出しではテンプレートとして、<code>.html.erb</code>ではなく<code>.js.erb</code>が呼び出される。<br><code>.js.erb</code>には、アクションでの処理結果に基づいてページを更新するためのJavascriptを記述する。<br>あとは、このJavascriptが呼び出し元ページで実行される事でページが更新される。</p>
+<figure class="highlight ruby"><figcaption><span>ajax_controller.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upanel</span></span></span><br><span class="line">  <span class="variable">@time</span> = <span class="constant">Time</span>.now.to_s</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><figcaption><span>ajax/upanel.js.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(</span><span class="string">'#result'</span>).html(</span><br><span class="line">  <span class="string">'&lt;%= escape_javascript('</span>現在時刻<span class="symbol">:</span> <span class="string">' + @time) %&gt;'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>escape_javascriptはビューヘルパーの一種で、「’」「”」や改行文字などをエスケープ処理する。<br>エスケープ処理を正しく行わなかった場合、JavascriptのエラーやCRSF脆弱性の原因にもなるため、注意が必要。</p>
+<p>以上のコードで、「更新」をクリックした際に、下部の現在時刻だけが非同期に更新される処理の完成である。</p>
+
+<br>
+
+<h3 id="更新コンテンツの生成を部分テンプレートに任せる">更新コンテンツの生成を部分テンプレートに任せる</h3><p>前節で紹介したHTML構造は単純なコードであったが、HTMLが複雑な構造になる場合は<code>.js.erb</code>にはページ更新のコードのみを記述して、コンテンツ本体は外部化するのが望ましい。</p>
+<figure class="highlight ruby"><figcaption><span>ajax/upanel.js.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(</span><span class="string">'#result'</span>).html(</span><br><span class="line">  <span class="string">"&lt;%= escape_javascript(render: 'ajax_result') %&gt;"</span><span class="string">"</span><br><span class="line">);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight erb"><figcaption><span>ajax/_ajax_result.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span>現在時刻: </span>&lt;%=<span class="ruby"> <span class="variable">@time</span> </span>%&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>これによって、レイアウト部分は全て<code>.html.erb</code>に集約されるため、Javascriptに複雑なコードを記述する必要がなくなる。</p>
+
+<br>
+
+<h3 id="Ajax通信でJSONデータを利用する">Ajax通信でJSONデータを利用する</h3><p>前節までは、Javascriptの内容は単純なものであったが、結果を細かく制御したい場合は、クライアントサイドで行う方が適している。</p>
+<p>下記にサーバーサイドではJSON形式のデータだけを送出して、結果データの整形はクライアントサイドで行う例を示す。</p>
+<p>この場合、テンプレートは<code>.js.erb</code>では無く<code>.json.jbuilder</code>を準備する。<br><figure class="highlight ruby"><figcaption><span>ajax/result.json.jbuilder</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.array!(<span class="variable">@books</span>) <span class="keyword">do</span> |book|</span><br><span class="line">  json.extract! book, <span class="symbol">:isbn</span>, <span class="symbol">:title</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>ここでは<code>extract!メソッド</code>を利用して、必要なattributeのみを抽出している。</p>
+<p>次に、上記で生成されたJSONを処理するJavascriptである。<br><figure class="highlight coffee"><figcaption><span>ajax.js.coffee</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">init -&gt;</span><br><span class="line">  <span class="comment"># Ajax通信に成功したタイミングで実行</span></span><br><span class="line">  $(<span class="string">'#ajax_form'</span>).<span class="literal">on</span> <span class="string">'ajax:success'</span>, <span class="function"><span class="params">(e, data)</span> -&gt;</span></span><br><span class="line">  <span class="comment"># &lt;ul id="result"&gt;要素の配下を空に</span></span><br><span class="line">  $(<span class="string">'result'</span>).empty()</span><br><span class="line">  <span class="comment"># 取得したデータをもとに&lt;li&gt;要素を作成</span></span><br><span class="line">  $.each.data, <span class="function">-&gt;</span></span><br><span class="line">    $(<span class="string">'#result'</span>).append(</span><br><span class="line">      $(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>).append(</span><br><span class="line">        $(<span class="string">'&lt;a&gt;&lt;/a&gt;'</span>).attr(<span class="string">'href'</span>, <span class="string">'http://www.hoge.com/'</span> + <span class="property">@isbn</span>).append(<span class="property">@title</span>)</span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">  <span class="comment"># ページロード時にinit関数を実行</span></span><br><span class="line">  $(<span class="built_in">document</span>).ready(init)</span><br><span class="line">  $(<span class="built_in">document</span>).<span class="literal">on</span>(<span class="string">'page:change'</span>, init)</span><br></pre></td></tr></table></figure></p>
+<p>なお、init関数を準備して、ready,page:changeイベントに登録する流れはRails4のイディオムである。</p>
+
+<br>
+
+<h3 id="Ajax呼び出しの際に進捗メッセージを表示する">Ajax呼び出しの際に進捗メッセージを表示する</h3><p>時間が掛かるAjax処理の場合は、エンドユーザが何度もボタンやリンクをクリックしてしまわないよう、通信中である事が分かるように「通信中…」などのメッセージや画像を表示するのが一般的である。</p>
+<figure class="highlight javascript"><figcaption><span>ajax.js.coffee</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">init = -&gt;</span><br><span class="line">  $(<span class="built_in">document</span>).ajaxStart -&gt;</span><br><span class="line">    $(<span class="string">'#progress'</span>).html <span class="string">'通信中...'</span></span><br><span class="line">  .ajaxComplete -&gt;</span><br><span class="line">    $(<span class="string">'#progress'</span>).html <span class="string">''</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="Turbolinks">Turbolinks</h2><p><strong>Turbolinks</strong>はRails4から採用された仕組みで「ページ遷移の際、タイトルと本文だけを置き換える」処理を行ってくれる。<br>Turbolinkを利用する事で、ページ全体を更新する手間が省け、特にJavascriptやスタイルシートの再取得/解析が不要になるため、ページ遷移時のオーバーヘッドを軽減できる。</p>
+<p>なお、TurbolinksはAssetPipeline・Ajaxを前提とした仕組みである。</p>
+<h3 id="Turbolinkの仕組み">Turbolinkの仕組み</h3><p>ページ遷移時に、Turbolinkが通常のリンクをいったん引き取って、内部的には非同期リクエストを発生させる。<br>その性質上、ページ毎に参照するアセットが異なるケースでは、Turbolinkは意味をなさない。<br>全てのJavascriptとスタイルシートが一つにまとめられている事を前提とした仕組みである。</p>
+<p>以前のページの内容は最大10ページまでがキャッシュされる。</p>
+
+<br>
+
+<h3 id="Turbolinksの落とし穴">Turbolinksの落とし穴</h3><p><strong>ready、onloadイベントが発生しない</strong><br>Turbolinkでは「ページを書き換えない」という性質上、ページ遷移に際してjQuery.ready、window.onloadイベントが発生しない。</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ -&gt;</span><br><span class="line">  ...ページロード時の処理...</span><br></pre></td></tr></table></figure>
+<p>上記のようなコードはTurbolinks環境において、以下のように書き換える必要がある。<br><figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ -&gt;</span><br><span class="line">  <span class="comment"># アプリケーションを開いた初回に実行すべき処理</span></span><br><span class="line"><span class="function"></span><br><span class="line">  <span class="title">init</span> = -&gt;</span></span><br><span class="line">    <span class="comment"># ページ読み込み時に実行すべき処理</span></span><br><span class="line"></span><br><span class="line">$(<span class="built_in">document</span>).ready(init)</span><br><span class="line">$(<span class="built_in">document</span>).<span class="literal">on</span>(<span class="string">'page:change'</span>, init)</span><br></pre></td></tr></table></figure></p>
+<p><code>page:change</code>はTurbolink固有のイベントで、Turbolinksによるページ遷移のタイミングで発生する。</p>
+
+<br>
+
+<h3 id="Turbolinkを無効にする">Turbolinkを無効にする</h3><p>総括すると、Turbolinkは高速化のための強力な可能性を秘めている反面、従来のJavascript開発へのインパクトも小さくない。<br>(※他ライブラリにも影響を及ぼす可能背がある)<br>デメリットがメリットを上回る場合には、潔くTurbolinksを使わないという選択肢もある。</p>
+<p>下記にTurbolinkを無効化する手順を記す。<br><strong>GemfileからTurbolinksをコメントアウト</strong><br>デフォルトで登録されているTurbolinksを無効化する。<br><figure class="highlight ruby"><figcaption><span>Gemfile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gem 'turbolinks'</span></span><br></pre></td></tr></table></figure></p>
+<p>編集後は<code>bundle install</code>を実行する。</p>
+<p><strong>レイアウトファイルからTurbolinksの設定を除去</strong><br>レイアウトファイルから、アセットに対してマーキングされたTurbolinks追跡のための属性を除去する。<br><figure class="highlight erb"><figcaption><span>layouts/application.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span>&lt;%=<span class="ruby"> stylesheet_link_tag <span class="string">"application"</span>, <span class="symbol">media:</span> <span class="string">"all"</span>, <span class="string">"data-turbolinks-track"</span> =&gt; <span class="keyword">true</span> </span>%&gt;<span class="xml"></span><br><span class="line"></span>&lt;%=<span class="ruby"> javascript_include_tag <span class="string">"application"</span>, <span class="string">"data-turbolinks-track"</span> =&gt; <span class="keyword">true</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<p>上記の<code>&quot;data-turbolinks-track&quot; =&gt; true</code>を削除する。</p>
+<p><strong>マニフェストからTurbolinksを除去する</strong><br><figure class="highlight javascript"><figcaption><span>assets/javascript/application.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//= reqire jquery</span></span><br><span class="line"><span class="comment">//= reqire jquery_ujs</span></span><br><span class="line"><span class="comment">//= reqire turbolinks</span></span><br><span class="line"><span class="comment">//= reqire_tree .</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+
+<h3 id="リンク単位でTurbolinksを無効にする">リンク単位でTurbolinksを無効にする</h3><p>アプリケーション算対でTurbolinksを無効にはせず、特定のページだけで無効にしたい場合には、リンク単位で無効にする方法が存在する。</p>
+<p>これには、アンカータグに対して<code>data-no-turbolinks</code>属性を付与するだけである。<br><code>&lt;a href=&quot;/books/1&quot; data-no-turbolink&gt;参照&lt;/a&gt;&lt;br /&gt;</code></p>
+<p><code>link_toメソッド</code>を利用している場合は下記のようにも記述できる。<br><code>&lt;%= link_to &#39;参照&#39;, book_path(1), data: { &quot;no-turbolink&quot; =&gt; true } %&gt;</code></p>
+<p>また、特定の領域でまとめて無効化する場合は下記のように記述する。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-no-turbolik</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"/books/1"</span>&gt;</span>参照<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+<br>
+<br>
+
+<p>ここまでで、クライアントサイド開発編は終了。<br>coffee.scriptやsassの基本説明もありましたが、割愛しています。</p>
+<p>turnolinksについては、否定的な記事を多く見かけるため、あまり活用されていなそうな雰囲気。<br>大規模開発になると、アセットを分割したりするため効率が悪い、あるいはより複雑な処理をJSフレームワークを用いて行うようなケースでは、邪魔者になるのかな..?</p>
+<p>次回は最終章、「10章 Railsの高度な機能」について書いていきます。<br>ちなみに、この書籍が終わったら、実践的になにか作る+Javascriptの復習を行っていこうと考えています。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/13/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">いまさら2015年の振り返り</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
