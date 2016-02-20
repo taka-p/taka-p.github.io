@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RoR4_AP 10章 Railsの高度な機能 | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ついにこの書籍も最終章。最終章では、とりわけ重要なキャッシュ機能についてのみ書いていきます。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoR4_AP 10章 Railsの高度な機能">
+<meta property="og:url" content="http://taka-p.github.io/2016/02/18/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="ついにこの書籍も最終章。最終章では、とりわけ重要なキャッシュ機能についてのみ書いていきます。">
+<meta property="og:updated_time" content="2016-02-20T11:39:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RoR4_AP 10章 Railsの高度な機能">
+<meta name="twitter:description" content="ついにこの書籍も最終章。最終章では、とりわけ重要なキャッシュ機能についてのみ書いていきます。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+プールで泳ぐの好きです。<br>
+お勉強友達がホスｲ..<br>
+_:(´ཀ`」 ∠):_</div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#キャッシュ機能の実装"><span class="toc-text">キャッシュ機能の実装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#キャッシュを利用する設定"><span class="toc-text">キャッシュを利用する設定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#フラグメントキャッシュの基本"><span class="toc-text">フラグメントキャッシュの基本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#キャッシュキーの生成規則"><span class="toc-text">キャッシュキーの生成規則</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#フラグメントキャッシュを複数ページで共有する"><span class="toc-text">フラグメントキャッシュを複数ページで共有する</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#モデルをもとにキャッシュキーを決める"><span class="toc-text">モデルをもとにキャッシュキーを決める</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#キャッシュの格納先を変更する"><span class="toc-text">キャッシュの格納先を変更する</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RoR4-AP-10章-Railsの高度な機能" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RoR4_AP 10章 Railsの高度な機能
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-on-rails/">Ruby on rails</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/02/18/1/" class="article-date">
+  	<time datetime="2016-02-17T15:39:49.000Z" itemprop="datePublished">2016-02-18</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ついにこの書籍も最終章。<br>最終章では、とりわけ重要なキャッシュ機能についてのみ書いていきます。</p>
+<a id="more"></a>
+<h2 id="キャッシュ機能の実装">キャッシュ機能の実装</h2><p>ページ遷移の際、元となるデータソースがほとんど変更されない場合は、再びそのようなデータをリクエストせずにキャッシュして保存しておく事で、パフォーマンスを向上させる事が出来る。</p>
+<p>Railsでは、このようなキャッシュのための仕組みとして<strong>フラグメントキャッシュ</strong>という機能を提供している。<br>フラグメントキャッシュとは、その名の通りページの断片（フラグメント）をキャッシュするための仕組みである。<br>フラグメントキャッシュは下記のような理由から、動的なページのキャッシュに適している。</p>
+<ul>
+<li>ページの中に、キャッシュしたい静的な領域（例えば記憶コンテンツ）と、キャッシュで着ない動的に生成すべき領域（例えば現在時刻など）が混在している場合にも、適切なキャッシュポリシーを設定できる。</li>
+<li>書籍情報の配下にレビュー情報が属するような階層的なページ構造でも効率よくキャッシュを管理できる。</li>
+</ul>
+<h3 id="キャッシュを利用する設定">キャッシュを利用する設定</h3><p>Railsの開発環境では、デフォルトでキャッシュが無効化されている。<br>そのため、下記のような設定を行う必要がある。<br><figure class="highlight ruby"><figcaption><span>development.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.action_controller.perform_caching = <span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="フラグメントキャッシュの基本">フラグメントキャッシュの基本</h3><figure class="highlight erb"><figcaption><span>構文</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span>&lt;%<span class="ruby"> cache([key]) <span class="keyword">do</span> </span>%&gt;<span class="xml"></span><br><span class="line">  content</span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>key: キャッシュキー、content: キャッシュするコンテンツ</em></p>
+</blockquote>
+<p>具体的な例を見ていく。<br>下記は、テンプレートを部分的にキャッシュする例である。<br><figure class="highlight erb"><figcaption><span>extra/f_cache.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">現在時刻（キャッシュなし） :</span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> cache <span class="keyword">do</span> </span>%&gt;<span class="xml"></span><br><span class="line">  現在時刻（キャッシュあり） :</span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<p>このような状態で画面更新を行った場合、上記の値は更新されるが下記の値はキャッシュされているため更新されない。</p>
+<h4 id="キャッシュキーの生成規則">キャッシュキーの生成規則</h4><p>cacheメソッドでは、デフォルトで現在のURLをもとにキャッシュキーを生成する。<br>そのため、前項の例では<code>extra/f_cache/5345sddf67dsfg67s5f7g</code>がキーとなる。</p>
+<p>しかし、一つのページに複数のフラグメントキャッシュが存在する場合、このままではキャッシュキーが重複してしまう。<br>このように重複する可能性がある場合は、cacheメソッドの引数keyにキャッシュキーを明示的に指定する事が必要となる。</p>
+<figure class="highlight erb"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span>&lt;%<span class="ruby"> cache(<span class="symbol">suffix:</span> <span class="string">'footer'</span>) <span class="keyword">do</span> </span>%&gt;<span class="xml"></span><br><span class="line">  現在時刻（キャッシュあり）: </span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>このような記述を行った場合、<code>extra/f_cache?suffix=footer/9234uhfd75hd4fh345klu</code>のようなキャッシュキーが生成されるため、ページ内でのキャッシュキーが判別できるようになる。</p>
+
+<br>
+
+<h4 id="フラグメントキャッシュを複数ページで共有する">フラグメントキャッシュを複数ページで共有する</h4><p>フラグメントキャッシュは複数のページ間でも共有できる。<br>この仕組みを利用するためには、cacheヘルパーの引数として、共通の文字列を渡す必要がある。<br>また、キャッシュすべき領域は部分テンプレートとして切り出しておく。</p>
+<figure class="highlight erb"><figcaption><span>extra/share1.html.erb、share2.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">現在時刻（キャッシュなし）: </span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line"></span>&lt;%=<span class="ruby"> render <span class="string">'share'</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight erb"><figcaption><span>extra/_share.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span>&lt;%<span class="ruby"> cache(<span class="string">'GlobalTime'</span>) <span class="keyword">do</span> </span>%&gt;<span class="xml"></span><br><span class="line">  現在時刻（キャッシュあり）: </span>&lt;%=<span class="ruby"> <span class="constant">Time</span>.now </span>%&gt;<span class="xml"><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line"></span>&lt;%<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>この状態で、share1とshare2のテンプレートを描画したとき、現在時刻（キャッシュあり）の表示が双方等しい事が確認できる。</p>
+
+<br>
+
+<h4 id="モデルをもとにキャッシュキーを決める">モデルをもとにキャッシュキーを決める</h4><p>cacheヘルパーの引数key（キャッシュキー）には、Active Recordのモデルを指定する事も出来る。</p>
+<figure class="highlight erb"><figcaption><span>extra/model.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> <span class="variable">@book</span> = <span class="constant">Book</span>.find(<span class="number">1</span>) </span>%&gt;<span class="xml"></span><br><span class="line">  </span>&lt;%=<span class="ruby"> render <span class="variable">@book</span> </span>%&gt;<span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight erb"><figcaption><span>books/_book.html.erb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span></span><br><span class="line">  </span>&lt;%<span class="ruby"> cache(book) <span class="keyword">do</span> </span>%&gt;<span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://www.foo.com/books/</span></span></span>&lt;%=<span class="ruby"> book.isbn </span>%&gt;<span class="xml"><span class="tag"><span class="value">/logo.jpg"</span>&gt;</span></span><br><span class="line">    </span>&lt;%<span class="ruby"> book.title </span>%&gt;<span class="xml"><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line">    </span>&lt;%<span class="ruby"> book.publish </span>%&gt;<span class="xml"></span><br><span class="line">  </span>&lt;%=<span class="ruby"> <span class="keyword">end</span> </span>%&gt;<span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>上記の_books.html.erbにおいては、Cacheヘルパーの引数としてBookモデルを渡している。<br>この場合<code>books/1-2016234234123492418234/wqre34rnu2jnff</code>のようなキーが生成される。<br>これは「モデル/id - updated_at列の値/ハッシュ値」の形式である。</p>
+<p>このようなキーを利用する事で、モデルに更新が発生した場合にも変更を検知して、キャッシュをリフレッシュする事ができる。</p>
+<h4 id="キャッシュの格納先を変更する">キャッシュの格納先を変更する</h4><p>キャッシュデータは、ファイルシステムだけでなく、メモリやMemcachedなどに保存する事も可能である。<br>キャッシュの保存先を変更する場合、設定ファイルを下記のように編集する。</p>
+<p>キャッシュをメモリに保存する例である。<br><figure class="highlight ruby"><figcaption><span>development.rb</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Railbook::Application</span>.configure <span class="keyword">do</span></span><br><span class="line">  config.cache_store = <span class="symbol">:memory_store</span>, &#123; <span class="symbol">size:</span> <span class="number">16</span>.megabytes &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>キャッシュは以下のような保存先を利用できる。</p>
+<table>
+<thead>
+<tr>
+<th>設定値</th>
+<th>保存先</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:memory_store, { size: mb }</td>
+<td>メモリ（mbは最大サイズ。デフォルトは32.megabytes）</td>
+</tr>
+<tr>
+<td>:file_store.path</td>
+<td>ファイルシステム（pathは保存先ディレクトリ）</td>
+</tr>
+<tr>
+<td>:mem_cache_store.host, …</td>
+<td>Memcachedサーバ（hostはホスト名。複数指定可）</td>
+</tr>
+<tr>
+<td>:null_store</td>
+<td>キャッシュしない（開発用のダミーキャッシュストア）</td>
+</tr>
+</tbody>
+</table>
+<p>なお、デフォルトの保存先は:file_storeであるが、ディスク上限までキャッシュを累積するため、古くなったキャッシュは定期的に削除する事が重要である。</p>
+
+<br>
+<br>
+
+<p>今回も比較的短かったですが、ここまでで終わりです。</p>
+<p>そして、やっとこの写経スタイルも完了です。。<br>モチベーションを保つのが大変でした_:(´ཀ`」 ∠):_<br>しかしながら、リファレンスとして後から読み返せる資料が出来たので、一つ成果かと考えています。</p>
+<p>これからは、実際にいくつかアプリケーションを作りながら、Javascriptの復習も行っていきたいと考えています。<br>また、こちらに投稿する記事についても、実践の中でつまづいた事などが中心になっていくかと思います。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/13/2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RoR4_AP 9章 クライアントサイド開発</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
