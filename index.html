@@ -189,121 +189,6 @@ _:(´ཀ`」 ∠):_</div>
         <p>Javascriptの復習はブログに書かない予定でしたが、やっぱり書きます٩( ‘ω’ )و</p>
 <p>復習の最初に読む書籍として「Javascript本格入門」を選択しました。<br>さすがにRails関係の書籍に比べると、さらさら読み進められますが、普段つまづく・疑問に思っていたような箇所が解決する説明がちらほら見つかります。</p>
 <p>戒めの意味を兼ねて、再びつまづきそうな部分のみブログに綴りたいと思います。</p>
-<h1 id="基本構文編">基本構文編</h1><p>基本構文編では、下記の項目について書いていました。</p>
-<ul>
-<li>Javascriptの基本的な記法</li>
-<li>変数</li>
-<li>データ型</li>
-<li>演算子</li>
-<li>制御命令</li>
-</ul>
-<p>いくつか今までの疑問が解消した箇所がありましたので、下記に紹介。</p>
-<h2 id="識別子の命名規則">識別子の命名規則</h2><p>ここで紹介されていた、「一般的な識別子の記法の使い分け」についてです。</p>
-<p><strong>識別子の主な記法</strong></p>
-<table>
-<thead>
-<tr>
-<th>記法</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>camelCase記法</td>
-<td>lastName</td>
-</tr>
-<tr>
-<td>Pascal記法</td>
-<td>LastName</td>
-</tr>
-<tr>
-<td>アンダースコア記法</td>
-<td>last_name</td>
-</tr>
-</tbody>
-</table>
-<p>一般的には、下記のような使い分けをする。</p>
-<ul>
-<li>変数名や関数名 - camelCase記法</li>
-<li>クラス（コンストラクタ）名 - Pascal記法</li>
-</ul>
-<p>あまり意識していませんでしたが、後日改めて<a href="http://cou929.nu/data/google_javascript_style_guide/" target="_blank" rel="external">Google Javascript Style Guide</a>などで、世間一般的な命名や記述方法を学ぼうと思いました。</p>
-<p>余談ですが、先日Javascript好きの知人に、自分が書いたコードをレビューしてもらったところ、変数・関数名の命名にアンダースコア記法を用いていたため「<mark>○○カスですね(^q^)</mark>」という、ありがたいお言葉を頂戴仕りました。<br>その知人にJavascriptの教えを請おうと思い、コンタクトを取りましたが、今の状態だと立ち直れなくなる可能性があったため、ますは復習している次第です。</p>
-<p>いまも頭をよぎる「<mark>○○カスですね(^q^)</mark>」</p>
-
-<br>
-
-<h2 id="数値リテラルnumber">数値リテラルnumber</h2><p>いまのところ使った事がありませんが、数値リテラル-整数リテラルに属する「8/16進数リテラル」なるものの存在を知りました。</p>
-<p>リテラルの階層構造は以下。</p>
-<ul>
-<li>数値リテラル<ul>
-<li>整数リテラル<ul>
-<li>10進数リテラル - 10</li>
-<li>8進数リテラル - 012</li>
-<li>16進数リテラル - 0xA</li>
-</ul>
-</li>
-<li>浮動小数点リテラル - 10.0</li>
-</ul>
-</li>
-</ul>
-<p>なお、8進数は先頭に<code>0</code>、16進数は<code>0x</code>を付与する事で表現できる。<br>これによって、等価比較演算子<code>==</code>では、上記のリテラルもよしなに解釈してしまうため、<code>&quot;0x10&quot; == 16</code>のような条件式もtrueが返ってくる。</p>
-
-<br>
-
-<h2 id="前置演算と後置演算">前置演算と後置演算</h2><p>インクリメント/デクリメント演算子を記述する箇所によって、結果が変わる原因がうやむやでしたが、前置演算と後置演算の存在が原因でした。</p>
-<p>オペランド（演算対象）に対して、前方に演算子を配置した場合は<code>前方置換</code>、逆に後方に演算子を配置した場合は<code>後方置換</code>として解釈されるらしいです。<br><figure class="highlight javascript"><figcaption><span>前方置換と後方置換の結果</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前方置換 - xに+1してからyに代入</span></span><br><span class="line">y = ++x;</span><br><span class="line"><span class="keyword">return</span> x; <span class="comment">// -&gt; 3</span></span><br><span class="line"><span class="keyword">return</span> y; <span class="comment">// -&gt; 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 後方置換 - yに代入してからxに+1</span></span><br><span class="line">y = x++;</span><br><span class="line"><span class="keyword">return</span> x; <span class="comment">// -&gt; 3</span></span><br><span class="line"><span class="keyword">return</span> y; <span class="comment">// -&gt; 2</span></span><br></pre></td></tr></table></figure></p>
-
-<br>
-
-<h2 id="基本型と参照型による代入の違い">基本型と参照型による代入の違い</h2><p>Javasciprtのデータ型には基本型と参照型が存在して、array,objectは参照型。<br>この2種類のデータ型の挙動に違いが出るのが、代入の局面です。</p>
-<figure class="highlight javascript"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基本型の挙動</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> y = x;</span><br><span class="line">x = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">return</span> y; <span class="comment">// -&gt; 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参照型の挙動</span></span><br><span class="line"><span class="keyword">var</span> arr1 =[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 =ary1;</span><br><span class="line">ary[<span class="number">0</span>] = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">return</span> arr2; <span class="comment">// -&gt; 4,1,2</span></span><br></pre></td></tr></table></figure>
-<p>上記のような差異が発生する原因は、基本型は<code>y = x</code>の時にメモリ領域を新たに確保しているが、参照型は<code>arr2 = arr1</code>の時に、arr1のデータが格納される「メモリアドレス」をarr2にコピーしているからです。</p>
-<p>ちなみに、このような値の渡し方を「参照渡し」と呼ぶらしいです。</p>
-
-<br>
-
-<h2 id="論理演算子のデータ型による評価">論理演算子のデータ型による評価</h2><p>Javascriptの場合、下記のような値はfalseと見なし、下記以外の値をtrueと見なします。<br><code>空文字(&quot;&quot;)、数値の0、NaN(Not a Number)、null、undefined</code></p>
-
-<br>
-
-<h2 id="ifとswitchの使い分け">ifとswitchの使い分け</h2><p>Javascriptでは条件分岐の制御構文として<code>if</code>と<code>switch</code>を用意していますが、いまいち使い分けの境界が理解できていなかったので、この機会に明記します。</p>
-<ul>
-<li>if - 単純な条件の場合はこちら</li>
-<li>switch - 複雑な条件の場合はこちら</li>
-</ul>
-<p>ざっくりとですが、if文の場合は、処理を記述する条件ブロックの都度、条件式を記述する必要があります。<br><strong>同一の変数に対して比較を行う場合</strong>は、構文の上部にのみ条件式を定義するswitch文を利用する事で、並列の関係にある条件値をキレイに表現できます。</p>
-<figure class="highlight javascript"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// if文の場合</span></span><br><span class="line"><span class="keyword">if</span> (x === <span class="number">1</span>) &#123;</span><br><span class="line">  処理<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">elseif (x === <span class="number">2</span>) &#123;</span><br><span class="line">  処理<span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line">elseif (x === <span class="number">3</span>) &#123;</span><br><span class="line">  処理<span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  処理<span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// switch文の場合</span></span><br><span class="line"><span class="keyword">switch</span> (x) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'1'</span> :</span><br><span class="line">    処理<span class="number">1</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'2'</span> :</span><br><span class="line">    処理<span class="number">2</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'3'</span> :</span><br><span class="line">    処理<span class="number">3</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span> :</span><br><span class="line">    処理<span class="number">4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="forとwhileの使い分け">forとwhileの使い分け</h2><p>forとwhileについても、使いどころがいまいち理解できていませんでした。</p>
-<p>for文では、「初期化式、ループ継続条件式、増減式」という式を設定しますが、これらの式のいずれかが複雑になる場合はwhileを利用した方がキレイに記述できます。<br>例えば、初期化する変数が多い、といった理由が挙げられます。</p>
-<p>また、do…while文とfor…inの使いどころについても、迷いがちだったため明記します。</p>
-<ul>
-<li>do…while - 条件に関わらず、1回は処理を実行したい場合（条件式が処理ブロックの後に配置されるため）</li>
-<li>for…in - オブジェクト（連想配列、ハッシュ）のプロパティを取り出したい場合</li>
-</ul>
-<p>for…inの例のみ下記に示します。<br><figure class="highlight javascript"><figcaption><span>for...in</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">  title: <span class="string">"10日じゃ出来ないJavascript"</span>,</span><br><span class="line">  publish: <span class="string">"大動脈切造出版"</span>,</span><br><span class="line">  price: <span class="string">"100"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> book) &#123;</span><br><span class="line">  <span class="keyword">return</span> k + <span class="string">'は'</span> + book[k];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// =&gt; titleは10日じゃ出来ないJavascript</span></span><br><span class="line"><span class="comment">// =&gt; publishは大動脈切造出版</span></span><br><span class="line"><span class="comment">// =&gt; priceは100</span></span><br></pre></td></tr></table></figure></p>
-
-<br>
-
-<h2 id="例外処理try…catch…finaly">例外処理try…catch…finaly</h2><p>Javascriptにも例外処理があった事を初めて知りました_:(´ཀ`」 ∠):_</p>
-<ul>
-<li>try - 例外が発生するかもしれない処理</li>
-<li>catch (e) - 例外が発生した場合の処理</li>
-<li>finaly - 例外の有無にかかわらず実行する処理</li>
-<li>throw new Error(message) - tryにおいて、強制的に例外を発生させる</li>
-</ul>
-<p>直近で、「想定する値以外が渡ってきた場合」という処理をif文で実装していたのを思い出したため、イメージが掴み易かったです。<br><figure class="highlight javascript"><figcaption><span>用例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// if文の場合</span></span><br><span class="line"><span class="keyword">if</span> (x !== <span class="literal">null</span> ||</span><br><span class="line">    x !== <span class="literal">undefined</span> ||</span><br><span class="line">    x !== <span class="string">""</span>) &#123;</span><br><span class="line">    実行したい処理</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"エラーだお!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例外処理の場合</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  実行したい処理</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  alert(e.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>なお、finalyの使いどころはパッと浮かびませんでした…</p>
-
-<br>
-<br>
-
-<p>基本構文編は終わりです。<br>次回は、3章 組み込みオブジェクトについて書いていきます。</p>
-<p>蛇足でそろそろ、Qiitaに投稿してみようかなとも考えてましたが、承認やコミニケーションを図りたいものでは無く、知識定着のためのアウトプットは引き続きブログに書いていこうと思います。<br><del>（まさかり怖ry）</del></p>
-
       
     </div>
     
@@ -316,6 +201,10 @@ _:(´ཀ`」 ∠):_</div>
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/02/21/1/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
