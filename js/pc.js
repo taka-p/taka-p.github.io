@@ -25,7 +25,7 @@ define([], function(){
 			tags[i].className = "";
 			tags.eq(i).addClass("color"+num);
 		}
-	}
+	};
 
 	var slide = function(idx){
 		var $wrap = $(".switch-wrap");
@@ -34,7 +34,7 @@ define([], function(){
 		});
 		$(".icon-wrap").addClass("hide");
 		$(".icon-wrap").eq(idx).removeClass("hide");
-	}
+	};
 
 	var bind = function(){
 		var switchBtn = $("#myonoffswitch");
@@ -86,7 +86,7 @@ define([], function(){
 			slide(idx);
 			Tips.hide();
 		});
-	}
+	};
 
 	var throttleFunc = function(elm) {
 		var consts = {
@@ -126,14 +126,14 @@ define([], function(){
 			});
 		}
 		setInterval(checkThrottleScroll, consts.THROTTLE_TIME);
-	}
+	};
 
 	var toc_left_fixed = function() {
 		if (document.getElementById("js_toc_left") !== null) {
 			var $elm = $("#js_toc_left");
 			throttleFunc($elm);
 		}
-	}
+	};
 
 	var elmDisplayChange = function(elm) {
 		var consts = {
@@ -154,7 +154,7 @@ define([], function(){
 		}
 
 		setInterval(changeDisplay, consts.THROTTLE_TIME);
-	}
+	};
 
 	var back_to_top_func = function() {
 		if (document.getElementById("js_back_to_top") !== null) {
@@ -170,7 +170,39 @@ define([], function(){
 				$anime_elms.animate({ scrollTop: 0 }, consts.ANIMATION_DELAY, 'swing');
 			});
 		}
-	}
+	};
+
+	var toggleSlidebar = function() {
+		var closeFlg = false;
+
+		$('#js_toggle_sidebar').on('click', function(){
+			if (closeFlg) {
+				$('.left-col').show();
+				$('.mid-col').animate({
+					left: 300
+				}, 'fast');
+				$(this).animate({
+					left: 300
+				}, 'fast')
+				.find('.fa')
+				.removeClass('fa-chevron-right')
+				.addClass('fa-chevron-left');
+				closeFlg = false;
+			} else {
+				$('.left-col').hide();
+				$('.mid-col').animate({
+					left: 0
+				}, 'fast');
+				$(this).animate({
+					left: 0
+				}, 'fast')
+				.find('.fa')
+				.removeClass('fa-chevron-left')
+				.addClass('fa-chevron-right');
+				closeFlg = true;
+			}
+		});
+	};
 
 	return {
 		init: function(){
@@ -179,6 +211,7 @@ define([], function(){
 			Tips.init();
 			toc_left_fixed();
 			back_to_top_func();
+			toggleSlidebar();
 		}
-	}
+	};
 });
