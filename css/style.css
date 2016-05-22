@@ -619,11 +619,29 @@ a {
   border: 1px solid #cf5d0f;
 }
 #header .header-nav .social a.github {
-  background: url("/img/github.png") center no-repeat #afb6ca;
-  border: 1px solid #afb6ca;
+  background: url("/img/github.png") center no-repeat;
+  border: 1px solid #444;
+  -webkit-background-size: 40px;
+  -moz-background-size: 40px;
+  background-size: 40px;
+  opacity: 0.4;
+  width: 30px;
+  height: 30px;
 }
 #header .header-nav .social a.github:hover {
-  border: 1px solid #909ab6;
+  opacity: 0.6;
+  border: 1px solid #444;
+}
+#header .header-nav .social a.qiita {
+  background: url("/img/qiita.png") center no-repeat #6cc523;
+  border: 1px solid #13d405;
+  -webkit-background-size: 21px;
+  -moz-background-size: 21px;
+  background-size: 21px;
+}
+#header .header-nav .social a.qiita:hover {
+  border: 1px solid #68c31e;
+  opacity: 1;
 }
 #header .header-nav .social a.facebook {
   background: url("/img/facebook.png") center no-repeat #3b5998;
