@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>call, apply, bindの使いどころ | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="call, apply, bindなどの「thisを束縛」するメソッドの使いどころについて、いまいち使いどころが分かっていなかったので復習。
+最近、イディオムやデザインパターンなどミニマムなコードをcodepenで書いているため、そのままcodepenで掲載。（hexoにcodepenのpluginがあってtakap感激）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="call, apply, bindの使いどころ">
+<meta property="og:url" content="http://taka-p.github.io/2016/06/01/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="call, apply, bindなどの「thisを束縛」するメソッドの使いどころについて、いまいち使いどころが分かっていなかったので復習。
+最近、イディオムやデザインパターンなどミニマムなコードをcodepenで書いているため、そのままcodepenで掲載。（hexoにcodepenのpluginがあってtakap感激）">
+<meta property="og:updated_time" content="2016-06-01T15:32:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="call, apply, bindの使いどころ">
+<meta name="twitter:description" content="call, apply, bindなどの「thisを束縛」するメソッドの使いどころについて、いまいち使いどころが分かっていなかったので復習。
+最近、イディオムやデザインパターンなどミニマムなコードをcodepenで書いているため、そのままcodepenで掲載。（hexoにcodepenのpluginがあってtakap感激）">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+
+  <link rel="stylesheet" href="/css/fonts/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+								<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/ものづくり/" style="font-size: 10px;">ものづくり</a> <a href="/tags/イディオム/" style="font-size: 10px;">イディオム</a> <a href="/tags/レザークラフト/" style="font-size: 10px;">レザークラフト</a> <a href="/tags/目標/" style="font-size: 16.67px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+ゆくゆくは、地元に帰省してWebを利用した地域活性化に携わりたいです。<br>
+趣味はものづくりです<br></div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#なりすまし"><span class="toc-text">なりすまし</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#call編"><span class="toc-text">call編</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind編"><span class="toc-text">bind編</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#クラス継承"><span class="toc-text">クラス継承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#applyが効果を発揮するケース"><span class="toc-text">applyが効果を発揮するケース</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引数の配列を展開"><span class="toc-text">引数の配列を展開</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メソッドのエイリアスを作成"><span class="toc-text">メソッドのエイリアスを作成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bindのテクニック_-_引数の予約"><span class="toc-text">bindのテクニック - 引数の予約</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#処理の汎化"><span class="toc-text">処理の汎化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#argumentsオブジェクトをthisに束縛"><span class="toc-text">argumentsオブジェクトをthisに束縛</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+
+    </div>
+
+    <div id="js_toggle_sidebar" class="toggle-side-menu" style="    position: fixed;
+    top: 50%;
+    width: 25px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.21);
+    left: 300px;
+    z-index: 10;">
+    <i class="fa fa-chevron-left" style="    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -15px;"></i></div>
+
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+						<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-call-apply-bindの使いどころ" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      call, apply, bindの使いどころ
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/イディオム/">イディオム</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/06/01/1/" class="article-date">
+  	<time datetime="2016-06-01T07:35:34.000Z" itemprop="datePublished">2016-06-01</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>call, apply, bindなどの「thisを束縛」するメソッドの使いどころについて、いまいち使いどころが分かっていなかったので復習。</p>
+<p>最近、イディオムやデザインパターンなどミニマムなコードをcodepenで書いているため、そのままcodepenで掲載。<br>（<a href="https://www.npmjs.com/package/hexo-tag-codepen" target="_blank" rel="external">hexoにcodepenのplugin</a>があってtakap感激）</p>
+<a id="more"></a>
+<h2 id="なりすまし">なりすまし</h2><p>まさに「thisを束縛」する振る舞いを利用する。</p>
+<h3 id="call編">call編</h3><iframe id="cp_embed_vKYojV" src="//codepen.io/taka-p/embed/vKYojV?height=300&theme-id=0011&slug-hash=vKYojV&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ここでは、<code>girl</code>インスタンスのメソッド<code>enterToilet</code>を<code>boy</code>が借用している。<br>(スゴい文脈..!)</p>
+<h3 id="bind編">bind編</h3><iframe id="cp_embed_Eyamwp" src="//codepen.io/taka-p/embed/Eyamwp?height=300&theme-id=0011&slug-hash=Eyamwp&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ここでは、<code>Cat</code>インスタンス<code>tama</code>が<code>Human</code>インスタンス<code>steve</code>のメソッドを借用するパターン、<code>Human</code>のプロトタイプから直接メソッドを借用するパターンの2パターンを利用している。</p>
+
+<br>
+
+<h2 id="クラス継承">クラス継承</h2><p>古典的なコンストラクタ、プロトタイプ継承の方法である。<br>（ES5のObject.create、ES6のclass構文を利用しない）</p>
+<iframe id="cp_embed_XKWvYR" src="//codepen.io/taka-p/embed/XKWvYR?height=300&theme-id=0011&slug-hash=XKWvYR&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ここでは、サブクラス<code>SmartPhone</code>コンストラクタ内において、スーパクラス<code>Phone</code>を<code>call</code>メソッドで呼び出している。<br>これによって、スタティックメンバを継承。</p>
+<p>プロトタイプの継承は、サブクラスのプロトタイプに<code>new スーパクラス</code>を代入する事で可能。<br>なお、このコードではプロトタイプを利用していないため、プロトタイプの継承に意味は無い。</p>
+
+<br>
+
+<h2 id="applyが効果を発揮するケース">applyが効果を発揮するケース</h2><h3 id="引数の配列を展開">引数の配列を展開</h3><p>call, applyの唯一の違いは、applyが「第二引数以降を配列で受け取る」点である。<br>そして、applyは第二引数以降の配列をレシーバメソッド内で展開するため、<code>fn.apply(this, [x,y,z])</code>で呼び出された<code>fn</code>メソッド内からは、引数に<code>x</code>のようにアクセスが可能です。</p>
+<iframe id="cp_embed_jrOgdq" src="//codepen.io/taka-p/embed/jrOgdq?height=300&theme-id=0011&slug-hash=jrOgdq&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p><code>Math.max</code>のように、配列で受け取る事を許容しない関数などに対して、配列を渡す際に有効である。</p>
+<h3 id="メソッドのエイリアスを作成">メソッドのエイリアスを作成</h3><p>「スルーする」と呼ばれているのを見かけるが、既存メソッドの処理を拝借して新しく短い名前のメソッドを作成する場合に有効。<br>（配列を展開する振る舞いを持つapplyのみ可能）</p>
+<iframe id="cp_embed_XKJrGy" src="//codepen.io/taka-p/embed/XKJrGy?height=300&theme-id=0011&slug-hash=XKJrGy&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>よく使う<code>Array.prototype.forEach</code>や<code>document.getElementById</code>などエイリアス化したら便利そうですね。</p>
+<h2 id="bindのテクニック_-_引数の予約">bindのテクニック - 引数の予約</h2><p>そもそも、これが必要になる事態に遭遇した事はありませんが..<br>関数型言語で利用される<code>部分適用</code>というテクニックを利用して「引数を部分的に適用した関数」を作る事が出来ます。</p>
+<iframe id="cp_embed_gMbWea" src="//codepen.io/taka-p/embed/gMbWea?height=300&theme-id=0011&slug-hash=gMbWea&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ここでは、<code>Math.max</code>関数に<code>-1, -2</code>という引数を渡した関数をbindメソッドによって<code>max</code>変数に代入し、再度、maxに引数を渡して実行しています。</p>
+<p>このような手順を踏む事で「bindされたmax関数は渡された引数のうち、最低でも-1を返す」という振る舞いを持つ事が出来ます。<br>（書いていて気づきましたが、-2は必要ないっすね..）</p>
+<p>実務での使いどころは、普段、関数型言語で開発されている方に聞きましょう..</p>
+<h2 id="処理の汎化">処理の汎化</h2><p>このテクニックは、イディオムとして良く利用されているようです。<br>処理の汎化とは、特定のリソース（処理やデータ）に依存しているロジックを切り分ける事を指します。</p>
+<p>つまり、下記のように「特定リソースに依存した処理をコールバック関数に切り分けて、汎用化した処理の中からthis付きで呼び出す」事を指します。<br>（反対に、汎用化した処理をコールバックにするパターンも同様）</p>
+<iframe id="cp_embed_KMKOjg" src="//codepen.io/taka-p/embed/KMKOjg?height=300&theme-id=0011&slug-hash=KMKOjg&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>下部に汎化前のコードが記述されている。<br>元はseparatedJunkで①ゴミの分別と②配列（ゴミの集合）の走査を行っていたが、②をiterate関数に切り分けて、iterate関数内において①ゴミの分別処理をcallメソッドで呼び出してイテレートしている。</p>
+<p>汎化を行った事によって、iterate関数はゴミの分別以外の処理も関数の組み合わせによって実現出来る「汎用的なソースコード」になった。<br>（例えば、ごみを収集して配列から取り除くメソッドとか）</p>
+<h2 id="argumentsオブジェクトをthisに束縛">argumentsオブジェクトをthisに束縛</h2><p>章題について結論から述べると、インスタンスメソッド（Receiver.prototype.method）を利用する際に、call,apply,bindメソッドの第一引数にthis束縛するオブジェクトとしてargumentsオブジェクトを渡す事を意味している。</p>
+<p>argumentsと聞くと「引数群が格納された配列のようなデータ集合」をイメージするため、むしろ<code>call(this, arguments)</code>では？<br>と反射的に思うが、argumentsはの実体はオブジェクトのため、第一引数に指定した場合は、<strong>レシーバオブジェクト</strong>として振る舞うようになる。</p>
+<p>クラスメソッドの場合は<code>Math.max.apply(null, arguments)</code>のようになる。</p>
+<iframe id="cp_embed_VjYZBZ" src="//codepen.io/taka-p/embed/VjYZBZ?height=300&theme-id=0011&slug-hash=VjYZBZ&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+<br>
+
+<p>以上で終わりです。<br>最近、Qiitaにも記事を投稿していますが、<del>あまり自身の無い</del>自己解決的な記事は、引き続きこちらのブログに投稿していこうと思います&lt;(__;)&gt;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/22/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初めてのレザークラフト</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
