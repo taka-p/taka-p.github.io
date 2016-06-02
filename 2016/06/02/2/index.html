@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>続call,apply,bindの使いどころ + イテレーション系メソッド | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前回はcall, apply, bindの使いどころという事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。
+今回は、イテレーション系メソッドとcall, applyを組み合わせて「テーブル操作」を行っていきます。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="続call,apply,bindの使いどころ + イテレーション系メソッド">
+<meta property="og:url" content="http://taka-p.github.io/2016/06/02/2/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="前回はcall, apply, bindの使いどころという事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。
+今回は、イテレーション系メソッドとcall, applyを組み合わせて「テーブル操作」を行っていきます。">
+<meta property="og:updated_time" content="2016-06-02T10:58:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="続call,apply,bindの使いどころ + イテレーション系メソッド">
+<meta name="twitter:description" content="前回はcall, apply, bindの使いどころという事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。
+今回は、イテレーション系メソッドとcall, applyを組み合わせて「テーブル操作」を行っていきます。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+
+  <link rel="stylesheet" href="/css/fonts/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+								<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/Underscore-js/" style="font-size: 10px;">Underscore.js</a> <a href="/tags/apply/" style="font-size: 13.33px;">apply</a> <a href="/tags/bind/" style="font-size: 13.33px;">bind</a> <a href="/tags/call/" style="font-size: 13.33px;">call</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/lodash-js/" style="font-size: 10px;">lodash.js</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/ものづくり/" style="font-size: 10px;">ものづくり</a> <a href="/tags/イテレーター/" style="font-size: 13.33px;">イテレーター</a> <a href="/tags/イディオム/" style="font-size: 13.33px;">イディオム</a> <a href="/tags/レザークラフト/" style="font-size: 10px;">レザークラフト</a> <a href="/tags/目標/" style="font-size: 16.67px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+ゆくゆくは、地元に帰省してWebを利用した地域活性化に携わりたいです。<br>
+趣味はものづくりです<br></div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#テーブル操作"><span class="toc-text">テーブル操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数値によって色分けする"><span class="toc-text">数値によって色分けする</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件によって行を非表示にする"><span class="toc-text">条件によって行を非表示にする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件を満たすものを抽出"><span class="toc-text">条件を満たすものを抽出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebAPIからデータを取得する場合"><span class="toc-text">WebAPIからデータを取得する場合</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+
+    </div>
+
+    <div id="js_toggle_sidebar" class="toggle-side-menu" style="    position: fixed;
+    top: 50%;
+    width: 25px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.21);
+    left: 300px;
+    z-index: 10;">
+    <i class="fa fa-chevron-left" style="    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -15px;"></i></div>
+
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+						<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-続call-apply-bindの使いどころ" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      続call,apply,bindの使いどころ + イテレーション系メソッド
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apply/">apply</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bind/">bind</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/call/">call</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/イテレーター/">イテレーター</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/06/02/2/" class="article-date">
+  	<time datetime="2016-06-02T09:15:32.000Z" itemprop="datePublished">2016-06-02</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回は<a href="2016/06/01/1/">call, apply, bindの使いどころ</a>という事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。</p>
+<p>今回は、イテレーション系メソッドとcall, applyを組み合わせて「テーブル操作」を行っていきます。</p>
+<a id="more"></a>
+<h2 id="テーブル操作">テーブル操作</h2><h3 id="数値によって色分けする">数値によって色分けする</h3><p>DOM参照に関しては、ネイティブAPIのみ利用しています。<br>Resultタブから処理結果のテーブルを確認出来ます。</p>
+<iframe id="cp_embed_gMbOYg" src="//codepen.io/taka-p/embed/gMbOYg?height=600&theme-id=0011&slug-hash=gMbOYg&default-tab=js" scrolling="no" frameborder="no" height="600" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<ul>
+<li><code>Array.prototype.slice.call(tbl.rows, 1)</code>の部分で<code>tr</code>要素群の内、最初の行である項目名の行を削る</li>
+<li><code>.forEach(function(row)</code>で<code>tr</code>要素群を走査</li>
+<li>次の記述で<code>vals, nums</code>に、<code>td</code>要素群とその中の値を取り出す<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vals = <span class="built_in">Array</span>.prototype.slice.call(row.cells, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> nums = <span class="built_in">Array</span>.prototype.map.call(vals, <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Number</span>(v.textContent);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>ここでも最初の手順同様に<code>td</code>要素群から項目名の要素を削っています。</p>
+<ul>
+<li><p>ピュアな数値の配列<code>nums</code>を利用して、最大値と最小値を抽出</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> max = <span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, nums);</span><br><span class="line"><span class="keyword">var</span> min = <span class="built_in">Math</span>.min.apply(<span class="literal">null</span>, nums);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最後に<code>td</code>要素群である<code>vals</code>をforEachで走査して、最大値・最小値と等しい値を持つ要素に対して色を変更する行う</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.forEach.call(vals, <span class="function"><span class="keyword">function</span>(<span class="params">v, i</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (max == nums[i]) &#123;</span><br><span class="line">    v.style.color = <span class="string">'red'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (min == nums[i]) &#123;</span><br><span class="line">    v.style.color = <span class="string">'blue'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>基本的な手順としては、下記になります。</p>
+<ol>
+<li>必要なセル要素群を取得してDOM要素の配列を作成、そこから新たにデータ（数値）のみを取り出したピュアなデータ配列を作成</li>
+<li>データ配列を走査して、抽出ロジックを適用 -&gt; 条件に適合する値を抽出</li>
+<li>DOM要素の配列を走査して、条件に適合する値に一致するDOM要素に対して走査を行う</li>
+</ol>
+<h2 id="条件によって行を非表示にする">条件によって行を非表示にする</h2><p>お次は簡単、条件に該当した値を持つ行を非表示にする処理。</p>
+<iframe id="cp_embed_EyaxZq" src="//codepen.io/taka-p/embed/EyaxZq?height=400&theme-id=0011&slug-hash=EyaxZq&default-tab=js" scrolling="no" frameborder="no" height="400" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<ul>
+<li>先ほどと同様に<code>Array.prototype.slice.call(tbl.rows, 1)</code>の部分で、項目名の行を削る</li>
+<li>ここも同様<code>.forEach(function(row)</code>で<code>tr</code>要素群を走査</li>
+<li><p>次の記述で<code>vals</code>に、必要な<code>td</code>要素群を取り出す（項目セルを削る）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _vals = <span class="built_in">Array</span>.prototype.slice.call(row.cells, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>次の記述で条件の判定を行う（0より大きい値をもつセルはtrue）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _deleteFlg = _vals.some(<span class="function"><span class="keyword">function</span>(<span class="params">cell</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="built_in">Number</span>(cell.textContent) &lt; <span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上記でtrueが返った要素を持つ行を非表示にする</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_deleteFlg &amp;&amp; (row.style.display = <span class="string">'none'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="条件を満たすものを抽出">条件を満たすものを抽出</h2><p>最後は、条件に合致するセルを持つ行の先頭セル（項目名）を抽出するという処理です。<br>各商品行を走査して、100円より安い商品が存在する場合は、商品名を結合してコンソール出力しています。</p>
+<iframe id="cp_embed_dXPyJp" src="//codepen.io/taka-p/embed/dXPyJp?height=610&theme-id=0011&slug-hash=dXPyJp&default-tab=js" scrolling="no" frameborder="no" height="610" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<ul>
+<li><code>var ret = Array.prototype.slice.call(tbl.rows, 1)</code>の部分で不要な行を削除、処理結果を<code>ret</code>に代入（商品名の文字列）</li>
+<li><p>次の記述で100より小さい値を持つ要素を抽出<br><code>someメソッド</code>で要素の走査を行い、該当要素の判定を<code>filterメソッド</code>に受け渡して該当行の配列を作成している。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.filter(<span class="function"><span class="keyword">function</span>(<span class="params">row</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.slice.call(row.cells, <span class="number">1</span>)</span><br><span class="line">    <span class="comment">// 100より小さい場合true</span></span><br><span class="line">    .some(<span class="function"><span class="keyword">function</span>(<span class="params">cell</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (<span class="built_in">Number</span>(cell.textContent) &lt; <span class="number">100</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上記で作成された条件に該当する行の配列から、先頭セル（商品名）の値を抽出した配列を作成</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽出された行の先頭セルの値を格納した配列を返す</span></span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">row</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> row.cells[<span class="number">0</span>].textContent;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上記で得た商品名の配列内の文字列群を結合した文字列を返す<br>(最初に宣言したretに値が入る)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配列の要素を結合した文字列を返す</span></span><br><span class="line">.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, curr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> prev + <span class="string">', '</span> + curr;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>この部分に関しては、<code>.join(&#39;, &#39;)</code>の方が簡潔かと思いますが、せっかくなので<code>reduceメソッド</code>でイテレート。</p>
+<h2 id="WebAPIからデータを取得する場合">WebAPIからデータを取得する場合</h2><p>今回の記事ではWebAPIなどから、データを取得したりしないため<strong>既存のDOMから値を抽出-&gt;ロジックに適合する値を抽出-&gt;適合するDOM要素対しての操作</strong>という手順になります。</p>
+<p>要件にもよりますが、WebAPIなどからデータを得られる場合は、下記のような手順になると思います。</p>
+<ul>
+<li>APIからJSONを取得 -&gt; ロジックに適合する値を抽出 -&gt; 適合するDOM要素対しての操作</li>
+<li>APIからロジック適用後のJSONを取得 -&gt; DOM要素対しての操作</li>
+<li>APIからロジック適用後のJSONを取得 -&gt; DOM要素対しての操作 -&gt; ユーザアクション -&gt; ユーザアクション後のDOMから値を抽出 -&gt; ロジックに適合する値を抽出 -&gt; 適合するDOM要素対しての操作 -&gt; APIにpostしてデータを更新</li>
+</ul>
+<p>これについても、いつか記事にしたいと思います。</p>
+<p>以上です。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/02/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ネイティブのイテレーションメソッド</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
