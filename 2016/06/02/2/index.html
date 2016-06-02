@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="VagueLog">
 <meta property="og:description" content="前回はcall, apply, bindの使いどころという事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。
 今回は、イテレーション系メソッドとcall, applyを組み合わせて「テーブル操作」を行っていきます。">
-<meta property="og:updated_time" content="2016-06-02T10:58:21.000Z">
+<meta property="og:updated_time" content="2016-06-02T10:59:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="続call,apply,bindの使いどころ + イテレーション系メソッド">
 <meta name="twitter:description" content="前回はcall, apply, bindの使いどころという事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。
@@ -130,7 +130,7 @@
 
 	
 		<div id="js_toc_left" class="toc-left-area">
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#テーブル操作"><span class="toc-text">テーブル操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数値によって色分けする"><span class="toc-text">数値によって色分けする</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件によって行を非表示にする"><span class="toc-text">条件によって行を非表示にする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件を満たすものを抽出"><span class="toc-text">条件を満たすものを抽出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebAPIからデータを取得する場合"><span class="toc-text">WebAPIからデータを取得する場合</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数値によって色分けする"><span class="toc-text">数値によって色分けする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件によって行を非表示にする"><span class="toc-text">条件によって行を非表示にする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件を満たすものを抽出"><span class="toc-text">条件を満たすものを抽出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebAPIからデータを取得する場合"><span class="toc-text">WebAPIからデータを取得する場合</span></a></li></ol>
 		</div>
 	
 	
@@ -231,7 +231,7 @@
         <p>前回は<a href="2016/06/01/1/">call, apply, bindの使いどころ</a>という事で、call,aplly,bindの基本的な使い方やイディオムについて書きました。</p>
 <p>今回は、イテレーション系メソッドとcall, applyを組み合わせて「テーブル操作」を行っていきます。</p>
 <a id="more"></a>
-<h2 id="テーブル操作">テーブル操作</h2><h3 id="数値によって色分けする">数値によって色分けする</h3><p>DOM参照に関しては、ネイティブAPIのみ利用しています。<br>Resultタブから処理結果のテーブルを確認出来ます。</p>
+<h2 id="数値によって色分けする">数値によって色分けする</h2><p>DOM参照に関しては、ネイティブAPIのみ利用しています。<br>Resultタブから処理結果のテーブルを確認出来ます。</p>
 <iframe id="cp_embed_gMbOYg" src="//codepen.io/taka-p/embed/gMbOYg?height=600&theme-id=0011&slug-hash=gMbOYg&default-tab=js" scrolling="no" frameborder="no" height="600" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 <ul>
 <li><code>Array.prototype.slice.call(tbl.rows, 1)</code>の部分で<code>tr</code>要素群の内、最初の行である項目名の行を削る</li>
