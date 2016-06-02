@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ネイティブのイテレーションメソッド | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Rubyの学習をしていると、「javascriptの配列・オブジェクト操作メソッド」が比較的貧弱という文脈を見かけることが多くなったため、改めてイテレーション系のメソッドを復習しました。
+配列操作系の処理はUnderscore.js、lodash.jsを利用するのが定石ですが、Lodash/Underscoreは必要ない（かも）に感化され、ついでにjavascriptのビルトインメソッドも復習です">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ネイティブのイテレーションメソッド">
+<meta property="og:url" content="http://taka-p.github.io/2016/06/02/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="Rubyの学習をしていると、「javascriptの配列・オブジェクト操作メソッド」が比較的貧弱という文脈を見かけることが多くなったため、改めてイテレーション系のメソッドを復習しました。
+配列操作系の処理はUnderscore.js、lodash.jsを利用するのが定石ですが、Lodash/Underscoreは必要ない（かも）に感化され、ついでにjavascriptのビルトインメソッドも復習です">
+<meta property="og:updated_time" content="2016-06-02T08:22:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ネイティブのイテレーションメソッド">
+<meta name="twitter:description" content="Rubyの学習をしていると、「javascriptの配列・オブジェクト操作メソッド」が比較的貧弱という文脈を見かけることが多くなったため、改めてイテレーション系のメソッドを復習しました。
+配列操作系の処理はUnderscore.js、lodash.jsを利用するのが定石ですが、Lodash/Underscoreは必要ない（かも）に感化され、ついでにjavascriptのビルトインメソッドも復習です">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+
+  <link rel="stylesheet" href="/css/fonts/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+								<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/Underscore-js/" style="font-size: 10px;">Underscore.js</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/lodash-js/" style="font-size: 10px;">lodash.js</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/ものづくり/" style="font-size: 10px;">ものづくり</a> <a href="/tags/イテレーター/" style="font-size: 10px;">イテレーター</a> <a href="/tags/イディオム/" style="font-size: 13.33px;">イディオム</a> <a href="/tags/レザークラフト/" style="font-size: 10px;">レザークラフト</a> <a href="/tags/目標/" style="font-size: 16.67px;">目標</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+ゆくゆくは、地元に帰省してWebを利用した地域活性化に携わりたいです。<br>
+趣味はものづくりです<br></div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#イテレーション系"><span class="toc-text">イテレーション系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach_-__-each"><span class="toc-text">forEach - _.each</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map_-__-map"><span class="toc-text">map - _.map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#every_-__-every"><span class="toc-text">every - _.every</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#some_-__-some"><span class="toc-text">some - _.some</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce_-__-reduce"><span class="toc-text">reduce - _.reduce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduceRight_-__-reduceRIght"><span class="toc-text">reduceRight - _.reduceRIght</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filter_-__-filter"><span class="toc-text">filter - _.filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find_-__-find"><span class="toc-text">find - _.find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#findIndex_-__-findIndex"><span class="toc-text">findIndex - _.findIndex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#indexOf_-__-indexOf"><span class="toc-text">indexOf - _.indexOf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lastIndexOf_-__-lastIndexOf"><span class="toc-text">lastIndexOf - _.lastIndexOf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#includes_-__-includes"><span class="toc-text">includes - _.includes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys_-__-keys"><span class="toc-text">keys - _.keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys(obj)-length_-__-size"><span class="toc-text">keys(obj).length - _.size</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#helperメソッドの作成"><span class="toc-text">helperメソッドの作成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse_-__-reverce"><span class="toc-text">reverse - _.reverce</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#その他"><span class="toc-text">その他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#isNaN_-__-isNaN"><span class="toc-text">isNaN - _.isNaN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join_-__-join"><span class="toc-text">join - _.join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trim_-_-trim"><span class="toc-text">trim - .trim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repeat_-__-repeat"><span class="toc-text">repeat - _.repeat</span></a></li></ol></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+
+    </div>
+
+    <div id="js_toggle_sidebar" class="toggle-side-menu" style="    position: fixed;
+    top: 50%;
+    width: 25px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.21);
+    left: 300px;
+    z-index: 10;">
+    <i class="fa fa-chevron-left" style="    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -15px;"></i></div>
+
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+						<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-ネイティブのイテレーションメソッド" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ネイティブのイテレーションメソッド
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Underscore-js/">Underscore.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lodash-js/">lodash.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/イテレーター/">イテレーター</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/イディオム/">イディオム</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/06/02/1/" class="article-date">
+  	<time datetime="2016-06-01T15:36:35.000Z" itemprop="datePublished">2016-06-02</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Rubyの学習をしていると、「javascriptの配列・オブジェクト操作メソッド」が比較的貧弱という文脈を見かけることが多くなったため、改めてイテレーション系のメソッドを復習しました。</p>
+<p>配列操作系の処理はUnderscore.js、lodash.jsを利用するのが定石ですが、<a href="http://qiita.com/ossan-engineer/items/ad5313d84da82c6ac421" target="_blank" rel="external">Lodash/Underscoreは必要ない（かも）</a>に感化され、ついでにjavascriptのビルトインメソッドも復習です。<br>（環境に依存せず、パフォーマンス的にも優れていると思われる）</p>
+<p>また、イテレーションメソッド以外にもネイティブでArray,Object,Stringに実装されたメソッドのうち、Underscore/lodashでも実装されているものを紹介します。</p>
+<a id="more"></a>
+
+<hr>
+
+<p>章題は<code>ビルトインメソッド名 - Underscore/lodashメソッド名</code>という形式で記述します。</p>
+<p>ちなみにビルトインメソッドについて、本来は<code>Array.prototype</code>もしくは<code>Object.prototype</code>、場合によっては<code>String.prototype</code>などの接頭辞(レシーバオブジェクト)を持ち、引数にそれらレシーバオブジェクト（データ）を処理するコールバック関数を渡します。<br><code>Array.prototype.forEach(callback)</code></p>
+<p>なお、Underscore/lodashでは、<code>_</code>という名前空間オブジェクトからメソッドにアクセスして、引数に配列やオブジェクトなどのデータとコールバック関数を渡します。<br><code>_.each(array, callback)</code></p>
+<h2 id="イテレーション系">イテレーション系</h2><h3 id="forEach_-__-each">forEach - _.each</h3><p>イテレーションメソッドの中でも一番シンプルな<code>index, value</code>を取り出すメソッドです。</p>
+<iframe id="cp_embed_BzaqxQ" src="//codepen.io/taka-p/embed/BzaqxQ?height=300&theme-id=0011&slug-hash=BzaqxQ&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>オブジェクトの<code>key, value</code>を取り出す場合は下記。<br><figure class="highlight js"><figcaption><span>オブジェクトのkey,valueを取り出す</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="string">'foo'</span>: <span class="number">1</span>, <span class="string">'bar'</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(obj).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key, obj[key]);</span><br><span class="line">&#125;); <span class="comment">// -&gt; "foo" 1 "bar" 2</span></span><br></pre></td></tr></table></figure></p>
+<p>ObjectはforEachを持たないため<code>keysメソッド</code>で<code>obj</code>のプロパティ名群が格納された配列を作成して、その配列に対して呼び出す必要がある。</p>
+<h3 id="map_-__-map">map - _.map</h3><p>引数に渡されたコールバック関数でレシーバの配列を走査して、返された値を新しい配列に格納して返す。</p>
+<iframe id="cp_embed_WxNaJO" src="//codepen.io/taka-p/embed/WxNaJO?height=300&theme-id=0011&slug-hash=WxNaJO&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="every_-__-every">every - _.every</h3><p>引数に渡されたコールバック関数でレシーバの配列を走査して、全要素のコールバック判定がtureだった場合にtrueを返す。</p>
+<iframe id="cp_embed_beGmKW" src="//codepen.io/taka-p/embed/beGmKW?height=300&theme-id=0011&slug-hash=beGmKW&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="some_-__-some">some - _.some</h3><p>引数に渡されたコールバック関数でレシーバの配列を走査して、要素のうち一つでもコールバック判定がtureだった場合にtrueを返す。</p>
+<iframe id="cp_embed_GqRYBZ" src="//codepen.io/taka-p/embed/GqRYBZ?height=300&theme-id=0011&slug-hash=GqRYBZ&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="reduce_-__-reduce">reduce - _.reduce</h3><p>配列を走査する際に、コールバック関数に引数として「累積値（最終評価値）、現在の要素値」を渡せる。<br>また、第二引数に累積値の初期値を渡す事が出来る。</p>
+<blockquote>
+<p>累積値の初期値を省略した場合は「array[0]が累積値・array[1]が現在の要素値」という状態で走査が始まる。</p>
+</blockquote>
+
+<br>
+
+<iframe id="cp_embed_KMKGBZ" src="//codepen.io/taka-p/embed/KMKGBZ?height=300&theme-id=0011&slug-hash=KMKGBZ&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>汎用的に利用出来るため、大抵の演算処理を伴う配列走査は<code>reduceメソッド</code>で賄えると思う。</p>
+<h3 id="reduceRight_-__-reduceRIght">reduceRight - _.reduceRIght</h3><p><code>reduceメソッド</code>は配列を左から走査するが、<code>reduceRightメソッド</code>はその名の通り右から走査を行う。</p>
+<iframe id="cp_embed_ZOEqMj" src="//codepen.io/taka-p/embed/ZOEqMj?height=300&theme-id=0011&slug-hash=ZOEqMj&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="filter_-__-filter">filter - _.filter</h3><p>コールバック関数の判定がtrueだった要素群からなる、新しい配列を返す。<br><code>every, someメソッド</code>が判定値を返すのに対して、<code>filterメソッド</code>は判定によって得た配列を返す。</p>
+<iframe id="cp_embed_YWzJJX" src="//codepen.io/taka-p/embed/YWzJJX?height=300&theme-id=0011&slug-hash=YWzJJX&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>「特定の要素を抽出する」といったケースで効果を発揮するため、リストやテーブル操作で頻繁に利用しそう。</p>
+<h3 id="find_-__-find">find - _.find</h3><p>コールバック関数の判定がtrueだった最初の要素を返す。<br><code>filterメソッド</code>は判定がtrueだった要素群を配列に格納して返すのに対して<code>findメソッド</code>は要素1つだけを返す。</p>
+<iframe id="cp_embed_GqRYwq" src="//codepen.io/taka-p/embed/GqRYwq?height=300&theme-id=0011&slug-hash=GqRYwq&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>データ構造の違いよる使い分けが想定される。</p>
+<h3 id="findIndex_-__-findIndex">findIndex - _.findIndex</h3><p>コールバック関数の判定がtrueだった最初の要素インデックスを返す。</p>
+<iframe id="cp_embed_OXJBrW" src="//codepen.io/taka-p/embed/OXJBrW?height=300&theme-id=0011&slug-hash=OXJBrW&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="indexOf_-__-indexOf">indexOf - _.indexOf</h3><p>引数に指定した要素値を持つ最初の要素インデックスを返す。<br>存在しない場合は-1が返る。</p>
+<iframe id="cp_embed_ezYPbP" src="//codepen.io/taka-p/embed/ezYPbP?height=300&theme-id=0011&slug-hash=ezYPbP&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="lastIndexOf_-__-lastIndexOf">lastIndexOf - _.lastIndexOf</h3><p>引数に指定した要素値を持つ最後の要素インデックスを返す。<br>存在しない場合は-1が返る。</p>
+<iframe id="cp_embed_MeWPLB" src="//codepen.io/taka-p/embed/MeWPLB?height=300&theme-id=0011&slug-hash=MeWPLB&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="includes_-__-includes">includes - _.includes</h3><p>コレクション内に指定した値があるか判定</p>
+<iframe id="cp_embed_aZbRXx" src="//codepen.io/taka-p/embed/aZbRXx?height=300&theme-id=0011&slug-hash=aZbRXx&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="keys_-__-keys">keys - _.keys</h3><p>レシーバオブジェクト自身の列挙可能なプロパティ名を列挙した配列を返す。<br>（enumerableがfalseのプロパティかつプロトタイプは列挙しないため、「自身のスタティック/静的メンバ、クラスメソッドを列挙する」と言い換えられる）</p>
+<iframe id="cp_embed_GqRYej" src="//codepen.io/taka-p/embed/GqRYej?height=300&theme-id=0011&slug-hash=GqRYej&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="keys(obj)-length_-__-size">keys(obj).length - _.size</h3><p>Arrayには要素数を出力する<code>length</code>メソッドが存在するが、Objectには存在しない。<br>そのため、<code>foreachメソッド</code>でも利用した「<code>keysメソッド</code>で配列に変換する」というイディオムを用いてから<code>length</code>メソッドを呼び出す。</p>
+<iframe id="cp_embed_OXJBGp" src="//codepen.io/taka-p/embed/OXJBGp?height=300&theme-id=0011&slug-hash=OXJBGp&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>これは、ビルトインメソッドに追加していただいたいですね。。</p>
+<h4 id="helperメソッドの作成">helperメソッドの作成</h4><p>helperとして、下記のようなメソッドを作成しても良いと思います。<br>（プロジェクト的にOKなら、Object.prototypeに追加しても良いかも）</p>
+<figure class="highlight js"><figcaption><span>sizeメソッド</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Util = &#123;</span><br><span class="line">  <span class="comment">// オブジェクトのプロパティ数を返す</span></span><br><span class="line">  size: <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(o).length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="string">'foo'</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">'bar'</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="string">'baz'</span>: &#123;</span><br><span class="line">    <span class="string">'quo'</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="string">'hoge'</span>: <span class="number">5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Util.size(obj)); <span class="comment">// -&gt; 3</span></span><br><span class="line"><span class="built_in">console</span>.log(Util.size(obj.baz)); <span class="comment">// -&gt; 2</span></span><br></pre></td></tr></table></figure>
+<h3 id="reverse_-__-reverce">reverse - _.reverce</h3><p>配列内の要素を逆に並べる。<br>仕様を理解するよりもソースコードを見た方が直感的に理解出来る。</p>
+<iframe id="cp_embed_pboxXK" src="//codepen.io/taka-p/embed/pboxXK?height=300&theme-id=0011&slug-hash=pboxXK&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>SQLの<code>DESC</code>相当処理を擬似的にクライアントで実現したいケースで使える..？</p>
+<h2 id="その他">その他</h2><h3 id="isNaN_-__-isNaN">isNaN - _.isNaN</h3><p>NaNの判定を行うメソッド。<br>ただし、ネイティブの<code>isNaNメソッド</code>の場合、<code>typeof 引数 == &#39;number&#39;</code>のように等値演算のロジックを含んでいるため、<code>&#39;hoge&#39;</code>のような文字列なども暗黙の型変換によりtrueと判定してしまう。<br>そのため、同値演算<code>typeof 引数 === &#39;number&#39;</code>のロジックを併記するイディオムが存在する。</p>
+<iframe id="cp_embed_zBYmXb" src="//codepen.io/taka-p/embed/zBYmXb?height=300&theme-id=0011&slug-hash=zBYmXb&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>なお、ES6において「Underscore/lodashもしくはネイティブのisNaN+同値演算ロジック併記」に相当するロジックが実装された<code>Number.isNaN</code>が存在する。</p>
+<h3 id="join_-__-join">join - _.join</h3><p>引数に与えられた文字列をセパレータとして、配列要素を結合した文字列を返す。</p>
+<iframe id="cp_embed_jrOQNx" src="//codepen.io/taka-p/embed/jrOQNx?height=300&theme-id=0011&slug-hash=jrOQNx&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="trim_-_-trim">trim - .trim</h3><p>文字列の先頭と末尾から空白を削除する。</p>
+<iframe id="cp_embed_LZYXYE" src="//codepen.io/taka-p/embed/LZYXYE?height=300&theme-id=0011&slug-hash=LZYXYE&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="repeat_-__-repeat">repeat - _.repeat</h3><p>レシーバで受け取った文字列オブジェクトを引数に指定したn回繰り返し結合した文字列を返す。</p>
+<iframe id="cp_embed_MeWzWP" src="//codepen.io/taka-p/embed/MeWzWP?height=300&theme-id=0011&slug-hash=MeWzWP&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ES7では実験的に実装されているみたいですが、まだ使うのは危なそうですね..<br>ネイティブでは、イディオムの<code>Array(n + 1).join(str)</code>を利用するのが良さそうです。</p>
+
+<br>
+
+<p>以上で、終わりです。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/01/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">call, apply, bindの使いどころ</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

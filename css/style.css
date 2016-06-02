@@ -789,6 +789,36 @@ a {
 .toc-left-area .toc .toc-item:nth-child(10)::after {
   content: "10.";
 }
+.toc-left-area .toc .toc-item:nth-child(11)::after {
+  content: "11.";
+}
+.toc-left-area .toc .toc-item:nth-child(12)::after {
+  content: "12.";
+}
+.toc-left-area .toc .toc-item:nth-child(13)::after {
+  content: "13.";
+}
+.toc-left-area .toc .toc-item:nth-child(14)::after {
+  content: "14.";
+}
+.toc-left-area .toc .toc-item:nth-child(15)::after {
+  content: "15.";
+}
+.toc-left-area .toc .toc-item:nth-child(16)::after {
+  content: "16.";
+}
+.toc-left-area .toc .toc-item:nth-child(17)::after {
+  content: "17.";
+}
+.toc-left-area .toc .toc-item:nth-child(18)::after {
+  content: "18.";
+}
+.toc-left-area .toc .toc-item:nth-child(19)::after {
+  content: "19.";
+}
+.toc-left-area .toc .toc-item:nth-child(20)::after {
+  content: "20.";
+}
 .toc-left-area .toc .toc-item::after {
   position: absolute;
   left: -9px;
