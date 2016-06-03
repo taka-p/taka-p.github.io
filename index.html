@@ -204,139 +204,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="FLOCSSとは">FLOCSSとは</h2><p><a href="https://github.com/hiloki/flocss" target="_blank" rel="external">FLOCSS</a>を写経してみました。<br>(随所で省略しています)</p>
-<h3 id="レイヤー">レイヤー</h3><p>下記のレイヤーから構成される。</p>
-<ul>
-<li>Foundation - reset/normalize/base…</li>
-<li>Layout - header/main/sideber/footer…</li>
-<li>Object<ul>
-<li>Component - grid/button/form/media…</li>
-<li>Project - articles/ranking/promo…</li>
-<li>Utility - clearfix/display/margin…</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-_Foundation">1. Foundation</h4><p>reset.css、base.cssなどのブラウザのデフォルトスタイル（タグ要素への指定）を定義。<br>ページ全体の背景やタイポグラフィなどが該当する。</p>
-<h4 id="2-_Layout">2. Layout</h4><p>ページを構成するヘッダー、フッター、サイドバー、メインコンテンツといった広域の共通部品の定義。</p>
-<p>ページ単位で唯一の部品となるためIDセレクタによる指定を行っても良い。</p>
-<h4 id="3-_Object">3. Object</h4><p>プロダクト内において繰り返されるビジュアルパターンが全て該当する。<br>(Faundatino, Layoutを除く)</p>
-<p>Objectレイヤーは更に下記3レイヤーに分類される。</p>
-<h5 id="3-1-_Component">3-1. Component</h5><p>再利用出来るパターンとして、小さな単位のモジュールを定義。</p>
-<p>出来る限り最初減の機能を持ったモジュールとして定義されるべき。<br>（汎化）</p>
-<h5 id="3-2-_Project">3-2. Project</h5><p>プロジェクト固有のパターンであり、いくつかのコンポーネントとそれに該当しない要素によって構成される。</p>
-<h5 id="3-3-_Utility">3-3. Utility</h5><p>ComponentとProjectレイヤーの組み合わせで解決する事が難しい・適切ではない場合やわずかなスタイルの調整を行うためのヘルパー。</p>
-<h3 id="命名規則">命名規則</h3><p>基本的にはBEMシステムのシンタックス <strong>Block, Element, Modifier</strong> に分類して構成される。</p>
-<p>Modifierの派生パターンとして、JSで走査されるような <strong>状態</strong> を表すものについては<code>is-</code>プレフィックスを付与する事も可能。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button <span class="keyword">class</span>=<span class="string">"c-button is-active"</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>なお、<code>is-active</code>のようなステートクラスには直接スタイルを充てず、<code>.c-button.is-active</code>のように範囲を限定する事。<br>（他のModifierのスタイルを汚染しない）</p>
-<h4 id="オブジェクトのプレフィックス">オブジェクトのプレフィックス</h4><ul>
-<li>Component - <code>.c-*</code></li>
-<li>Project - <code>.p-*</code></li>
-<li>Utility - <code>.u-*</code></li>
-</ul>
-<h3 id="ファイル・ディレクトリ構成">ファイル・ディレクトリ構成</h3><ul>
-<li>foundation<ul>
-<li>_reset.scss</li>
-<li>_base.scss</li>
-</ul>
-</li>
-<li>layout<ul>
-<li>_main.scss</li>
-<li>_header.scss</li>
-<li>_footer.scss</li>
-<li>_sidebar.scss</li>
-</ul>
-</li>
-<li>Object<ul>
-<li>component<ul>
-<li>_button.scss</li>
-<li>_dialog.scss</li>
-<li>_grid.scss</li>
-<li>_media.scss</li>
-</ul>
-</li>
-<li>project<ul>
-<li>_articles.scss</li>
-<li>_comments.scss</li>
-<li>_gallery.scss</li>
-<li>_profile.scss</li>
-</ul>
-</li>
-<li>utility<ul>
-<li>_align.scss</li>
-<li>_clearfix.scss</li>
-<li>_margin.scss</li>
-<li>_position.scss</li>
-<li>_size.scss</li>
-<li>_text.scss</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="カスケーディングと詳細度">カスケーディングと詳細度</h3><p>レイヤーの順序を前後させてはならない</p>
-<h4 id="レイヤー、モジュールのカスケーディング">レイヤー、モジュールのカスケーディング</h4><p>原則として、モジュール間のカスケーディング、他のモジュールを親とするセレクタを用いたカスケーディングを禁止する。</p>
-<p>特に同一レイヤーにおけるモジュール間のカスケーディングは好ましくない。</p>
-<p>可能な限りモジュール間に依存性が存在しない構成にするべきである。</p>
-<p>例外として、レイヤー間におけるカスケーディングは許容される。<br>（プロジェクトはいくつかのコンポーネントと固有のスタイルを持つ）</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"p-profile c-media"</span>&gt;</span><br><span class="line">  &lt;img <span class="type">class</span>=<span class="string">"c-media__image"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"-media__body"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>このような場合においてもComponentレイヤーのModifier拡張、ProjectレイヤーのElement拡張によって、解決出来る場合がある。<br>(スタイルの上書きを行う場合はコメントするのが好ましい)</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"p-profile c-media"</span>&gt;</span><br><span class="line">  &lt;img <span class="type">class</span>=<span class="string">"p-profile__avater c-media__image"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"-media__body"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"p-profile c-media"</span>&gt;</span><br><span class="line">  &lt;img <span class="type">class</span>=<span class="string">"c-media__image c-media__image-reverse"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"-media__body"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>なお、出来る限り前者（Componentレイヤーを太らせる方向）を採用して、後者（Projectレイヤーを太らせる方向）を採用する場合は下記のようなルールを設ける。</p>
-<ul>
-<li>子供セレクタなどによって出来るだけ適用範囲を限定する</li>
-<li>他レイヤーのモジュールを親セレクタに持つのは一つだけとする<br><code>.p-profile &gt; .c-media__image</code></li>
-</ul>
-<h4 id="モジュール内のカスケーディング">モジュール内のカスケーディング</h4><p>モジュール内で完結するカスケーディング、複数のセレクタを用いる事は許容される。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="keyword">class</span>=<span class="string">"c-tabs"</span>&gt;</span><br><span class="line">  &lt;li <span class="keyword">class</span>=<span class="string">"c-tab"</span>&gt;</span><br><span class="line">    &lt;a <span class="keyword">class</span>=<span class="string">"c-tab__target"</span>&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="考察">考察</h2><ul>
-<li>イベントなどでサイト全体のデザインが大きく変更される場合は、 <strong>Theme</strong>などのレイヤーを設けても良いかも</li>
-<li>あまりにも各レイヤーのパターンが多い場合やカンプが不揃いな場合はヘルパークラスを多用してプロトタイプ的なものを作り、後からパターンを見つけてモジュール化していく方が良さそう。（考える &gt; 作業になりそう）</li>
-<li>レイヤー、モジュールの切り分け以上に大変で重要な作業はカンプ時点でのデザインのクオリティ向上（パターン化）を <strong>説得する作業</strong>だと思った。</li>
-<li><a href="https://github.com/hiloki/flocss#cssプリプロセッサのextend" target="_blank" rel="external">プリプロセッサのextend機能</a>については、余計な依存関係に悩まされたくない・CSSよりHTML側を太らせる方針の場合、使わない方が良い。（extendでシングルクラスを作るか問題）</li>
-<li>大規模な場合は、レイヤーに <strong>Composition</strong>を追加、小階層に必要な <strong>Project, Component</strong>を読み込む基点ファイルを配置、それぞれのファイルをビルドの単位として個別に読み込むのが良さそう。<br>またその場合、 <strong>Foundation, Layout, Object-Utility</strong>に関しては、共通で読み込むための基点ファイル <strong>General, Common</strong>を作成する。</li>
-</ul>
-<h3 id="大規模なプロジェクトに対応するためのカスタマイズ構成">大規模なプロジェクトに対応するためのカスタマイズ構成</h3><h4 id="ディレクトリ・ファイル構成">ディレクトリ・ファイル構成</h4><ul>
-<li><strong>Composition</strong><ul>
-<li><strong>General or Common</strong></li>
-<li><strong>Resorce or Controller</strong><br>(同じ機能内ならばある程度同じパターンを持つと想定)</li>
-<li><strong>Event or Function or Page or Flame</strong><br>(上記の命名が不適切な場合)</li>
-<li><strong>Theme</strong><br>(唯一、他レイヤーをカスケーディングできるレイヤー)</li>
-</ul>
-</li>
-<li>Foundation<ul>
-<li><strong>_valiables</strong> : 画面幅、ブランドカラーなどの定数<br>(実体を伴わないため、general,resorce双方で読み込んで良い)</li>
-<li><strong>_mixin</strong> : 共通mixinを定義<br>(同上、太りそうな場合はCompositionに移動)</li>
-</ul>
-</li>
-<li>Layout</li>
-<li>Object</li>
-<li><strong>Vendor</strong> : サードパーティ</li>
-</ul>
-<h4 id="ビルドファイル">ビルドファイル</h4><ul>
-<li>general.min.css</li>
-<li>resource/mypage.min.css</li>
-<li>theme/new_year.min.css</li>
-</ul>
-<h3 id="小中規模なプロジェクトに対応するためのカスタマイズ構成">小中規模なプロジェクトに対応するためのカスタマイズ構成</h3><h4 id="ディレクトリ・ファイル構成-1">ディレクトリ・ファイル構成</h4><ul>
-<li>Foundation<ul>
-<li><strong>_valiables</strong></li>
-<li><strong>_mixin</strong></li>
-</ul>
-</li>
-<li>Layout</li>
-<li>Object</li>
-<li><strong>Vendor</strong></li>
-</ul>
-<h4 id="ビルドファイル-1">ビルドファイル</h4><ul>
-<li>app.min.css</li>
-</ul>
-
-<br>
-
-<p>以上で終わりです。<br>そろそろ、スタートキット作ろうと考えています。</p>
-
+        <h2 id="FLOCSSとは">FLOCSSとは</h2><p><a href="https://github.com/hiloki/flocss">FLOCSS</a>を写経してみました。<br>(随所で省略しています)</p>
       
     </div>
     
@@ -349,6 +217,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/03/1/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
