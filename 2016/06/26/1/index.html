@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascriptコーディング規約 - Google編 | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Javascriptのコーディングスタイルを復習 - Google編
+今回は、Google Javascript Style Guideを眺めて、重要そう・忘れがちなトピックのみを抜粋しました。
+サンプルコードは原文通りではなく、理解促進のために簡潔な形に修正しています。(項目についても自己解釈の元、修正しています)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascriptコーディング規約 - Google編">
+<meta property="og:url" content="http://taka-p.github.io/2016/06/26/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="Javascriptのコーディングスタイルを復習 - Google編
+今回は、Google Javascript Style Guideを眺めて、重要そう・忘れがちなトピックのみを抜粋しました。
+サンプルコードは原文通りではなく、理解促進のために簡潔な形に修正しています。(項目についても自己解釈の元、修正しています)">
+<meta property="og:updated_time" content="2016-06-26T10:12:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascriptコーディング規約 - Google編">
+<meta name="twitter:description" content="Javascriptのコーディングスタイルを復習 - Google編
+今回は、Google Javascript Style Guideを眺めて、重要そう・忘れがちなトピックのみを抜粋しました。
+サンプルコードは原文通りではなく、理解促進のために簡潔な形に修正しています。(項目についても自己解釈の元、修正しています)">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+
+  <link rel="stylesheet" href="/css/fonts/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+								<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES5/" style="font-size: 12.5px;">ES5</a> <a href="/tags/FLOCSS/" style="font-size: 10px;">FLOCSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/StyleGuide/" style="font-size: 12.5px;">StyleGuide</a> <a href="/tags/Underscore-js/" style="font-size: 10px;">Underscore.js</a> <a href="/tags/apply/" style="font-size: 12.5px;">apply</a> <a href="/tags/bind/" style="font-size: 12.5px;">bind</a> <a href="/tags/call/" style="font-size: 12.5px;">call</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/lodash-js/" style="font-size: 10px;">lodash.js</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/ものづくり/" style="font-size: 10px;">ものづくり</a> <a href="/tags/イテレーター/" style="font-size: 12.5px;">イテレーター</a> <a href="/tags/イディオム/" style="font-size: 12.5px;">イディオム</a> <a href="/tags/コーディング規約/" style="font-size: 12.5px;">コーディング規約</a> <a href="/tags/レザークラフト/" style="font-size: 10px;">レザークラフト</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a> <a href="/tags/設計/" style="font-size: 10px;">設計</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+ゆくゆくは、地元に帰省してWebを利用した地域活性化に携わりたいです。<br>
+趣味はものづくりです<br></div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#言語仕様に関わるルール"><span class="toc-text">言語仕様に関わるルール</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ブロック内で関数宣言してはならない"><span class="toc-text">ブロック内で関数宣言してはならない</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#プリミティブ型のラッパーオブジェクトを利用しない"><span class="toc-text">プリミティブ型のラッパーオブジェクトを利用しない</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メソッドとプロパティの定義"><span class="toc-text">メソッドとプロパティの定義</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete演算子を利用せず、nullを代入する"><span class="toc-text">delete演算子を利用せず、nullを代入する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#連想配列"><span class="toc-text">連想配列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#複数業のstringリテラル"><span class="toc-text">複数業のstringリテラル</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ビルトインオブジェクトのプロトタイプ書き換え"><span class="toc-text">ビルトインオブジェクトのプロトタイプ書き換え</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IEの条件付きコメントは利用しない"><span class="toc-text">IEの条件付きコメントは利用しない</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#スタイルに関わるルール"><span class="toc-text">スタイルに関わるルール</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命名規則"><span class="toc-text">命名規則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getter・setterを利用しない"><span class="toc-text">getter・setterを利用しない</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#長い型名のエイリアスを作成する"><span class="toc-text">長い型名のエイリアスを作成する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開始波括弧は宣言と同じ行に配置する（改行しちゃだめ）"><span class="toc-text">開始波括弧は宣言と同じ行に配置する（改行しちゃだめ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列・オブジェクトの初期化"><span class="toc-text">配列・オブジェクトの初期化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引数"><span class="toc-text">引数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#無名関数を引数とする場合"><span class="toc-text">無名関数を引数とする場合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#式を折り返す際のインデント"><span class="toc-text">式を折り返す際のインデント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空白行"><span class="toc-text">空白行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二項・三項演算子"><span class="toc-text">二項・三項演算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#丸括弧"><span class="toc-text">丸括弧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文字列"><span class="toc-text">文字列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips・トリック"><span class="toc-text">Tips・トリック</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#真偽値表現"><span class="toc-text">真偽値表現</span></a></li></ol></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+
+    </div>
+
+    <div id="js_toggle_sidebar" class="toggle-side-menu" style="    position: fixed;
+    top: 50%;
+    width: 25px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.21);
+    left: 300px;
+    z-index: 10;">
+    <i class="fa fa-chevron-left" style="    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -15px;"></i></div>
+
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+						<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-javascriptコーディング規約-Google編" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      javascriptコーディング規約 - Google編
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES5/">ES5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/StyleGuide/">StyleGuide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/コーディング規約/">コーディング規約</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/06/26/1/" class="article-date">
+  	<time datetime="2016-06-26T10:04:41.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Javascriptのコーディングスタイルを復習 - Google編</strong></p>
+<p>今回は、<a href="http://cou929.nu/data/google_javascript_style_guide" target="_blank" rel="external">Google Javascript Style Guide</a>を眺めて、重要そう・忘れがちなトピックのみを抜粋しました。</p>
+<p>サンプルコードは原文通りではなく、理解促進のために簡潔な形に修正しています。<br>(項目についても自己解釈の元、修正しています)</p>
+<a id="more"></a>
+<h2 id="言語仕様に関わるルール">言語仕様に関わるルール</h2><h3 id="ブロック内で関数宣言してはならない">ブロック内で関数宣言してはならない</h3><p>ブロック内において、関数を利用する場合は変数に代入して利用する事。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// for, switchなども同様</span></span><br><span class="line"><span class="comment">/* 非推奨 */</span></span><br><span class="line"><span class="keyword">if</span> (x) &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 推奨 */</span></span><br><span class="line"><span class="keyword">if</span> (x) &#123;</span><br><span class="line">  <span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>理由は、単にECMAで標準化されていないため。<br>（実行環境に依存、あるいは将来的に動かなくなる可能性を持っている）</p>
+<h3 id="プリミティブ型のラッパーオブジェクトを利用しない">プリミティブ型のラッパーオブジェクトを利用しない</h3><p>様々なケースの弊害が想定出来るが、典型的なのは真偽値を期待していたのに、真偽値ではなくなっていたパターンだと思う。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* オブジェクトの真偽値判定は常にtrue */</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">if</span> (x) <span class="built_in">console</span>.log(x); <span class="comment">// -&gt; Booleanオブジェクト</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* これはOK */</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="built_in">Boolean</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (!x) <span class="built_in">console</span>.log(x); <span class="comment">// -&gt; false</span></span><br></pre></td></tr></table></figure>
+<p><strong>プリミティブ型のコンストラクタはnewしてはならない</strong></p>
+<h3 id="メソッドとプロパティの定義">メソッドとプロパティの定義</h3><p>インスタンス化されたオブジェクトに追加するのではなく、コンストラクタ内におけるプロパティの初期化・プロトタイプによるコンストラクタへのメソッド追加が推奨される。</p>
+<h3 id="delete演算子を利用せず、nullを代入する">delete演算子を利用せず、nullを代入する</h3><p>プロパティ数の変更より、再代入の方が実行パフォーマンスが優れるため。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">foo = &#123;</span><br><span class="line">  bar: &#123;</span><br><span class="line">    baz: &#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> foo.bar;</span><br><span class="line"><span class="built_in">console</span>.log(foo.bar); <span class="comment">// -&gt; undefined</span></span><br><span class="line"></span><br><span class="line">foo.bar = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(foo.bar); <span class="comment">// -&gt; null</span></span><br></pre></td></tr></table></figure>
+<h3 id="this">this</h3><p>コンストラクタ、およびオブジェクトのメソッド内（クロージャの作成含む）のみ許容</p>
+<h3 id="連想配列">連想配列</h3><p>配列のインデックスに数値以外の値を適用して、map/hashのようなデータを作成しない事。<br>map/hashを利用したいときは、オブジェクトを利用する。</p>
+<h3 id="複数業のstringリテラル">複数業のstringリテラル</h3><p>文字列内に<code>\</code>を用いて改行を表現しない事。<br>改行を表現する場合、<code>+</code>演算子で連結する。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 非推奨 */</span></span><br><span class="line"><span class="keyword">var</span> multiLineStr = <span class="string">'hoge\</span><br><span class="line">            fuga'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 推奨 */</span></span><br><span class="line"><span class="keyword">var</span> multiLineStr = <span class="string">'hoge'</span> +</span><br><span class="line">           <span class="string">'fuga'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="ビルトインオブジェクトのプロトタイプ書き換え">ビルトインオブジェクトのプロトタイプ書き換え</h3><p>言語仕様が変わってしまうような操作は行わない。</p>
+<h3 id="IEの条件付きコメントは利用しない">IEの条件付きコメントは利用しない</h3><p>動作が遅くなるため。</p>
+<h2 id="スタイルに関わるルール">スタイルに関わるルール</h2><h3 id="命名規則">命名規則</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 関数、変数、メソッド、名前空間はキャメルケース</span></span><br><span class="line">somethingName</span><br><span class="line"><span class="comment">// コンストラクタはパスカルケース</span></span><br><span class="line">ClassName</span><br><span class="line"><span class="comment">// 定数は大文字スネークケース</span></span><br><span class="line">CONSTANT_NAME</span><br><span class="line"><span class="comment">// privateプロパティ、メソッド(protectedはpublicと同様)</span></span><br><span class="line">_privateMethod</span><br><span class="line"><span class="comment">// オプション引数(必須ではないパラメータ)にはopt_プレフィックスを付ける</span></span><br><span class="line">opt_param</span><br><span class="line"><span class="comment">// 可変長引数はvar_arg固定、かつ関数内ではargumentsを参照</span></span><br><span class="line">var_arg</span><br><span class="line"><span class="comment">// ファイル名は全て小文字</span></span><br><span class="line">filename.js</span><br></pre></td></tr></table></figure>
+<h3 id="getter・setterを利用しない">getter・setterを利用しない</h3><p>利用したい場合は、<code>getFoo/setFoo</code>のような名前にしてあげる。</p>
+<h3 id="長い型名のエイリアスを作成する">長い型名のエイリアスを作成する</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.namespace.MyClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">myApp = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> MyClass = app.namespace.MyClass;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="開始波括弧は宣言と同じ行に配置する（改行しちゃだめ）">開始波括弧は宣言と同じ行に配置する（改行しちゃだめ）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 推奨例 */</span></span><br><span class="line"><span class="keyword">if</span> (x) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配列・オブジェクトの初期化">配列・オブジェクトの初期化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1行の場合(80文字)、括弧の前後には空白を挿入しない</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;a:<span class="number">1</span>, b:<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">//複数行の場合は括弧だけで1行つかう、かつインデントはスペース2つ</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  bar: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// キー名が長い場合、`:`を整列させない</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  barbaz: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="引数">引数</h3><p>可能な限り1行に納める。<br>80文字を超えた場合は、折り返しても良い。<br>また、1行づつ配置しても良い。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// スペース4つ分インデントし、80字で折り返し</span></span><br><span class="line"><span class="comment">// 関数をリネームしてもインデントを修正しなくてOK</span></span><br><span class="line">app.namespace.foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span><br><span class="line">  foo, bar, ...省略..., baz,</span><br><span class="line">  hoge, huga, ...省略..., piyo</span>) </span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 丸括弧にそろえて80字で折り返す</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">somethingFunc</span>(<span class="params">foo, bar, ...省略..., baz,</span><br><span class="line">            hoge, huga, ...省略..., piyo</span>) </span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// スペース4つ分インデントし、各業に1つずつ引数を記述</span></span><br><span class="line"><span class="comment">// 引数名が長い場合に有効</span></span><br><span class="line">app.namespace.foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span><br><span class="line">  fooBar...省略...Baz,</span><br><span class="line">  hogeHuga...省略...Piyo</span>) </span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 丸括弧に揃えてインデントし、1行毎に引数を記述</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">somethingFunc</span>(<span class="params">fooBar...省略...Baz,</span><br><span class="line">              hogeHuga...省略...Piyo</span>) </span>&#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="無名関数を引数とする場合">無名関数を引数とする場合</h3><p>内容を文全体の左端からスペース2つ分インデントする。<br>または、無名関数宣言の左端から2つ分インデントする。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app.namespace.somethingFunc(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (x) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> somethingFuncClojure = app.namespace.somethingFunc(</span><br><span class="line">    fooBarBazParam,</span><br><span class="line">    hogeFugaPiyoParam,</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> x = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (x) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>恐らく、無名関数によるコールバックの宣言はネストが深くなるため2行なんだと思われる。</p>
+<h3 id="式を折り返す際のインデント">式を折り返す際のインデント</h3><p>行を折り返す場合は、直前の兄弟式の左端に開始位置を揃える。<br>または、スペース4つ分のインデントを挿入する。<br>(配列、オブジェクト、無名関数の引き渡しはスペース2つ分)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直前の兄弟式の左端に開始位置を揃える</span></span><br><span class="line"><span class="keyword">var</span> html = <span class="string">'fooBar...省略...Baz'</span> +</span><br><span class="line">           <span class="string">'hogeFuga...省略...Piyo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直前式の左端から4スペース</span></span><br><span class="line">app.namespace.fooBar...省略..Baz =</span><br><span class="line">    hogeFugaPiyo;</span><br></pre></td></tr></table></figure>
+<h3 id="空白行">空白行</h3><p>論理的なまとまりを表すため適宜、空白行を挿入する</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preParam = <span class="string">'pre'</span>;</span><br><span class="line">preSomething(preParam);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nowParam = <span class="string">'now'</span>;</span><br><span class="line">nowSomething(nowParam);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> afterParam = <span class="string">'after'</span>;</span><br><span class="line">afterSomething(afterParam);</span><br></pre></td></tr></table></figure>
+<h3 id="二項・三項演算子">二項・三項演算子</h3><p>演算子は常に先行する行に配置する</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一行で収まる場合はこのように記述</span></span><br><span class="line"><span class="keyword">var</span> x = a ? b : c;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4文字分のインデントでもOK（?を先行する行に配置）</span></span><br><span class="line"><span class="keyword">var</span> y = a ?</span><br><span class="line">    longButSimpleOperandB : longButSimpleOperandC;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最初のオペランドの位置までインデントする形でもOK</span></span><br><span class="line"><span class="comment">// （?と:を先行する行に配置）</span></span><br><span class="line"><span class="keyword">var</span> z = a ?</span><br><span class="line">        moreComplicatedB :</span><br><span class="line">        moreComplicatedC;</span><br><span class="line">This includes the dot operator.</span><br><span class="line"></span><br><span class="line"><span class="comment">// ドット演算子も同様（.を先行する行に配置）</span></span><br><span class="line"><span class="keyword">var</span> x = foo.bar().</span><br><span class="line">    doSomething().</span><br><span class="line">    doSomethingElse();</span><br></pre></td></tr></table></figure>
+<h3 id="丸括弧">丸括弧</h3><p>構文上必要となる箇所のみに記述</p>
+<h3 id="文字列">文字列</h3><p>常にシングルクォーテーション<code>&#39;</code>を利用<br>(htmlを含む文字列を作る際に有効)</p>
+<h2 id="Tips・トリック">Tips・トリック</h2><h3 id="真偽値表現">真偽値表現</h3><p>下記はfalseになる</p>
+<ul>
+<li>null</li>
+<li>undefined</li>
+<li>‘’(空の文字列)</li>
+<li>0</li>
+</ul>
+<p>下記はtrueになる</p>
+<ul>
+<li>‘0’, ‘null’, ‘undefined’(空でない文字列)</li>
+<li>[], {} (空の配列、オブジェクト)</li>
+</ul>
+<p>次回は、Airbnbのスタイルガイド(ES5)を眺めていきます。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/26/2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          javascriptコーディング規約 - Airbnb編(ES5)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/03/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">FLOCSSをカスタマイズ</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

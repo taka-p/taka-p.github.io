@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascriptコーディング規約 - Airbnb編(ES5) | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Javascriptのコーディングスタイルを復習 - Airbnb(ES5)編
+前回は、Google Javascript Style Guideを眺めて、重要そうなトピックを抜き出しました。
+今回は、Airbnb javascript Style Guide (ES5)を眺め、重要そう・かつ忘れそうなトピックを抜き出していきます。
+なお、Google Style Guideで明示されている部分に">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascriptコーディング規約 - Airbnb編(ES5)">
+<meta property="og:url" content="http://taka-p.github.io/2016/06/26/2/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="Javascriptのコーディングスタイルを復習 - Airbnb(ES5)編
+前回は、Google Javascript Style Guideを眺めて、重要そうなトピックを抜き出しました。
+今回は、Airbnb javascript Style Guide (ES5)を眺め、重要そう・かつ忘れそうなトピックを抜き出していきます。
+なお、Google Style Guideで明示されている部分に">
+<meta property="og:updated_time" content="2016-06-26T10:09:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascriptコーディング規約 - Airbnb編(ES5)">
+<meta name="twitter:description" content="Javascriptのコーディングスタイルを復習 - Airbnb(ES5)編
+前回は、Google Javascript Style Guideを眺めて、重要そうなトピックを抜き出しました。
+今回は、Airbnb javascript Style Guide (ES5)を眺め、重要そう・かつ忘れそうなトピックを抜き出していきます。
+なお、Google Style Guideで明示されている部分に">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+
+  <link rel="stylesheet" href="/css/fonts/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+								<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES5/" style="font-size: 12.5px;">ES5</a> <a href="/tags/FLOCSS/" style="font-size: 10px;">FLOCSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/StyleGuide/" style="font-size: 12.5px;">StyleGuide</a> <a href="/tags/Underscore-js/" style="font-size: 10px;">Underscore.js</a> <a href="/tags/apply/" style="font-size: 12.5px;">apply</a> <a href="/tags/bind/" style="font-size: 12.5px;">bind</a> <a href="/tags/call/" style="font-size: 12.5px;">call</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/lodash-js/" style="font-size: 10px;">lodash.js</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/ものづくり/" style="font-size: 10px;">ものづくり</a> <a href="/tags/イテレーター/" style="font-size: 12.5px;">イテレーター</a> <a href="/tags/イディオム/" style="font-size: 12.5px;">イディオム</a> <a href="/tags/コーディング規約/" style="font-size: 12.5px;">コーディング規約</a> <a href="/tags/レザークラフト/" style="font-size: 10px;">レザークラフト</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a> <a href="/tags/設計/" style="font-size: 10px;">設計</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+ゆくゆくは、地元に帰省してWebを利用した地域活性化に携わりたいです。<br>
+趣味はものづくりです<br></div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#オブジェクト"><span class="toc-text">オブジェクト</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列"><span class="toc-text">配列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#関数"><span class="toc-text">関数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#プロパティ"><span class="toc-text">プロパティ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#変数"><span class="toc-text">変数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#巻き上げ"><span class="toc-text">巻き上げ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ブロック"><span class="toc-text">ブロック</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#コメント"><span class="toc-text">コメント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空白"><span class="toc-text">空白</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#カンマ"><span class="toc-text">カンマ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#セミコロン"><span class="toc-text">セミコロン</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#型変換"><span class="toc-text">型変換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名規則"><span class="toc-text">命名規則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#コンストラクタ"><span class="toc-text">コンストラクタ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#イベント"><span class="toc-text">イベント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#モジュール"><span class="toc-text">モジュール</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JQuery"><span class="toc-text">JQuery</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+
+    </div>
+
+    <div id="js_toggle_sidebar" class="toggle-side-menu" style="    position: fixed;
+    top: 50%;
+    width: 25px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.21);
+    left: 300px;
+    z-index: 10;">
+    <i class="fa fa-chevron-left" style="    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -15px;"></i></div>
+
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+						<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-javascriptコーディング規約-Airbnb編-ES5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      javascriptコーディング規約 - Airbnb編(ES5)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES5/">ES5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/StyleGuide/">StyleGuide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/コーディング規約/">コーディング規約</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/06/26/2/" class="article-date">
+  	<time datetime="2016-06-26T10:04:52.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Javascriptのコーディングスタイルを復習 - Airbnb(ES5)編</strong></p>
+<p>前回は、<a href="http://cou929.nu/data/google_javascript_style_guide" target="_blank" rel="external">Google Javascript Style Guide</a>を眺めて、重要そうなトピックを抜き出しました。</p>
+<p>今回は、<a href="https://github.com/mitsuruog/javascript-style-guide/blob/master/es5/README.md" target="_blank" rel="external">Airbnb javascript Style Guide (ES5)</a>を眺め、重要そう・かつ忘れそうなトピックを抜き出していきます。</p>
+<p>なお、Google Style Guideで明示されている部分についても省略します。</p>
+<p>前回と同様にサンプルコードは原文通りではなく、理解促進のために簡潔な形に修正しています。<br>(項目についても自己解釈の元、修正しています)</p>
+<a id="more"></a>
+<h3 id="オブジェクト">オブジェクト</h3><ul>
+<li>オブジェクトのキーに予約語を使用しない（IE8で動作しない）<br>利用する場合には、分かり易い同義語を採用する。</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* bad */</span><br><span class="line">var obj = &#123;</span><br><span class="line">  class: 'hoge'</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* good */</span><br><span class="line">var obj = &#123;</span><br><span class="line">  klass: 'hoge',</span><br><span class="line">  type: 'hoge'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配列">配列</h3><ul>
+<li>配列をコピーする際はArray#sliceを使用する。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">/* bad */</span></span><br><span class="line"><span class="keyword">var</span> arrCopy = [];</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) &#123;</span><br><span class="line">  arrCopy.push(arr[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* good */</span></span><br><span class="line">arrCopy = arr.slice();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Array-likeなオブジェクト(主にarguments)をArrayに変換する場合は、Array#sliceを使用する。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trigger</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>文字列連結をループ内で行わない</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> items,</span><br><span class="line">  messages,</span><br><span class="line">  length,</span><br><span class="line">  i;</span><br><span class="line"></span><br><span class="line">messages = [</span><br><span class="line">  &#123;message: <span class="string">'this one'</span>&#125;,</span><br><span class="line">  &#123;message: <span class="string">'this two'</span>&#125;,</span><br><span class="line">  &#123;message: <span class="string">'this three'</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">length = messages.length;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* bad */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inbox</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  items = <span class="string">'&lt;ul&gt;'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    items += <span class="string">'&lt;li&gt;'</span> + message[i] + <span class="string">'&lt;/li&gt;'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> items + <span class="string">'&lt;/ul&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* good */</span></span><br><span class="line"><span class="comment">// 文字列の配列をループで作成してからjoinで連結</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inbox</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  items = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">    items[i] = messages[i].message;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">'&lt;ul&gt;&lt;li&gt;'</span> + items.join(<span class="string">'&lt;/li&gt;&lt;li&gt;'</span>) + <span class="string">'&lt;/li&gt;&lt;/ul&gt;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="関数">関数</h3><ul>
+<li>パラメータに<code>arguments</code>を指定しないこと。<br>関数ブロック内に渡される<code>arguments</code>の参照が上書きされるため。<br>可変長引数を利用出来る事を明示したい場合は<code>var_args</code>を引数に配置する。（関数内での利用はあくまでも<code>arguments</code>）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* bad */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">name, opt_foo, arguments</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">var</span> args = [].slice.apply(<span class="built_in">arguments</span>);</span><br><span class="line"> <span class="keyword">return</span> args;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* good */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">name, opt_foo, var_args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = [].slice.apply(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="keyword">return</span> args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="プロパティ">プロパティ</h3><ul>
+<li>プロパティへのアクセスは<code>.</code>を利用する。</li>
+<li>変数を使用してプロパティにアクセスする場合は<code>[]</code>を利用する。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  bar: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本は.でアクセス</span></span><br><span class="line"><span class="keyword">var</span> foo = obj.foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 変数を利用する場合は[]でアクセス</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProp</span>(<span class="params">prop</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj[prop];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo = getProp(<span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 演算を行いたい場合も[]でアクセス</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="string">'foo'</span>, <span class="string">'bar'</span>],</span><br><span class="line">  index = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> bar = arr[index + <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="変数">変数</h3><ul>
+<li>複数の変数を宣言する場合は、<code>var</code>を一つだけ記述して変数毎に改行する。</li>
+<li>未定義変数は最後に宣言する。<br>定義済み変数を代入したい場合などに便利。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* bad */</span></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">len</span>;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">'foo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* good */</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">'foo'</span>,</span><br><span class="line">    i = foo,</span><br><span class="line">    <span class="built_in">len</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>変数の割当はスコープの先頭で行う（主に関数スコープ）<br>なお、変数の割当前に必要となる処理はこの限りではない。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* bad */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">var_args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">arguments</span>.length) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (name == <span class="string">'foo'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> name = <span class="built_in">arguments</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">var</span> bar = bar();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* good */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">var_args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">arguments</span>.length) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> name = <span class="built_in">arguments</span>[<span class="number">0</span>],</span><br><span class="line">      bar = bar();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (name == <span class="string">'foo'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> foo;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="巻き上げ">巻き上げ</h3><p>関数や変数の巻き上げについて詳細に解説されていましたが、既知の内容だったため、ここでは関数内における関数式を代入した変数の巻き上げについてのみ取り上げます。<br>(無名関数も名前付き関数も同じ挙動)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(bar); <span class="comment">// -&gt; undefined</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 関数割当前の変数が巻き上げられる</span></span><br><span class="line">  <span class="comment">// 関数の表示名と実行名の内、表示名が巻き上げられる</span></span><br><span class="line">  <span class="comment">// 表示名のみでは実行出来ないため、例外が発生する</span></span><br><span class="line">  bar(); -&gt; <span class="built_in">TypeError</span> bar is not a <span class="function"><span class="keyword">function</span></span><br><span class="line"></span><br><span class="line">  <span class="title">var</span> <span class="title">bar</span> = <span class="title">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'bar'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>忘れた時に参照したいセクションです。<br><a href="https://github.com/mitsuruog/javascript-style-guide/blob/master/es5/README.md#巻き上げ-原文" target="_blank" rel="external">巻き上げ</a></p>
+<h3 id="ブロック">ブロック</h3><p>複数業のブロックには<code>{}</code>を利用する。<br>なお、<code>function</code>は必ず改行する。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">if</span> (test)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">if</span> (test) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">if</span> (test) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="コメント">コメント</h3><ul>
+<li>コメントは該当処理の上部に記述<br>また、単一行コメントの前には空白行を配置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> active = <span class="literal">true</span>;  <span class="comment">// is current tab</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">// is current tab</span></span><br><span class="line"><span class="keyword">var</span> active = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'fetching type...'</span>);</span><br><span class="line">  <span class="comment">// set the default type to 'no type'</span></span><br><span class="line">  <span class="keyword">var</span> type = <span class="keyword">this</span>._type || <span class="string">'no type'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'fetching type...'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// set the default type to 'no type'</span></span><br><span class="line">  <span class="keyword">var</span> type = <span class="keyword">this</span>._type || <span class="string">'no type'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>問題の指摘や解決策の提案を行う必要があるコードには<code>TODO, FIXME</code>を記述する。<ul>
+<li>TODO: 実装が必要(解決策の提示もこちら)</li>
+<li>FIXME: 解決策が必要</li>
+</ul>
+</li>
+</ul>
+<h3 id="空白">空白</h3><ul>
+<li>タブはスペース2つ</li>
+<li>中括弧<code>{}</code>の前にはスペース1つ</li>
+<li>制御構文の丸括弧<code>()</code>の前にはスペース1つ（関数の引数リストの前には入れない）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">if</span>(isJedi) &#123;</span><br><span class="line">  fight ();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">if</span> (isJedi) &#123;</span><br><span class="line">  fight();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fight</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log (<span class="string">'Swooosh!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fight</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Swooosh!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>演算子の間にはスペース1つ</li>
+<li>ファイルの最後には改行文字を入れる</li>
+<li>メソッドチェーンが長くなる場合は、論理的なまとまり毎に適宜インデントを入れる</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">$(<span class="string">'#items'</span>).find(<span class="string">'.selected'</span>).highlight().end().find(<span class="string">'.open'</span>).updateCount();</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">$(<span class="string">'#items'</span>)</span><br><span class="line">  .find(<span class="string">'.selected'</span>)</span><br><span class="line">    .highlight()</span><br><span class="line">    .end()</span><br><span class="line">  .find(<span class="string">'.open'</span>)</span><br><span class="line">    .updateCount();</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> leds = stage.selectAll(<span class="string">'.led'</span>).data(data).enter().append(<span class="string">'svg:svg'</span>).class(<span class="string">'led'</span>, <span class="literal">true</span>)</span><br><span class="line">    .attr(<span class="string">'width'</span>,  (radius + margin) * <span class="number">2</span>).append(<span class="string">'svg:g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>, <span class="string">'translate('</span> + (radius + margin) + <span class="string">','</span> + (radius + margin) + <span class="string">')'</span>)</span><br><span class="line">    .call(tron.led);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">var</span> leds = stage.selectAll(<span class="string">'.led'</span>)</span><br><span class="line">    .data(data)</span><br><span class="line">  .enter().append(<span class="string">'svg:svg'</span>)</span><br><span class="line">    .class(<span class="string">'led'</span>, <span class="literal">true</span>)</span><br><span class="line">    .attr(<span class="string">'width'</span>,  (radius + margin) * <span class="number">2</span>)</span><br><span class="line">  .append(<span class="string">'svg:g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>, <span class="string">'translate('</span> + (radius + margin) + <span class="string">','</span> + (radius + margin) + <span class="string">')'</span>)</span><br><span class="line">    .call(tron.led);</span><br></pre></td></tr></table></figure>
+<h3 id="カンマ">カンマ</h3><ul>
+<li>先頭にカンマを入れない</li>
+<li>末尾に余計なカンマを入れない</li>
+</ul>
+<h3 id="セミコロン">セミコロン</h3><ul>
+<li>トップレベルの匿名関数・名前空間オブジェクト前後には<code>;</code>を入れる<br>(ファイル連結時のリスク対応)</li>
+</ul>
+<h3 id="型変換">型変換</h3><ul>
+<li>文字列の型変換は式中の先頭で行う<br>不要な記述が増える場合はこの限りではない</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  =&gt; this.reviewScore = 9;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> totalScore = <span class="keyword">this</span>.reviewScore + <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">var</span> totalScore = <span class="string">''</span> + <span class="keyword">this</span>.reviewScore;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> totalScore = <span class="string">''</span> + <span class="keyword">this</span>.reviewScore + <span class="string">' total score'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">var</span> totalScore = <span class="keyword">this</span>.reviewScore + <span class="string">' total score'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数値の型変換は<code>Number</code>もしくは基数を添えた<code>parseInt</code>で行う</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inputValue = <span class="string">'4'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> val = <span class="keyword">new</span> <span class="built_in">Number</span>(inputValue);</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> val = +inputValue;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> val = inputValue &gt;&gt; <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> val = <span class="built_in">parseInt</span>(inputValue);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">var</span> val = <span class="built_in">Number</span>(inputValue);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">var</span> val = <span class="built_in">parseInt</span>(inputValue, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>parseIntがボトルネックとなる場合はwhy,whatのコメントを添えたビット演算子を利用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * parseIntがボトルネックとなっていたため、</span><br><span class="line"> * ビットシフトで文字列を数値へ強制的に変換することで</span><br><span class="line"> * パフォーマンスを改善させます。</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> val = inputValue &gt;&gt; <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>真偽値の型変換は<code>Boolean</code>もしくは<code>!!</code>を利用</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> age</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasAge</span> = new <span class="typename">Boolean</span>(age);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasAge</span> = <span class="typename">Boolean</span>(age);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> hasAge</span> = !!age;</span><br></pre></td></tr></table></figure>
+<h3 id="命名規則">命名規則</h3><ul>
+<li>1文字の名前は避ける（最低限の意味を読み取れる長さにする）</li>
+<li>privateプロパティには<code>_</code>を接頭辞として付与</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">this</span>.__firstName__ = <span class="string">'Panda'</span>;</span><br><span class="line"><span class="keyword">this</span>.firstName_ = <span class="string">'Panda'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">this</span>._firstName = <span class="string">'Panda'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>thisの参照を保存する場合は<code>_this</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(self);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(that);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(_this);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>スタックトレースを追い易くするために、関数には名前をつける<br>(コールスタック表示時に<code>anonymous function</code>と表示されないようにする)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> log = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(msg);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">var</span> log = <span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(msg);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong><a href="http://d.hatena.ne.jp/think49/20110521/1305959222" target="_blank" rel="external">IE8では名前付き関数を関数宣言と認識する等のバグが存在</a></strong></p>
+<ul>
+<li>プロパティが真偽値の場合<code>isVal(), hasVal()</code>とする</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">if</span> (!dragon.age()) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">if</span> (!dragon.hasAge()) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="コンストラクタ">コンストラクタ</h3><ul>
+<li>prototypeにプロパティを追加する際は、既存のプロトタイプをオーバーライドしない。</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">Foo.prototype = &#123;</span><br><span class="line">  bar: <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;&#125;,</span><br><span class="line">  baz: <span class="function"><span class="keyword">function</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line">Foo.prototype.baz = <span class="function"><span class="keyword">function</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>プロトタイプチェーンを積極的に活用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.x = x;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo.prototype.baz = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.y = y;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo();</span><br><span class="line"></span><br><span class="line">foo</span><br><span class="line">  .bar(<span class="string">'bar'</span>)</span><br><span class="line">  .baz(<span class="string">'baz'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo.x, foo.y); <span class="comment">// -&gt; bar baz</span></span><br></pre></td></tr></table></figure>
+<h3 id="イベント">イベント</h3><p>イベントのコールバックに渡すペイロードは、オブジェクトや配列でラップして、イベント・ペイロード変更時の影響範囲を減らすこと</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">$(<span class="keyword">this</span>).trigger(<span class="string">'fooEvent'</span>, param.id);</span><br><span class="line"></span><br><span class="line">$(<span class="keyword">this</span>).on(<span class="string">'fooEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e, paramId</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something with paramId</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">$(<span class="keyword">this</span>).trigger(<span class="string">'fooEvent'</span>, &#123; id : param.id &#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="keyword">this</span>).on(<span class="string">'fooEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e, data</span>) </span>&#123;</span><br><span class="line"><span class="comment">// do something with data.id</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="モジュール">モジュール</h3><ul>
+<li>モジュールは<code>!</code>で始める<br><a href="http://blog.tojiru.net/article/197270788.html" target="_blank" rel="external">単項演算子を先頭に付与するとfunction式として評価されるため</a></li>
+<li>モジュールのファイル名はキャメルケースで記述して、同じ名称のフォルダに格納</li>
+<li><code>noCOnflict()</code>という名称で名前衝突して上書きされる前のモジュールを返すメソッドを追加</li>
+<li>モジュールのスコープの先頭で<code>&#39;use strict&#39;;</code>を宣言</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// fancyInput/fancyInput.js&#10;&#10;!function(global) &#123;&#10;  &#39;use strict&#39;;&#10;&#10;  var previousFancyInput = global.FancyInput;&#10;&#10;  function FancyInput(options) &#123;&#10;    this.options = options || &#123;&#125;;&#10;  &#125;&#10;&#10;  FancyInput.noConflict = function noConflict() &#123;&#10;    global.FancyInput = previousFancyInput;&#10;    return FancyInput;&#10;  &#125;;&#10;&#10;  global.FancyInput = FancyInput;&#10;&#125;(this);</span><br></pre></td></tr></table></figure>
+<h3 id="JQuery">JQuery</h3><p><a href="http://millkeyweb.com/jquery-high/" target="_blank" rel="external">JQuery高速化について</a></p>
+<ul>
+<li>JQueryオブジェクトの変数は先頭に<code>$</code>を付与</li>
+<li>DOMの検索結果はキャッシュする</li>
+<li>DOMの検索にはカスケードを利用する<br><code>$(&#39;.sidebar ul&#39;)</code>や<code>$(&#39;.sidebar &gt; ul&#39;)</code></li>
+<li>DOMの検索にはスコープ付きの<code>find</code>を利用<br><strong>検索結果はキャッシュする、メソッドはキャッシュされた変数に対して利用する、疑似要素をセレクタに含めない</strong>というルールが適切かも。</li>
+</ul>
+<p>次回はES6のスタイルを含む<a href="https://github.com/mitsuruog/javascript-style-guide" target="_blank" rel="external">Airbnb Javascript Style Guide</a>やReact.js周りのスタイルを含む<a href="https://github.com/airbnb/javascript/tree/master/react" target="_blank" rel="external">Airbnb React/JSX Style Guide</a>を眺めたいと考えています。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/26/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascriptコーディング規約 - Google編</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
