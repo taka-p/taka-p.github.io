@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://taka-p.github.io/2016/06/27/1/index.html">
 <meta property="og:site_name" content="VagueLog">
 <meta property="og:description" content="javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、今回はその中から、忘れがちなものをピックアップして紹介します。">
-<meta property="og:updated_time" content="2016-06-27T08:07:54.000Z">
+<meta property="og:updated_time" content="2016-06-27T08:09:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascriptイディオム">
 <meta name="twitter:description" content="javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、今回はその中から、忘れがちなものをピックアップして紹介します。">
@@ -127,7 +127,7 @@
 
 	
 		<div id="js_toc_left" class="toc-left-area">
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数値を文字列に変換"><span class="toc-text">数値を文字列に変換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文字列を数値に型変換"><span class="toc-text">文字列を数値に型変換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NaNチェック"><span class="toc-text">NaNチェック</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引数の既定値"><span class="toc-text">引数の既定値</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の作成、文字列の繰り返し結合"><span class="toc-text">配列の作成、文字列の繰り返し結合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#処理の実行速度を計測"><span class="toc-text">処理の実行速度を計測</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0パディング"><span class="toc-text">0パディング</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列内に該当要素が存在するか判定"><span class="toc-text">配列内に該当要素が存在するか判定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#値の入れ替え"><span class="toc-text">値の入れ替え</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の複製"><span class="toc-text">配列の複製</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の重複排除"><span class="toc-text">配列の重複排除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可変引数を配列にする"><span class="toc-text">可変引数を配列にする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new忘れ防止"><span class="toc-text">new忘れ防止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メソッドが存在する場合は実行"><span class="toc-text">メソッドが存在する場合は実行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#処理が失敗・成功するまで処理を継続"><span class="toc-text">処理が失敗・成功するまで処理を継続</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#whileの代わりにsomeメソッド"><span class="toc-text">whileの代わりにsomeメソッド</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文字列を数値に型変換"><span class="toc-text">文字列を数値に型変換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NaNチェック"><span class="toc-text">NaNチェック</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引数の既定値"><span class="toc-text">引数の既定値</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の作成、文字列の繰り返し結合"><span class="toc-text">配列の作成、文字列の繰り返し結合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#処理の実行速度を計測"><span class="toc-text">処理の実行速度を計測</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0パディング"><span class="toc-text">0パディング</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列内に該当要素が存在するか判定"><span class="toc-text">配列内に該当要素が存在するか判定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#値の入れ替え"><span class="toc-text">値の入れ替え</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の複製"><span class="toc-text">配列の複製</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の重複排除"><span class="toc-text">配列の重複排除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可変引数を配列にする"><span class="toc-text">可変引数を配列にする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new忘れ防止"><span class="toc-text">new忘れ防止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メソッドが存在する場合は実行"><span class="toc-text">メソッドが存在する場合は実行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#処理が失敗・成功するまで処理を継続"><span class="toc-text">処理が失敗・成功するまで処理を継続</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#whileの代わりにsomeメソッド"><span class="toc-text">whileの代わりにsomeメソッド</span></a></li></ol>
 		</div>
 	
 	
@@ -227,9 +227,6 @@
       
         <p>javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、<br>今回はその中から、忘れがちなものをピックアップして紹介します。</p>
 <a id="more"></a>
-<h3 id="数値を文字列に変換">数値を文字列に変換</h3><p>数値と空の文字列をオペランドに演算すると文字列に型変換される。</p>
-<iframe id="cp_embed_RRwLYr" src="//codepen.io/taka-p/embed/RRwLYr?height=250&theme-id=0011&slug-hash=RRwLYr&default-tab=js" scrolling="no" frameborder="no" height="250" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-<p>なお、Airbnbでは空文字は前方に配置する規約</p>
 <h3 id="文字列を数値に型変換">文字列を数値に型変換</h3><p>これは沢山パターンがある</p>
 <iframe id="cp_embed_aZbLax" src="//codepen.io/taka-p/embed/aZbLax?height=300&theme-id=0011&slug-hash=aZbLax&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 <p>Airbnbでは、<code>parseInt(x, 10)</code>もしくわ<code>Number(x)</code>を推奨している。<br>なお、パフォーマンスがピーキーになる箇所ではビット演算もコメント付きで利用してOK</p>
