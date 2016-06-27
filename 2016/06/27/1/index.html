@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Javascriptイディオム | VagueLog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、今回はその中から、忘れがちなものをピックアップして紹介します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascriptイディオム">
+<meta property="og:url" content="http://taka-p.github.io/2016/06/27/1/index.html">
+<meta property="og:site_name" content="VagueLog">
+<meta property="og:description" content="javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、今回はその中から、忘れがちなものをピックアップして紹介します。">
+<meta property="og:updated_time" content="2016-06-27T08:07:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascriptイディオム">
+<meta name="twitter:description" content="javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、今回はその中から、忘れがちなものをピックアップして紹介します。">
+  
+    <link rel="alternative" href="/atom.xml" title="VagueLog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/ta.ico">
+  
+
+  <link rel="stylesheet" href="/css/fonts/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">VagueLog</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>TagCloud</li>
+						
+						
+						<li>About me</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">ホーム</a></li>
+						
+							<li><a href="/archives">過去記事一覧</a></li>
+						
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+							
+								<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+							
+						</div>
+					</nav>
+				</section>
+
+ 				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES5/" style="font-size: 12.5px;">ES5</a> <a href="/tags/FLOCSS/" style="font-size: 10px;">FLOCSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Ruby/" style="font-size: 20px;">Ruby</a> <a href="/tags/Ruby-on-rails/" style="font-size: 20px;">Ruby on rails</a> <a href="/tags/StyleGuide/" style="font-size: 12.5px;">StyleGuide</a> <a href="/tags/Underscore-js/" style="font-size: 10px;">Underscore.js</a> <a href="/tags/apply/" style="font-size: 12.5px;">apply</a> <a href="/tags/bind/" style="font-size: 12.5px;">bind</a> <a href="/tags/call/" style="font-size: 12.5px;">call</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/lodash-js/" style="font-size: 10px;">lodash.js</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/ものづくり/" style="font-size: 10px;">ものづくり</a> <a href="/tags/イテレーター/" style="font-size: 12.5px;">イテレーター</a> <a href="/tags/イディオム/" style="font-size: 15px;">イディオム</a> <a href="/tags/コーディング規約/" style="font-size: 12.5px;">コーディング規約</a> <a href="/tags/レザークラフト/" style="font-size: 10px;">レザークラフト</a> <a href="/tags/目標/" style="font-size: 15px;">目標</a> <a href="/tags/設計/" style="font-size: 10px;">設計</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+					
+					<section class="switch-part switch-part3">
+					
+						<div id="js-aboutme">普段はフロントエンド周りに触れています。<br>
+週末はRailsを頑張っています。<br>
+ゆくゆくは、地元に帰省してWebを利用した地域活性化に携わりたいです。<br>
+趣味はものづくりです<br></div>
+					</section>
+				
+			</div>
+		</div>
+	</header>
+
+	
+		<div id="js_toc_left" class="toc-left-area">
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数値を文字列に変換"><span class="toc-text">数値を文字列に変換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文字列を数値に型変換"><span class="toc-text">文字列を数値に型変換</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NaNチェック"><span class="toc-text">NaNチェック</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引数の既定値"><span class="toc-text">引数の既定値</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の作成、文字列の繰り返し結合"><span class="toc-text">配列の作成、文字列の繰り返し結合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#処理の実行速度を計測"><span class="toc-text">処理の実行速度を計測</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0パディング"><span class="toc-text">0パディング</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列内に該当要素が存在するか判定"><span class="toc-text">配列内に該当要素が存在するか判定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#値の入れ替え"><span class="toc-text">値の入れ替え</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の複製"><span class="toc-text">配列の複製</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配列の重複排除"><span class="toc-text">配列の重複排除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可変引数を配列にする"><span class="toc-text">可変引数を配列にする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new忘れ防止"><span class="toc-text">new忘れ防止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メソッドが存在する場合は実行"><span class="toc-text">メソッドが存在する場合は実行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#処理が失敗・成功するまで処理を継続"><span class="toc-text">処理が失敗・成功するまで処理を継続</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#whileの代わりにsomeメソッド"><span class="toc-text">whileの代わりにsomeメソッド</span></a></li></ol>
+		</div>
+	
+	
+		<div id="js_back_to_top" class="back-to-top"></div>
+	
+</div>
+
+    </div>
+
+    <div id="js_toggle_sidebar" class="toggle-side-menu" style="    position: fixed;
+    top: 50%;
+    width: 25px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.21);
+    left: 300px;
+    z-index: 10;">
+    <i class="fa fa-chevron-left" style="    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -15px;"></i></div>
+
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">VagueLog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/tokyo_gool.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">VagueLog</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">ホーム</a></li>
+		        
+					<li><a href="/archives">過去記事一覧</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/taka-p" title="github">github</a>
+			        
+						<a class="qiita" target="_blank" href="http://qiita.com/takap235711" title="qiita">qiita</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Javascriptイディオム" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Javascriptイディオム
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/イディオム/">イディオム</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+        
+          <div class="article-meta">
+            <a href="/2016/06/27/1/" class="article-date">
+  	<time datetime="2016-06-27T04:17:44.000Z" itemprop="datePublished">2016-06-27</time>
+</a>
+          </div>
+        
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>javascriptのイディオムを発見してはGistに投稿する習慣があるのですが、<br>今回はその中から、忘れがちなものをピックアップして紹介します。</p>
+<a id="more"></a>
+<h3 id="数値を文字列に変換">数値を文字列に変換</h3><p>数値と空の文字列をオペランドに演算すると文字列に型変換される。</p>
+<iframe id="cp_embed_RRwLYr" src="//codepen.io/taka-p/embed/RRwLYr?height=250&theme-id=0011&slug-hash=RRwLYr&default-tab=js" scrolling="no" frameborder="no" height="250" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>なお、Airbnbでは空文字は前方に配置する規約</p>
+<h3 id="文字列を数値に型変換">文字列を数値に型変換</h3><p>これは沢山パターンがある</p>
+<iframe id="cp_embed_aZbLax" src="//codepen.io/taka-p/embed/aZbLax?height=300&theme-id=0011&slug-hash=aZbLax&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>Airbnbでは、<code>parseInt(x, 10)</code>もしくわ<code>Number(x)</code>を推奨している。<br>なお、パフォーマンスがピーキーになる箇所ではビット演算もコメント付きで利用してOK</p>
+<h3 id="NaNチェック">NaNチェック</h3><p>単純なコードだけど、<code>NaN</code>の性質が特殊ため忘れがち<br><code>isNaN</code>だと、string型でもtrueになってしまうため、<code>typeof === &#39;number&#39;</code>の判定も併用しなければならない。</p>
+<iframe id="cp_embed_EyxwdM" src="//codepen.io/taka-p/embed/EyxwdM?height=280&theme-id=0011&slug-hash=EyxwdM&default-tab=js" scrolling="no" frameborder="no" height="280" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ES6で<code>Number.isNaN</code>が拡張メソッドとして用意されたけど、オブジェクト拡張系の機能はPolifylを導入してなければ利用出来ない。<br>実務レベルだと、JQuery・Underscoreが利用されているケースがまだ多いと思うので、現実的にまだ利用できるケースは少ないかも。<br>（2016/06時点）</p>
+<h3 id="引数の既定値">引数の既定値</h3><p>旧来の方法は利用ケースが多いので忘れないと思うが、ES6のデフォルトパラメータの挙動に注意<br>デフォルトパラメータでは<code>null</code>を弾かないため、結局関数内に<code>nullガード</code>を記述する必要がある</p>
+<iframe id="cp_embed_EyxwOM" src="//codepen.io/taka-p/embed/EyxwOM?height=600&theme-id=0011&slug-hash=EyxwOM&default-tab=js" scrolling="no" frameborder="no" height="600" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>いま思ったけど、使い分けるのではなくて、基本はデフォルトパラメータを基本的には利用して、<br><code>null</code>が想定される場合は<code>nullガード</code>を記述する。<br>というルールの方が、まとまりが出てよいかも。<br>（できるだけnullが入らないような設計にするとか..ECMA推奨？）</p>
+<h3 id="配列の作成、文字列の繰り返し結合">配列の作成、文字列の繰り返し結合</h3><p>まとめます。</p>
+<iframe id="cp_embed_yJLzrq" src="//codepen.io/taka-p/embed/yJLzrq?height=200&theme-id=0011&slug-hash=yJLzrq&default-tab=js" scrolling="no" frameborder="no" height="200" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<iframe id="cp_embed_NrWaVX" src="//codepen.io/taka-p/embed/NrWaVX?height=320&theme-id=0011&slug-hash=NrWaVX&default-tab=js" scrolling="no" frameborder="no" height="320" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="処理の実行速度を計測">処理の実行速度を計測</h3><p><a href="http://write-remember.com/program/javascript/console_time/" target="_blank" rel="external">参考記事</a></p>
+<p>参考記事そのままなため、gistは割愛。<br>下記2種類↓</p>
+<ul>
+<li><code>console.time(&#39;label&#39;);</code>と<code>console.timeEnd(&#39;label&#39;);</code>で処理を挟む</li>
+<li><code>new Date()</code>で処理を挟んで、差分を表示する</li>
+</ul>
+<h3 id="0パディング">0パディング</h3><p>以前、PHPでURLの加工位にしか使った事ある<br>正規表現でインデックスを取ってあげると安全</p>
+<iframe id="cp_embed_NrWwPy" src="//codepen.io/taka-p/embed/NrWwPy?height=430&theme-id=0011&slug-hash=NrWwPy&default-tab=js" scrolling="no" frameborder="no" height="430" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="配列内に該当要素が存在するか判定">配列内に該当要素が存在するか判定</h3><p>この前正式にES7で<code>Array.prototype.includes</code>の仕様が決まったが、いずれにしろPolifylが必要なため、<br><code>Array.prototype.indexOf</code>を利用しておくのが無難だと思う</p>
+<iframe id="cp_embed_KMKyVx" src="//codepen.io/taka-p/embed/KMKyVx?height=350&theme-id=0011&slug-hash=KMKyVx&default-tab=js" scrolling="no" frameborder="no" height="350" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="値の入れ替え">値の入れ替え</h3><p>こちらは、個人的にアンチパターン<br>知らない人はびっくりするし、ググラビリティが致命的（即時関数の中でoh yeah…）</p>
+<iframe id="cp_embed_QEWOKB" src="//codepen.io/taka-p/embed/QEWOKB?height=470&theme-id=0011&slug-hash=QEWOKB&default-tab=js" scrolling="no" frameborder="no" height="470" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ES6の分割代入を使うと簡潔に書ける</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">'foo'</span>,</span><br><span class="line">    b = <span class="string">'bar'</span>;</span><br><span class="line"></span><br><span class="line">[a, b] = [b, a]</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a, b); <span class="comment">// -&gt; bar foo</span></span><br></pre></td></tr></table></figure>
+<h3 id="配列の複製">配列の複製</h3><p>ここでは、ディープコピーの方法（新たに作成したメモリ領域にコピー）を紹介</p>
+<p>配列の複製は<code>array.concat();</code>するのが簡潔だと思う</p>
+<iframe id="cp_embed_XKWzpv" src="//codepen.io/taka-p/embed/XKWzpv?height=300&theme-id=0011&slug-hash=XKWzpv&default-tab=js" scrolling="no" frameborder="no" height="300" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>対して、オブジェクトの複製はJQuery、ES6を使うと簡潔に書ける</p>
+<figure class="highlight js"><figcaption><span>@JQuery</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  bar: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objCopy = $.extend(&#123;&#125;, obj);</span><br><span class="line">obj.foo = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// -&gt; &#123;foo: 0, bar: 2&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(objCopy);</span><br><span class="line"><span class="comment">// -&gt; &#123;foo: 1, bar: 2&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><figcaption><span>@ES6</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  bar: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objCopy = <span class="built_in">Object</span>.assign(&#123;&#125;, obj);</span><br><span class="line">obj.foo = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// -&gt; &#123;foo: 0, bar: 2&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(objCopy);</span><br><span class="line"><span class="comment">// -&gt; &#123;foo: 1, bar: 2&#125;</span></span><br></pre></td></tr></table></figure>
+<p>しかし、ES5以前ではネイティブメソッドにディープコピーを行うメソッドが提供されていないため、<br>下記のような関数を自作する必要がある。</p>
+<iframe id="cp_embed_rLjbqw" src="//codepen.io/taka-p/embed/rLjbqw?height=500&theme-id=0011&slug-hash=rLjbqw&default-tab=js" scrolling="no" frameborder="no" height="500" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>処理内容は下記</p>
+<ul>
+<li>objectじゃなければそのまま値を返す（用途をオブジェクトに限定するなら例外投げた方がいいかも）</li>
+<li><code>var copy = obj.constructor();</code>で複製オブジェクトを初期化（同上の場合<code>var copy = {}</code>の方が簡潔かも）</li>
+<li><code>obj</code>自身のプロパティのみを<code>copy</code>に複製（プロトタイプは弾く）</li>
+</ul>
+<p>O’Reilly本に載っていそうな感じ</p>
+<h3 id="配列の重複排除">配列の重複排除</h3><p>多分、そのうち忘れると思う..</p>
+<iframe id="cp_embed_mEdqmM" src="//codepen.io/taka-p/embed/mEdqmM?height=360&theme-id=0011&slug-hash=mEdqmM&default-tab=js" scrolling="no" frameborder="no" height="360" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>前述した通り、ES6はオブジェクト拡張機能なので、恐らく利用しない。</p>
+<h3 id="可変引数を配列にする">可変引数を配列にする</h3><p>Array-likeオブジェクトをArrayに変換</p>
+<p>ES5の方は比較的よく見るコード<br>ES6では主に2種類の方法があるので、一応メモ</p>
+<iframe id="cp_embed_beGYoj" src="//codepen.io/taka-p/embed/beGYoj?height=530&theme-id=0011&slug-hash=beGYoj&default-tab=js" scrolling="no" frameborder="no" height="530" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<p>ちなみに、ES6の可変長引数を利用すると下記のようにapplyが必要なくなる</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="string">'foo'</span>,</span><br><span class="line">      b = <span class="string">'bar'</span>,</span><br><span class="line">      c = <span class="string">'baz'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sliceArgs = (...args) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> [].slice.call(args);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arrCopy = sliceArgs(a, b, c);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arrCopy); <span class="comment">// -&gt; ['foo', 'bar', 'baz']</span></span><br></pre></td></tr></table></figure>
+<h3 id="new忘れ防止">new忘れ防止</h3><p>プラグインなどでよく見る記述<br>ES6の<code>class</code>構文の場合は、呼び出し時に<code>new</code>演算子を伴わない場合、例外が発生してくれる</p>
+<iframe id="cp_embed_zBYPav" src="//codepen.io/taka-p/embed/zBYPav?height=330&theme-id=0011&slug-hash=zBYPav&default-tab=js" scrolling="no" frameborder="no" height="330" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="メソッドが存在する場合は実行">メソッドが存在する場合は実行</h3><p>&amp;&amp;イディオムの応用<br><code>for...in</code>で列挙したり、<code>if</code>をネストしたりしてしまいがちなのでメモ</p>
+<iframe id="cp_embed_BzamqO" src="//codepen.io/taka-p/embed/BzamqO?height=260&theme-id=0011&slug-hash=BzamqO&default-tab=js" scrolling="no" frameborder="no" height="260" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="処理が失敗・成功するまで処理を継続">処理が失敗・成功するまで処理を継続</h3><p>&amp;&amp;、||イディオムの応用<br>考えた人天才だと思った（関数型だと、こういう書き方が普通なのかな？）</p>
+<iframe id="cp_embed_beGYQQ" src="//codepen.io/taka-p/embed/beGYQQ?height=330&theme-id=0011&slug-hash=beGYQQ&default-tab=js" scrolling="no" frameborder="no" height="330" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<iframe id="cp_embed_NrWwee" src="//codepen.io/taka-p/embed/NrWwee?height=330&theme-id=0011&slug-hash=NrWwee&default-tab=js" scrolling="no" frameborder="no" height="330" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+<h3 id="whileの代わりにsomeメソッド">whileの代わりにsomeメソッド</h3><p>備考: whileは走査する配列の中にfalsyな値が混入している場合に止まる</p>
+<iframe id="cp_embed_aZbVrB" src="//codepen.io/taka-p/embed/aZbVrB?height=500&theme-id=0011&slug-hash=aZbVrB&default-tab=js" scrolling="no" frameborder="no" height="500" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/26/2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascriptコーディング規約 - Airbnb編(ES5)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 taka-p
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
